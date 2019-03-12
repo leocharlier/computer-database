@@ -40,5 +40,47 @@ public class Computer {
 		this.company = company;
 	}
 	
+	public String toString() {
+		StringBuilder sb = new StringBuilder("Computer ");
+		sb.append( this.getId() );
+		sb.append( " : " );
+		sb.append( this.getName() );
+		return sb.toString();
+	}
+	
+	public String toDetailedString() {
+		StringBuilder sb = new StringBuilder("Computer ");
+		
+		sb.append( this.getId() );
+		sb.append( " : " );
+		sb.append( this.getName() );
+		sb.append( "\n" );
+		
+		if( this.getIntroduced() == null ) {
+			sb.append( "\t| Introducing date unknown \n" );
+		} else {
+			sb.append( "\t| Introduced the " );
+			sb.append( this.getIntroduced() );
+			sb.append( "\n" );
+		}
+		
+		if( this.getDiscontinued() == null  ) {
+			sb.append( "\t| Discontinuing date unknown \n" );
+		} else {
+			sb.append( "\t| Discontinued the " );
+			sb.append( this.getIntroduced() );
+			sb.append( "\n" );
+		}
+		
+		if( this.getCompany() == null ) {
+			sb.append( "\t| Manufacturer unknown \n" );
+		} else {
+			sb.append( "\t| Manufactured by " );
+			sb.append( this.getCompany().getName() );
+			sb.append( "\n" );
+		}
+		
+		return sb.toString();
+	}
 	
 }

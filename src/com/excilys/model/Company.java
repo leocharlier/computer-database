@@ -18,4 +18,12 @@ public class Company {
 		this.name = name;
 	}
 	
+	public String toString() {
+		StringBuilder sb = new StringBuilder("Company ");
+		sb.append( this.getId() );
+		sb.append( " : " );
+		sb.append( this.getName() );
+		return sb.toString();
+	}
+	
 }

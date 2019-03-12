@@ -14,6 +14,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 	private static final String SQL_SELECT_ALL = "SELECT id, name, introduced, discontinued, company_id FROM computer;";
 	private static final String SQL_INSERT = "INSERT INTO computer (name, introduced, discontinued, company_id) VALUES (?, ?, ?, ?)";
 	private static final String SQL_DELETE = "DELETE FROM computer WHERE id = ?;";
+	private static final String SQL_UPDATE = "UPDATE computer SET name = ?, introduced = ?, discontinued = ?, company_id = ? WHERE id = ?;";
 	
 	ComputerDAOImpl( DAOFactory daoFactory ) {
 		this.daoFactory = daoFactory;
@@ -89,7 +90,13 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 	    try {
 	    	connection = daoFactory.getConnection();
-	        preparedStatement = preparedStatementInitialization( connection, SQL_INSERT, true, computer.getName(), computer.getIntroduced(), computer.getDiscontinued(), computer.getCompany().getId() );
+	    	
+	    	Integer company_id = null;
+	    	if(computer.getCompany() != null) {
+	    		company_id = computer.getCompany().getId();
+	    	}
+	    	
+	        preparedStatement = preparedStatementInitialization( connection, SQL_INSERT, true, computer.getName(), computer.getIntroduced(), computer.getDiscontinued(), company_id );
 	        int statut = preparedStatement.executeUpdate();
 
 	        if ( statut == 0 ) {
@@ -112,7 +119,23 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 	@Override
 	public void update(Computer computer) throws DAOException {
+		Connection connection = null;
+	    PreparedStatement preparedStatement = null;
 
+	    try {
+	    	connection = daoFactory.getConnection();
+	        preparedStatement = preparedStatementInitialization( connection, SQL_UPDATE, false, computer.getName(), computer.getIntroduced(), computer.getDiscontinued(), computer.getCompany().getId(), computer.getId() );
+	        int statut = preparedStatement.executeUpdate();
+
+	        if ( statut == 0 ) {
+	            throw new DAOException( "Failed to delete the computer in database, no line deleted in the table." );
+	        }
+
+	    } catch ( SQLException e ) {
+	        throw new DAOException( e );
+	    } finally {
+	        closures( preparedStatement, connection );
+	    }
 	}
 
 	@Override
@@ -126,7 +149,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 	        int statut = preparedStatement.executeUpdate();
 
 	        if ( statut == 0 ) {
-	            throw new DAOException( "Failed to delete the computer in database, no line deleted in the table." );
+	            throw new DAOException( "Failed to update the computer in database, no line updated in the table." );
 	        }
 
 	    } catch ( SQLException e ) {
