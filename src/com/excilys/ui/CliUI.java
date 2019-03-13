@@ -3,7 +3,6 @@ package com.excilys.ui;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -85,7 +84,8 @@ public class CliUI {
 					
 				case "3" :
 					System.out.print( "Enter the ID of the computer (0 to come back to the menu) : " );
-					input = keyboard.nextLine();
+					input = keyboard.nextLine().trim();
+					
 					
 					while( ( StringUtils.isNullOrEmpty( input ) || !StringUtils.isStrictlyNumeric( input ) ) && !input.equals( "0" ) ) {
 						System.out.print( "Invalid computer ID. Enter a valid ID (0 to come back to the menu) : " );
@@ -96,7 +96,7 @@ public class CliUI {
 						try {
 							computer = computerDAO.find( Integer.parseInt( input ) );
 							System.out.println( computer.toDetailedString() );
-						} catch ( NullPointerException e) {
+						} catch ( DAOException e) {
 							System.out.println( "Sorry, this computer doesn't exist.\n" );
 						}
 						
@@ -110,11 +110,11 @@ public class CliUI {
 					System.out.println( "|||||||||||||||||||||||\n\n" );
 					
 					System.out.print( "Enter the name of the computer (0 to exit the creation) : " );
-					input = keyboard.nextLine();
+					input = keyboard.nextLine().trim();
 					
 					while( StringUtils.isNullOrEmpty( input ) && !input.equals( "0" ) ) {
 						System.out.print( "The name cannot be null. Enter a valid name (0 to to exit the creation) : " );
-						input = keyboard.nextLine();
+						input = keyboard.nextLine().trim();
 					}
 					
 					if( !input.equals( "0" ) ) {
@@ -124,61 +124,65 @@ public class CliUI {
 						break;
 					}
 					
-					System.out.print( "Enter the date of introduction (press Enter if it's unknown and 0 to exit the creation) : " );
-					input = keyboard.nextLine();
+					System.out.print( "Enter the date (Format 'dd/MM/yyyy' only) of introduction (press Enter if it's unknown and 0 to exit the creation) : " );
+					input = keyboard.nextLine().trim();
 					
-					if( StringUtils.isNullOrEmpty( input ) ) {
-						introduced = null;
-					} else if( !input.equals( "0" ) ) {
+					introduced = null;
+					
+					if( !input.equals( "0" ) && !StringUtils.isNullOrEmpty( input ) ) {
 						try {
 							date = dateFormat.parse(input);
 							time = date.getTime();
 							introduced = new Timestamp(time);
 						} catch (Exception e) {
 							System.out.println( "Wrong date format. The date of introduction will be null." );
-							introduced = null;
 						}
-					} else {
+					} else if ( input.equals( "0" ) ) {
 						System.out.println();
 						break;
 					}
 					
+					discontinued = null;
+					
 					if( introduced != null) {
-						System.out.print( "Enter the date of discontinuation (press Enter if it's unknown  and 0 to exit the creation) : " );
-						input = keyboard.nextLine();
+						System.out.print( "Enter the date (Format 'dd/MM/yyyy' only) of discontinuation (press Enter if it's unknown and 0 to exit the creation) : " );
+						input = keyboard.nextLine().trim();
 						
-						if( StringUtils.isNullOrEmpty( input ) ) {
-							discontinued = null;
-						} else if( !input.equals( "0" ) ) {
+						if( !input.equals( "0" )  && !StringUtils.isNullOrEmpty( input ) ) {
 							try {
 								date = dateFormat.parse(input);
 								time = date.getTime();
-								discontinued = date.after( introduced ) ? new Timestamp(time) : null;
+								if( date.after( introduced ) ) {
+									discontinued = new Timestamp(time);
+								} else {
+									System.out.println( "The date of discontinuation must be after the date of introduction. It will be null." );
+								}
 							} catch (Exception e) {
-								System.out.println( "Wrong date format. The date of discontinuation will be null. " );
-								discontinued = null;
+								System.out.println( "Wrong date format. The date of discontinuation will be null." );
 							}
-						} else {
+						} else if ( input.equals( "0" ) ) {
 							System.out.println();
 							break;
 						}
-					} else {
-						discontinued = null;
 					}
 					
-					System.out.print( "Enter the ID of the manufacturer company (press Enter if it's unknown  and 0 to exit the creation) : " );
-					input = keyboard.nextLine();
+					System.out.print( "Enter the ID of the manufacturer company (press Enter if it's unknown and 0 to exit the creation) : " );
+					input = keyboard.nextLine().trim();
 					
-					if( StringUtils.isNullOrEmpty( input ) ) {
-						company = null;
-					} else if( !input.equals( "0" ) ) {
+					while( !StringUtils.isStrictlyNumeric( input ) && !StringUtils.isNullOrEmpty( input ) && !input.equals( "0" ) ) {
+						System.out.print( "Invalid company ID. Enter a valid ID (0 to come back to the menu) : " );
+						input = keyboard.nextLine();
+					}
+					
+					company = null;
+					
+					if( !input.equals( "0" ) && !StringUtils.isNullOrEmpty( input ) ) {
 						try {
 							company = companyDAO.find( Integer.parseInt( input ) );
-						} catch ( NullPointerException e) {
+						} catch (DAOException e){
 							System.out.println( "This company doesn't exist. The manufacturer will be null." );
-							company = null;
 						}
-					} else {
+					} else if ( input.equals( "0" ) ){
 						System.out.println();
 						break;
 					}
@@ -198,8 +202,6 @@ public class CliUI {
 					break;
 				
 				case "5" :
-					computer = computerDAO.find(570);
-					System.out.println( computer.toDetailedString() );
 					break;
 				
 				case "6" :
@@ -232,7 +234,7 @@ public class CliUI {
 								System.out.println();
 								break;
 							}
-						} catch ( NullPointerException e) {
+						} catch ( DAOException e) {
 							System.out.println( "Sorry, this computer doesn't exist.\n" );
 						}
 					}

@@ -65,6 +65,8 @@ public class CompanyDAOImpl implements CompanyDAO {
 	        
 	        if ( resultSet.next() ) {
 	        	company = map( resultSet );
+	        } else {
+	        	throw new DAOException("No SQL result for this company ID.");
 	        }
 	    } catch ( SQLException e ) {
 			throw new DAOException( e );

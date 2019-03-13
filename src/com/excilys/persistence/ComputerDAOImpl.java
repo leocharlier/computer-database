@@ -29,7 +29,12 @@ public class ComputerDAOImpl implements ComputerDAO {
 	    computer.setName( resultSet.getString( "name" ) );
 	    computer.setIntroduced( resultSet.getTimestamp( "introduced" ) );
 	    computer.setDiscontinued( resultSet.getTimestamp( "discontinued" ) );
-	    computer.setCompany( companyDAO.find( resultSet.getInt( "company_id" ) ) );
+	    try {
+	    	computer.setCompany( companyDAO.find( resultSet.getInt( "company_id" ) ) );
+	    } catch (DAOException e) {
+	    	computer.setCompany( null );
+	    }
+	    
 	    
 	    return computer;
 	}
@@ -72,6 +77,8 @@ public class ComputerDAOImpl implements ComputerDAO {
 	        
 	        if ( resultSet.next() ) {
 	        	computer = map( resultSet );
+	        } else {
+	        	throw new DAOException("No SQL result for this computer ID.");
 	        }
 	    } catch ( SQLException e ) {
 			throw new DAOException( e );

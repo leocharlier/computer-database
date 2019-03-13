@@ -68,7 +68,7 @@ public class Computer {
 			sb.append( "\t| Discontinuing date unknown \n" );
 		} else {
 			sb.append( "\t| Discontinued the " );
-			sb.append( this.getIntroduced() );
+			sb.append( this.getDiscontinued() );
 			sb.append( "\n" );
 		}
 		
