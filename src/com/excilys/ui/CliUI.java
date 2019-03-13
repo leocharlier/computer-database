@@ -25,6 +25,7 @@ public class CliUI {
 		String action = "-1";
 		StringBuilder sbCompanies;
 		StringBuilder sbComputers;
+		StringBuilder sbUpdate;
 		Computer computer;
 		String name;
 		Date date;
@@ -50,7 +51,7 @@ public class CliUI {
 			System.out.println( "5 : Update a Computer" );
 			System.out.println( "6 : Delete a Computer" );
 			
-			action = keyboard.nextLine();
+			action = keyboard.nextLine().trim();
 			System.out.println();
 			
 			switch(action) {
@@ -89,7 +90,7 @@ public class CliUI {
 					
 					while( ( StringUtils.isNullOrEmpty( input ) || !StringUtils.isStrictlyNumeric( input ) ) && !input.equals( "0" ) ) {
 						System.out.print( "Invalid computer ID. Enter a valid ID (0 to come back to the menu) : " );
-						input = keyboard.nextLine();
+						input = keyboard.nextLine().trim();
 					}
 					
 					if( !input.equals( "0" ) ) {
@@ -171,7 +172,7 @@ public class CliUI {
 					
 					while( !StringUtils.isStrictlyNumeric( input ) && !StringUtils.isNullOrEmpty( input ) && !input.equals( "0" ) ) {
 						System.out.print( "Invalid company ID. Enter a valid ID (0 to come back to the menu) : " );
-						input = keyboard.nextLine();
+						input = keyboard.nextLine().trim();
 					}
 					
 					company = null;
@@ -202,15 +203,168 @@ public class CliUI {
 					break;
 				
 				case "5" :
+					System.out.print( "Enter the ID of the computer (0 to come back to the menu) : " );
+					input = keyboard.nextLine().trim();
+					
+					while( ( StringUtils.isNullOrEmpty( input ) || !StringUtils.isStrictlyNumeric( input ) ) && !input.equals( "0" ) ) {
+						System.out.print( "Invalid computer ID. Enter a valid ID (0 to come back to the menu) : " );
+						input = keyboard.nextLine().trim();
+					}
+					
+					if( !input.equals( "0" ) ) {
+						try {
+							computer = computerDAO.find( Integer.parseInt( input ) );
+						} catch ( DAOException e) {
+							System.out.println( "Sorry, this computer doesn't exist.\n" );
+							break;
+						}
+						
+						sbUpdate = new StringBuilder( "Actual computer name : " );
+						sbUpdate.append( computer.getName() );
+						sbUpdate.append( ". Do you want to update it ? (y/n)");
+						System.out.print( sbUpdate );
+						
+						input = keyboard.nextLine().trim();
+						while( !input.equals( "y" ) && !input.equals( "n" ) ) {
+							System.out.print( "Enter 'y' to update the name or 'n' to continue : " );
+							input = keyboard.nextLine().trim();
+						}
+						if( input.equals( "y" ) ) {
+							System.out.print( "New computer name : " );
+							input = keyboard.nextLine().trim();
+							
+							while( StringUtils.isNullOrEmpty( input ) ) {
+								System.out.print( "The name cannot be null. Enter a valid name : " );
+								input = keyboard.nextLine().trim();
+							}
+							
+							computer.setName( input );
+						}
+						
+						sbUpdate = new StringBuilder( "Actual introduction date : " );
+						sbUpdate.append( computer.getIntroduced() );
+						sbUpdate.append( ". Do you want to update it ? (y/n)");
+						System.out.print( sbUpdate );
+						
+						input = keyboard.nextLine().trim();
+						while( !input.equals( "y" ) && !input.equals( "n" ) ) {
+							System.out.print( "Enter 'y' to update the introduction or 'n' to continue : " );
+							input = keyboard.nextLine().trim();
+						}
+						if( input.equals( "y" ) ) {
+							System.out.print( "New introduction date (Format 'dd/MM/yyyy' or press Enter to make it null) : " );
+							input = keyboard.nextLine().trim();
+							
+							introduced = null;
+							if( !StringUtils.isNullOrEmpty( input ) ) {
+								try {
+									date = dateFormat.parse( input );
+									time = date.getTime();
+									introduced = new Timestamp( time );
+								} catch (Exception e) {
+									System.out.println( "Wrong date format. The date of introduction will be null." );
+								}
+							} else {
+								computer.setDiscontinued( null );
+							}
+							computer.setIntroduced( introduced );
+						}
+						
+						if( computer.getIntroduced() != null ) {
+							if( computer.getDiscontinued() != null && !computer.getDiscontinued().after( computer.getIntroduced() ) ) {
+								System.out.println( "The date of discontinuation is now before the date of introduction."
+										+ "\nNew date of discontinuation (Format 'dd/MM/yyyy' or press Enter to make it null) : " );
+							} else {
+								sbUpdate = new StringBuilder( "Actual discontinuation date : " );
+								sbUpdate.append( computer.getDiscontinued() );
+								sbUpdate.append( ". Do you want to update it ? (y/n)");
+								System.out.print( sbUpdate );
+								
+								input = keyboard.nextLine().trim();
+								while( !input.equals( "y" ) && !input.equals( "n" ) ) {
+									System.out.print( "Enter 'y' to update the discontinuation date or 'n' to continue : " );
+									input = keyboard.nextLine().trim();
+								}
+								
+								if( input.equals( "y" ) ) {
+									System.out.print( "New discontinuation date (Format 'dd/MM/yyyy' or press Enter to make it null) : " );
+								}
+							}
+							
+							if( !input.equals( "n" ) ) {
+								input = keyboard.nextLine().trim();
+								
+								discontinued = null;
+								if( !StringUtils.isNullOrEmpty( input ) ) {
+									try {
+										date = dateFormat.parse(input);
+										time = date.getTime();
+										if( date.after( computer.getIntroduced() ) ) {
+											discontinued = new Timestamp(time);
+										} else {
+											System.out.println( "The new date of discontinuation must be after the date of introduction. It will be null." );
+										}
+									} catch (Exception e) {
+										System.out.println( "Wrong date format. The new date of discontinuation will be null." );
+									}
+								}
+								
+								computer.setDiscontinued( discontinued );
+							}
+						}
+						
+						sbUpdate = new StringBuilder( "Actual manufacturer company : " );
+						try {
+							sbUpdate.append( computer.getCompany().getName() );
+						} catch ( NullPointerException e) {
+							sbUpdate.append( "none" );
+						}
+						sbUpdate.append( ". Do you want to update it ? (y/n)");
+						System.out.print( sbUpdate );
+						
+						input = keyboard.nextLine().trim();
+						while( !input.equals( "y" ) && !input.equals( "n" ) ) {
+							System.out.print( "Enter 'y' to update the manufacturer company or 'n' to continue : " );
+							input = keyboard.nextLine().trim();
+						}
+						if( input.equals( "y" ) ) {
+							System.out.print( "New ID of the manufacturer company (press Enter make it null) : " );
+							input = keyboard.nextLine().trim();
+							
+							while( !StringUtils.isStrictlyNumeric( input ) && !StringUtils.isNullOrEmpty( input ) ) {
+								System.out.print( "Invalid company ID. Enter a valid ID (0 to come back to the menu) : " );
+								input = keyboard.nextLine().trim();
+							}
+							
+							company = null;
+							if( !StringUtils.isNullOrEmpty( input ) ) {
+								try {
+									company = companyDAO.find( Integer.parseInt( input ) );
+								} catch (DAOException e){
+									System.out.println( "This company doesn't exist. The new manufacturer will be null." );
+								}
+							}
+							
+							computer.setCompany( company );
+						}
+						
+						computerDAO.update( computer );
+						
+						System.out.println( "\n||||||||||||||||||||||||" );
+						System.out.println( "|| Computer updated ! ||" );
+						System.out.println( "||||||||||||||||||||||||\n\n" );
+						
+					}
+					
 					break;
 				
 				case "6" :
 					System.out.print( "Enter the ID of the computer (0 to come back to the menu) : " );
-					input = keyboard.nextLine();
+					input = keyboard.nextLine().trim();
 					
 					while( ( StringUtils.isNullOrEmpty( input ) || !StringUtils.isStrictlyNumeric( input ) ) && !input.equals( "0" ) ) {
 						System.out.print( "Invalid computer ID. Enter a valid ID (0 to come back to the menu) : " );
-						input = keyboard.nextLine();
+						input = keyboard.nextLine().trim();
 					}
 					
 					if( !input.equals( "0" ) ) {
@@ -218,10 +372,10 @@ public class CliUI {
 							computer = computerDAO.find( Integer.parseInt( input ) );
 							System.out.println( computer.toDetailedString() );
 							System.out.print( "Are you sure you want to delete this computer ? (y\\n) : " );
-							input = keyboard.nextLine();
+							input = keyboard.nextLine().trim();
 							while( !input.equals( "y" ) && !input.equals( "n" ) ) {
 								System.out.print( "Enter 'y' to confirm the deletion or 'n' to come back to the menu : " );
-								input = keyboard.nextLine();
+								input = keyboard.nextLine().trim();
 							}
 							if( input.equals( "y" ) ) {
 								computerDAO.delete( computer );

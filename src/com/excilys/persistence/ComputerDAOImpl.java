@@ -131,7 +131,13 @@ public class ComputerDAOImpl implements ComputerDAO {
 
 	    try {
 	    	connection = daoFactory.getConnection();
-	        preparedStatement = preparedStatementInitialization( connection, SQL_UPDATE, false, computer.getName(), computer.getIntroduced(), computer.getDiscontinued(), computer.getCompany().getId(), computer.getId() );
+	    	
+	    	Integer company_id = null;
+	    	if(computer.getCompany() != null) {
+	    		company_id = computer.getCompany().getId();
+	    	}
+	    	
+	        preparedStatement = preparedStatementInitialization( connection, SQL_UPDATE, false, computer.getName(), computer.getIntroduced(), computer.getDiscontinued(), company_id, computer.getId() );
 	        int statut = preparedStatement.executeUpdate();
 
 	        if ( statut == 0 ) {
