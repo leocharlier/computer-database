@@ -5,10 +5,12 @@ import java.util.ArrayList;
 
 import static com.excilys.persistence.DAOUtility.*;
 
+import com.excilys.mapper.ComputerMapper;
 import com.excilys.model.Computer;
 
 public class ComputerDAOImpl implements ComputerDAO {
 	private DAOFactory daoFactory;
+	private ComputerMapper computerMapper;
 	
 	private static final String SQL_SELECT_BY_ID = "SELECT id, name, introduced, discontinued, company_id FROM computer WHERE id = ?;";
 	private static final String SQL_SELECT_ALL = "SELECT id, name, introduced, discontinued, company_id FROM computer;";
@@ -18,25 +20,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 	
 	ComputerDAOImpl( DAOFactory daoFactory ) {
 		this.daoFactory = daoFactory;
-	}
-	
-	private static Computer map( ResultSet resultSet ) throws SQLException {
-	    Computer computer = new Computer();
-	    DAOFactory daoFactory = DAOFactory.getInstance();
-	    CompanyDAO companyDAO = daoFactory.getCompanyDao();
-	    
-	    computer.setId( resultSet.getInt( "id" ) );
-	    computer.setName( resultSet.getString( "name" ) );
-	    computer.setIntroduced( resultSet.getTimestamp( "introduced" ) );
-	    computer.setDiscontinued( resultSet.getTimestamp( "discontinued" ) );
-	    try {
-	    	computer.setCompany( companyDAO.find( resultSet.getInt( "company_id" ) ) );
-	    } catch (DAOException e) {
-	    	computer.setCompany( null );
-	    }
-	    
-	    
-	    return computer;
+		this.computerMapper = new ComputerMapper();
 	}
 
 	@Override
@@ -52,7 +36,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 	        resultSet = preparedStatement.executeQuery();
 	        
 	        while ( resultSet.next() ) {
-	        	computers.add( map( resultSet ) );
+	        	computers.add( this.computerMapper.map( resultSet ) );
 	        }
 	    } catch ( SQLException e ) {
 			throw new DAOException( e );
@@ -76,7 +60,7 @@ public class ComputerDAOImpl implements ComputerDAO {
 	        resultSet = preparedStatement.executeQuery();
 	        
 	        if ( resultSet.next() ) {
-	        	computer = map( resultSet );
+	        	computer = this.computerMapper.map( resultSet );
 	        } else {
 	        	throw new DAOException("No SQL result for this computer ID.");
 	        }
