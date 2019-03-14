@@ -4,11 +4,13 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
 import com.excilys.model.Company;
 import com.excilys.model.Computer;
+import com.excilys.model.Page;
 import com.excilys.persistence.*;
 import com.mysql.cj.util.StringUtils;
 
@@ -19,6 +21,7 @@ public class CliUI {
 	private ComputerDAO computerDAO;
 	private Scanner keyboard;
 	private DateFormat dateFormat;
+	
 	private enum Actions {	
 		EXIT( "0" ),
 		LIST_COMPANIES( "1" ),
@@ -36,6 +39,37 @@ public class CliUI {
 		
 		public static Actions codeToAction(String pCode) {
 			return Actions.values()[Integer.parseInt( pCode )];
+		}
+	}
+	
+	private enum Pagination {
+		NEXT( "n" ),
+		PREVIOUS( "p" ),
+		STOP( "s" ),
+		INVALID;
+		
+		private String code;
+		
+		private Pagination() {}
+		
+		private Pagination( String pCode) {
+			this.code = pCode;
+		}
+		
+		public static Pagination codeToAction(String pCode) {
+			int index = 3;
+			switch( pCode ) {
+				case "n" :
+					index = 0;
+					break;
+				case "p" :
+					index = 1;
+					break;
+				case "s" :
+					index = 2;
+					break;
+			}
+			return Pagination.values()[index];
 		}
 	}
 	
@@ -108,22 +142,51 @@ public class CliUI {
 		System.out.println( "6 : Delete a Computer" );
 	}
 	
-	public void listCompanies() {
-		StringBuilder sbCompanies = new StringBuilder( "List of companies : \n" );
-		for( Company companyEntry : companyDAO.list() ) {
-			sbCompanies.append( companyEntry.toString() );
-			sbCompanies.append( "\n" );
+	public void showPage(Page<?> page) {
+		Pagination pageAction = null;
+		
+		while( pageAction != Pagination.STOP ) {
+			
+			for(Object object : page.getPageData())
+				System.out.println( object.toString() );
+			
+			System.out.print("Press 'n' for next page, 'p' for previous page or 's' to stop : ");
+
+			try {
+				pageAction = Pagination.codeToAction( keyboard.nextLine().trim() );
+				System.out.println();
+
+				switch(pageAction) {
+					case NEXT :
+						page.next();
+						break;
+					case PREVIOUS :
+						page.previous();
+						break;
+					case STOP :
+						break;
+					case INVALID :
+						System.out.println( "Invalid pagination input ('n' for Next Page, 'p' for Previous Page and 's' to Stop.\n" );
+						break;
+				}
+			} catch (NumberFormatException e) {
+				System.out.println( "Invalid pagination input ('n' for Next Page, 'p' for Previous Page and 's' to Stop.\n" );
+			}
 		}
-		System.out.println( sbCompanies );
+		
+		
+	}
+	
+	public void listCompanies() {
+		ArrayList<Company> companies = companyDAO.list();
+		Page<Company> pageCompany = new Page<Company>(companies);
+		showPage(pageCompany);
 	}
 	
 	public void listComputers() {
-		StringBuilder sbComputers = new StringBuilder( "List of computers : \n" );
-		for( Computer computerEntry : computerDAO.list() ) {
-			sbComputers.append( computerEntry.toString() );
-			sbComputers.append( "\n" );
-		}
-		System.out.println( sbComputers );
+		ArrayList<Computer> computers = computerDAO.list();
+		Page<Computer> pageComputer = new Page<Computer>(computers);
+		showPage(pageComputer);
 	}
 	
 	public void showComputer() {

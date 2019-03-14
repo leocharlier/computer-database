@@ -28,11 +28,11 @@ public class Page<T> {
 		this.size = size;
 	}
 	
-	public void nextStart() {
+	public void next() {
 		this.start = Math.min( this.start + NB_ELEMENTS, this.size - 1 );
 	}
 	
-	public void previousStart() {
+	public void previous() {
 		this.start = Math.max( this.start - NB_ELEMENTS,  0);
 	}
 	
