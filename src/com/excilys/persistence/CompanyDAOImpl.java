@@ -25,38 +25,37 @@ public class CompanyDAOImpl implements CompanyDAO {
 
 	@Override
 	public ArrayList<Company> list() throws DAOException {
-		Connection connection = null;
-	    PreparedStatement preparedStatement = null;
+		ArrayList<Company> companies = new ArrayList<Company>();
 	    ResultSet resultSet = null;
-	    ArrayList<Company> companies = new ArrayList<Company>();
 	    
-	    try {
-	    	connection = daoFactory.getConnection();
-	        preparedStatement = preparedStatementInitialization( connection, SQL_SELECT_ALL, false );
+	    try (
+	    	Connection connection = daoFactory.getConnection();
+	    	PreparedStatement preparedStatement = preparedStatementInitialization( connection, SQL_SELECT_ALL, false )
+	    	) {
+	    	
 	        resultSet = preparedStatement.executeQuery();
 	        
 	        while ( resultSet.next() ) {
 	        	companies.add( this.companyMapper.map( resultSet ) );
 	        }
+	        
 	    } catch ( SQLException e ) {
 			throw new DAOException( e );
-		} finally {
-			closures( resultSet, preparedStatement, connection );
-	    }
+		}
 	    
 		return companies;
 	}
 
 	@Override
 	public Company find( int pId ) throws DAOException {
-		Connection connection = null;
-	    PreparedStatement preparedStatement = null;
 	    ResultSet resultSet = null;
 	    Company company = null;
 	    
-	    try {
-	    	connection = daoFactory.getConnection();
-	        preparedStatement = preparedStatementInitialization( connection, SQL_SELECT_BY_ID, false, pId );
+	    try (
+	    	Connection connection = daoFactory.getConnection();
+	    	PreparedStatement preparedStatement = preparedStatementInitialization( connection, SQL_SELECT_BY_ID, false, pId )
+	    	) {
+	    	
 	        resultSet = preparedStatement.executeQuery();
 	        
 	        if ( resultSet.next() ) {
@@ -64,11 +63,10 @@ public class CompanyDAOImpl implements CompanyDAO {
 	        } else {
 	        	throw new DAOException("No SQL result for this company ID.");
 	        }
+	        
 	    } catch ( SQLException e ) {
 			throw new DAOException( e );
-		} finally {
-			closures( resultSet, preparedStatement, connection );
-	    }
+		}
 	    
 	    return company;
 	}
