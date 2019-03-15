@@ -1,8 +1,8 @@
-package com.excilys.persistence;
+package com.excilys.cdb.persistence;
 
 import java.util.ArrayList;
 
-import com.excilys.model.Computer;
+import com.excilys.cdb.model.Computer;
 
 public interface ComputerDAO {
 	

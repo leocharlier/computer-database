@@ -1,12 +1,12 @@
-package com.excilys.mapper;
+package com.excilys.cdb.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.excilys.model.Computer;
-import com.excilys.persistence.CompanyDAO;
-import com.excilys.persistence.DAOException;
-import com.excilys.persistence.DAOFactory;
+import com.excilys.cdb.model.Computer;
+import com.excilys.cdb.persistence.CompanyDAO;
+import com.excilys.cdb.persistence.DAOException;
+import com.excilys.cdb.persistence.DAOFactory;
 
 public class ComputerMapper {
 	

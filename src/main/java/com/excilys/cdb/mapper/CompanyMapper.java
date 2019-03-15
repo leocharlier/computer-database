@@ -1,9 +1,9 @@
-package com.excilys.mapper;
+package com.excilys.cdb.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.excilys.model.Company;
+import com.excilys.cdb.model.Company;
 
 public class CompanyMapper {
 	

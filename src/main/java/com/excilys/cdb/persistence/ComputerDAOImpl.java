@@ -1,12 +1,12 @@
-package com.excilys.persistence;
+package com.excilys.cdb.persistence;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-import static com.excilys.persistence.DAOUtility.*;
+import static com.excilys.cdb.persistence.DAOUtility.*;
 
-import com.excilys.mapper.ComputerMapper;
-import com.excilys.model.Computer;
+import com.excilys.cdb.mapper.ComputerMapper;
+import com.excilys.cdb.model.Computer;
 
 public class ComputerDAOImpl implements ComputerDAO {
 	private DAOFactory daoFactory;

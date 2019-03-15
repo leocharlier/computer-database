@@ -1,6 +1,6 @@
-package com.excilys.persistence;
+package com.excilys.cdb.persistence;
 
-import static com.excilys.persistence.DAOUtility.*;
+import static com.excilys.cdb.persistence.DAOUtility.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,8 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.excilys.mapper.CompanyMapper;
-import com.excilys.model.Company;
+import com.excilys.cdb.mapper.CompanyMapper;
+import com.excilys.cdb.model.Company;
 
 public class CompanyDAOImpl implements CompanyDAO {
 	private DAOFactory daoFactory;

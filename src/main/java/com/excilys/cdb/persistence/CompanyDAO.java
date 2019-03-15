@@ -1,8 +1,8 @@
-package com.excilys.persistence;
+package com.excilys.cdb.persistence;
 
 import java.util.ArrayList;
 
-import com.excilys.model.Company;
+import com.excilys.cdb.model.Company;
 
 public interface CompanyDAO {
 

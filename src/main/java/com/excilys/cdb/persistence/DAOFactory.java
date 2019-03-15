@@ -1,4 +1,4 @@
-package com.excilys.persistence;
+package com.excilys.cdb.persistence;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class DAOFactory {
 
-    private static final String FICHIER_PROPERTIES = "ressources/dao.properties";
+    private static final String FICHIER_PROPERTIES = "properties/dao.properties";
     private static final String PROPERTY_URL	   = "url";
     private static final String PROPERTY_DRIVER	   = "driver";
     private static final String PROPERTY_USER	   = "user";
