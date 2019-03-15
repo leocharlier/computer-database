@@ -1,17 +1,24 @@
 package com.excilys.cdb.persistence;
 
-public class DAOException extends RuntimeException {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-    public DAOException( String message ) {
+public class DAOException extends RuntimeException {
+	final static Logger logger = LoggerFactory.getLogger( "com.excilys.cdb.persistence.DAOException" );
+    
+	public DAOException( String message ) {
         super( message );
+        logger.warn(message);
     }
 
     public DAOException( String message, Throwable cause ) {
         super( message, cause );
+        logger.warn(cause.toString() + " : " + message);
     }
 
     public DAOException( Throwable cause ) {
         super( cause );
+        logger.warn(cause.toString());
     }
     
 }

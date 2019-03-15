@@ -107,7 +107,8 @@ public class CliUI {
 						keyboard.close();
 						break;
 					case LIST_COMPANIES :
-						listCompanies();
+						companyDAO.find(12345);
+						// listCompanies();
 						break;
 					case LIST_COMPUTERS :
 						listComputers();

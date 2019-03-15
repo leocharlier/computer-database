@@ -10,9 +10,13 @@
   <url>http://maven.apache.org</url>
   
   <properties>
-    <mysql-connector-java.version>8.0.15</mysql-connector-java.version>
-    <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <junit-jupiter-api.version>5.4.0</junit-jupiter-api.version>
+    <mysql-connector-java.version>8.0.15</mysql-connector-java.version>
+    <logback-classic.version>1.2.3</logback-classic.version>
+	<logback-core.version>1.2.3</logback-core.version>
+	<slf4j-api.version>1.7.26</slf4j-api.version>
   </properties>
   
   <dependencies>
@@ -26,6 +30,26 @@
       <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
         <version>${mysql-connector-java.version}</version>
+    </dependency>
+    <dependency>
+	  <groupId>org.junit.jupiter</groupId>
+	  <artifactId>junit-jupiter-api</artifactId>
+	  <version>${junit-jupiter-api.version}</version>
+	</dependency>
+	<dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback-classic.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>${logback-core.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j-api.version}</version>
     </dependency>
   </dependencies>
 </project>
