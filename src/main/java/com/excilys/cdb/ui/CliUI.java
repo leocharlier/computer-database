@@ -31,7 +31,7 @@ public class CliUI {
 		UPDATE_COMPUTER( "5" ),
 		DELETE_COMPUTER( "6" );
 		
-		private final String code;
+		private String code;
 		
 		private Actions( String pCode) {
 			this.code = pCode;
@@ -124,8 +124,10 @@ public class CliUI {
 					case DELETE_COMPUTER :
 						deleteComputer();
 						break;
+					default :
+						
 				}
-			} catch (NumberFormatException e) {
+			} catch ( NumberFormatException | ArrayIndexOutOfBoundsException e ) {
 				System.out.println( "Invalid input. Enter 1, 2, ..., 6 to perform an action or 0 to exit.\n" );
 			}
 		}	
@@ -147,30 +149,29 @@ public class CliUI {
 		
 		while( pageAction != Pagination.STOP ) {
 			
-			for(Object object : page.getPageData())
-				System.out.println( object.toString() );
+			if( pageAction != Pagination.INVALID ) {
+				for(Object object : page.getPageData())
+					System.out.println( object.toString() );
+				
+			}
 			
 			System.out.print("Press 'n' for next page, 'p' for previous page or 's' to stop : ");
 
-			try {
-				pageAction = Pagination.codeToAction( keyboard.nextLine().trim() );
-				System.out.println();
+			pageAction = Pagination.codeToAction( keyboard.nextLine().trim() );
+			System.out.println();
 
-				switch(pageAction) {
-					case NEXT :
-						page.next();
-						break;
-					case PREVIOUS :
-						page.previous();
-						break;
-					case STOP :
-						break;
-					case INVALID :
-						System.out.println( "Invalid pagination input ('n' for Next Page, 'p' for Previous Page and 's' to Stop.\n" );
-						break;
-				}
-			} catch (NumberFormatException e) {
-				System.out.println( "Invalid pagination input ('n' for Next Page, 'p' for Previous Page and 's' to Stop.\n" );
+			switch(pageAction) {
+				case NEXT :
+					page.next();
+					break;
+				case PREVIOUS :
+					page.previous();
+					break;
+				case STOP :
+					break;
+				case INVALID :
+					System.out.print( "Invalid pagination input.\n" );
+					break;
 			}
 		}
 		
@@ -241,9 +242,8 @@ public class CliUI {
 		input = companyIDInput();
 		Company company = null;
 		if( !input.equals( "0" ) && !StringUtils.isNullOrEmpty( input ) ) {
-			try {
-				company = companyDAO.find( Integer.parseInt( input ) );
-			} catch (DAOException e){
+			company = companyDAO.find( Integer.parseInt( input ) );
+			if( company == null ) {
 				System.out.println( "This company doesn't exist. The manufacturer will be null." );
 			}
 		} else if ( input.equals( "0" ) ){
@@ -329,10 +329,9 @@ public class CliUI {
 				input = companyIDInput();
 				Company company = null;
 				if( !input.equals( "0" ) &&  !StringUtils.isNullOrEmpty( input ) ) {
-					try {
-						company = companyDAO.find( Integer.parseInt( input ) );
-					} catch (DAOException e){
-						System.out.println( "This company doesn't exist. The new manufacturer will be null." );
+					company = companyDAO.find( Integer.parseInt( input ) );
+					if( company == null ) {
+						System.out.println( "This company doesn't exist. The manufacturer will be null." );
 					}
 				} else if ( input.equals( "0" ) ) {
 					System.out.println();

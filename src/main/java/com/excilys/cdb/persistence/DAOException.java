@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DAOException extends RuntimeException {
-	final static Logger logger = LoggerFactory.getLogger( "com.excilys.cdb.persistence.DAOException" );
+	final static Logger logger = LoggerFactory.getLogger( DAOException.class );
     
 	public DAOException( String message ) {
         super( message );

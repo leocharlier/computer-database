@@ -11,6 +11,23 @@ public class Computer {
 	private Timestamp discontinued;
 	private Company company;
 	
+	public Computer() {}
+	
+	public Computer(String pName) {
+		this.name = pName;
+	}
+	
+	public Computer(String pName, Timestamp pDiscontinued) {
+		this.name = pName;
+		this.discontinued = pDiscontinued;
+	}
+	
+	public Computer(String pName, Timestamp pIntroduced, Timestamp pDiscontinued) {
+		this.name = pName;
+		this.introduced = pIntroduced;
+		this.discontinued = pDiscontinued;
+	}
+	
 	public int getId() {
 		return id;
 	}

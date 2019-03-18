@@ -7,7 +7,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class DAOFactory {
+	
+	final static Logger logger = LoggerFactory.getLogger( DAOFactory.class );
 
     private static final String FICHIER_PROPERTIES = "properties/dao.properties";
     private static final String PROPERTY_URL	   = "url";

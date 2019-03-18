@@ -17,7 +17,7 @@ import com.excilys.cdb.model.Company;
 public class CompanyDAOImpl implements CompanyDAO {
 	private DAOFactory daoFactory;
 	private CompanyMapper companyMapper;
-	final static Logger logger = LoggerFactory.getLogger( "com.excilys.cdb.persistence.CompanyDAOImpl" );
+	final static Logger logger = LoggerFactory.getLogger( CompanyDAOImpl.class );
 	
 	private static final String SQL_SELECT_ALL = "SELECT id, name FROM company;";
 	private static final String SQL_SELECT_BY_ID = "SELECT id, name FROM company WHERE id = ?;";

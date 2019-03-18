@@ -14,7 +14,7 @@ import com.excilys.cdb.model.Computer;
 public class ComputerDAOImpl implements ComputerDAO {
 	private DAOFactory daoFactory;
 	private ComputerMapper computerMapper;
-	final static Logger logger = LoggerFactory.getLogger( "com.excilys.cdb.persistence.ComputerDAOImpl" );
+	final static Logger logger = LoggerFactory.getLogger( ComputerDAOImpl.class );
 	
 	private static final String SQL_SELECT_BY_ID = "SELECT id, name, introduced, discontinued, company_id FROM computer WHERE id = ?;";
 	private static final String SQL_SELECT_ALL = "SELECT id, name, introduced, discontinued, company_id FROM computer;";
