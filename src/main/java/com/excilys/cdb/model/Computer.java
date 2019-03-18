@@ -2,6 +2,8 @@ package com.excilys.cdb.model;
 
 import java.sql.Timestamp;
 
+import com.excilys.cdb.persistence.DAOException;
+
 public class Computer {
 	private int id;
 	private String name;
