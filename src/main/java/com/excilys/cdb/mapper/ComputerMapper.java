@@ -4,24 +4,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.excilys.cdb.model.Computer;
-import com.excilys.cdb.persistence.CompanyDAO;
-import com.excilys.cdb.persistence.DAOException;
-import com.excilys.cdb.persistence.DAOFactory;
+import com.excilys.cdb.persistence.CompanyDao;
+import com.excilys.cdb.persistence.DaoFactory;
 
 public class ComputerMapper {
-	
-	public Computer map( ResultSet resultSet ) throws SQLException {
-	    Computer computer = new Computer();
-	    DAOFactory daoFactory = DAOFactory.getInstance();
-	    CompanyDAO companyDAO = daoFactory.getCompanyDao();
-	    
-	    computer.setId( resultSet.getInt( "id" ) );
-	    computer.setName( resultSet.getString( "name" ) );
-	    computer.setIntroduced( resultSet.getTimestamp( "introduced" ) );
-	    computer.setDiscontinued( resultSet.getTimestamp( "discontinued" ) );
-	    computer.setCompany( companyDAO.find( resultSet.getInt( "company_id" ) ) );
 
-	    return computer;
-	}
+  public Computer map( ResultSet resultSet ) throws SQLException {
+    Computer computer = new Computer();
+    DaoFactory daoFactory = DaoFactory.getInstance();
+    CompanyDao companyDao = daoFactory.getCompanyDao();
+
+    computer.setId(resultSet.getInt("id"));
+    computer.setName(resultSet.getString("name"));
+    computer.setIntroduced(resultSet.getTimestamp("introduced"));
+    computer.setDiscontinued(resultSet.getTimestamp("discontinued"));
+    computer.setCompany(companyDao.find(resultSet.getInt("company_id")));
+
+    return computer;
+  }
 
 }

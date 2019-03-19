@@ -16,9 +16,9 @@ import com.mysql.cj.util.StringUtils;
 
 public class CliUI {
 	
-	private DAOFactory daoFactory;
-	private CompanyDAO companyDAO;
-	private ComputerDAO computerDAO;
+	private DaoFactory daoFactory;
+	private CompanyDao companyDAO;
+	private ComputerDao computerDAO;
 	private Scanner keyboard;
 	private DateFormat dateFormat;
 	
@@ -74,7 +74,7 @@ public class CliUI {
 	}
 	
 	public CliUI() {
-		this.daoFactory = DAOFactory.getInstance();
+		this.daoFactory = DaoFactory.getInstance();
 		this.companyDAO = daoFactory.getCompanyDao();
 		this.computerDAO = daoFactory.getComputerDao();
 		this.keyboard = new Scanner(System.in);
@@ -197,7 +197,7 @@ public class CliUI {
 			try {
 				Computer computer = computerDAO.find( Integer.parseInt( input ) );
 				System.out.println( computer.toDetailedString() );
-			} catch ( DAOException e) {
+			} catch ( DaoException e) {
 				System.out.println( "Sorry, this computer doesn't exist.\n" );
 			}
 		}
@@ -265,7 +265,7 @@ public class CliUI {
 		if( !input.equals( "0" ) ) {
 			try {
 				computer = computerDAO.find( Integer.parseInt( input ) );
-			} catch ( DAOException e) {
+			} catch ( DaoException e) {
 				System.out.println( "Sorry, this computer doesn't exist.\n" );
 				return;
 			}
@@ -380,7 +380,7 @@ public class CliUI {
 					System.out.println();
 					return;
 				}
-			} catch ( DAOException e) {
+			} catch ( DaoException e) {
 				System.out.println( "Sorry, this computer doesn't exist.\n" );
 			}
 		}
