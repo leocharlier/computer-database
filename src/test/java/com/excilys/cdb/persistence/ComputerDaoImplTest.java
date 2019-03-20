@@ -12,16 +12,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 class ComputerDaoImplTest {
 
   private static DaoFactory daoFactory;
   private static ComputerDao computerDAO;
-  private static Logger LOGGER = LoggerFactory.getLogger(ComputerDaoImplTest.class);
+  static final Logger LOGGER = Logger.getLogger(CompanyDaoImplTest.class);
   private static DateFormat dateFormat;
   private Computer computer;
   

@@ -15,9 +15,7 @@
     <junit-jupiter-api.version>5.4.0</junit-jupiter-api.version>
     <junit-jupiter-engine.version>5.4.0</junit-jupiter-engine.version>
     <mysql-connector-java.version>8.0.15</mysql-connector-java.version>
-    <logback-classic.version>1.2.3</logback-classic.version>
-	<logback-core.version>1.2.3</logback-core.version>
-	<slf4j-api.version>1.7.26</slf4j-api.version>
+    <log4j.version>1.2.17</log4j.version>
 	<mockito-all.version>1.8.4</mockito-all.version>
 	<maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
 	<maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
@@ -45,29 +43,30 @@
 	</dependency>
 	
 	<dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>${logback-classic.version}</version>
+      <groupId>log4j</groupId>
+	  <artifactId>log4j</artifactId>
+	  <version>${log4j.version}</version>
+	</dependency>
+    
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.0.1</version>
+      <scope>provided</scope>
     </dependency>
     
     <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-core</artifactId>
-      <version>${logback-core.version}</version>
+      <groupId>jstl</groupId>
+  	  <artifactId>jstl</artifactId>
+      <version>1.2</version>
+      <scope>compile</scope>
     </dependency>
-    
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>${slf4j-api.version}</version>
+      <groupId>taglibs</groupId>
+      <artifactId>standard</artifactId>
+      <version>1.1.2</version>
+      <scope>compile</scope>
     </dependency>
-    
-<!--     <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-all</artifactId>
-      <version>${mockito-all.version}</version>
-      <scope>test</scope>
-    </dependency> -->
   
   </dependencies>
   
@@ -92,7 +91,6 @@
         <configuration>
           <configLocation>src/main/resources/checkstyle/checkstyle.xml</configLocation>
           <suppressionsLocation>src/main/resources/checkstyle/suppressions.xml</suppressionsLocation>
-          <!-- <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression> -->
         </configuration>
       </plugin>
     </plugins>

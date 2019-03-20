@@ -11,13 +11,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 public class ComputerDaoImpl implements ComputerDao {
+  static final Logger LOGGER = Logger.getLogger(ComputerDaoImpl.class);
   private DaoFactory daoFactory;
   private ComputerMapper computerMapper;
-  static final Logger LOGGER = LoggerFactory.getLogger(ComputerDaoImpl.class);
 
   private static final String SQL_SELECT_BY_ID = 
       "SELECT id, name, introduced, discontinued, company_id FROM computer WHERE id = ?;";

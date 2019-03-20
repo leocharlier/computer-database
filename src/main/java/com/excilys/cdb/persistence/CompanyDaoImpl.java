@@ -11,13 +11,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 public class CompanyDaoImpl implements CompanyDao {
+  static final Logger LOGGER = Logger.getLogger(CompanyDaoImpl.class);
   private final DaoFactory daoFactory;
   private CompanyMapper companyMapper;
-  static final Logger LOGGER = LoggerFactory.getLogger(CompanyDaoImpl.class);
   private static final String SQL_SELECT_ALL = "SELECT id, name FROM company;";
   private static final String SQL_SELECT_BY_ID =
       "SELECT id, name FROM company WHERE id = ?;";

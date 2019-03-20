@@ -1,10 +1,9 @@
 package com.excilys.cdb.persistence;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 public class DaoException extends RuntimeException {
-  static final Logger LOGGER = LoggerFactory.getLogger(DaoException.class);
+  static final Logger LOGGER = Logger.getLogger(DaoException.class);
    
   public DaoException(String message) {
     super(message);

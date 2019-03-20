@@ -8,16 +8,15 @@ import com.excilys.cdb.model.Company;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 class CompanyDaoImplTest {
 
   private static DaoFactory daoFactory;
   private static CompanyDao companyDAO;
-  private static Logger LOGGER = LoggerFactory.getLogger(CompanyDaoImplTest.class);
+  static final Logger LOGGER = Logger.getLogger(CompanyDaoImplTest.class);
   private static final int NB_COMPANIES = 42;
   private Company company;
   
