@@ -11,9 +11,9 @@ import com.excilys.cdb.mapper.ComputerDtoMapper;
 import com.excilys.cdb.persistence.DaoFactory;
 import com.excilys.cdb.service.ComputerService;
 
-public class AddComputerServlet extends HttpServlet {
+public class EditComputerServlet extends HttpServlet {
   public static final String CONF_DAO_FACTORY = "daofactory";
-  public static final String VIEW             = "/views/addComputer.jsp";
+  public static final String VIEW             = "/views/editComputer.jsp";
   
   private ComputerService computerService;
   private ComputerDtoMapper computerDtoMapper;
