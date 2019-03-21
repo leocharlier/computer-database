@@ -82,6 +82,7 @@
 		                        <td>${computer.introduced}</td>
 		                        <td>${computer.discontinued}</td>
 		                        <td>${computer.company}</td>
+		                        <td>${page}</td>
 		                    </tr>
 	                    </c:forEach>
 	                </tbody>
@@ -92,21 +93,93 @@
 	    <footer class="navbar-fixed-bottom">
 	        <div class="container text-center">
 	            <ul class="pagination">
-	                <li>
-	                    <a href="#" aria-label="Previous">
-	                      <span aria-hidden="true">&laquo;</span>
-	                  </a>
-	              </li>
-	              <li><a href="#">1</a></li>
-	              <li><a href="#">2</a></li>
-	              <li><a href="#">3</a></li>
-	              <li><a href="#">4</a></li>
-	              <li><a href="#">5</a></li>
-	              <li>
-	                <a href="#" aria-label="Next">
-	                    <span aria-hidden="true">&raquo;</span>
-	                </a>
-	              </li>
+	            	<c:choose>
+	            		<c:when test="${page > 1}">
+	                		<li class="page-item">
+	                			<a class="page-link" href="dashboard?page=${page-1}" aria-label="Previous">
+			                      <span aria-hidden="true">&laquo;</span>
+			                    </a>
+			                 </li>
+	                	</c:when>
+	                	<c:otherwise>
+	                		<li class="page-item disabled">
+		                		<a class="page-link" href="#" aria-label="Previous">
+			                      <span aria-hidden="true">&laquo;</span>
+			                    </a>
+		                    </li>
+	                	</c:otherwise>
+					</c:choose>
+
+	                <c:choose>
+	                	<c:when test="${page == 1}">
+					        <li class="page-item active"><a class="page-link" href="dashboard?page=${page}">${page}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+1}">${page+1}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+2}">${page+2}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+3}">${page+3}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+4}">${page+4}</a></li>
+			                <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+			                <li class="page-item"><a class="page-link" href="dashboard?page=${nbMaxPages}">${nbMaxPages}</a></li>
+					    </c:when>
+					    <c:when test="${page == 2}">
+					        <li><a class="page-link" href="dashboard?page=${page-1}">${page-1}</a></li>
+			                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}">${page}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+1}">${page+1}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+2}">${page+2}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+3}">${page+3}</a></li>
+			                <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+			                <li class="page-item"><a class="page-link" href="dashboard?page=${nbMaxPages}">${nbMaxPages}</a></li>
+					    </c:when>
+					    <c:when test="${page == nbMaxPages-1}">
+					    	<li class="page-item"><a class="page-link" href="dashboard?page=1">1</a></li>
+					    	<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+					        <li><a class="page-link" href="dashboard?page=${page-3}">${page-3}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page-2}">${page-2}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page-1}">${page-1}</a></li>
+			                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}">${page}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+1}">${page+1}</a></li>
+					    </c:when>
+					    <c:when test="${page == nbMaxPages}">
+					    	<li class="page-item"><a class="page-link" href="dashboard?page=1">1</a></li>
+					    	<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+					        <li><a class="page-link" href="dashboard?page=${page-4}">${page-4}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page-3}">${page-3}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page-2}">${page-2}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page-1}">${page-1}</a></li>
+			                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}">${page}</a></li>
+					    </c:when>
+					    <c:otherwise>
+					    	<c:if test="${page > 3}">
+					    		<li class="page-item"><a class="page-link" href="dashboard?page=1">1</a></li>
+					    		<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+					    	</c:if>
+					        <li><a class="page-link" href="dashboard?page=${page-2}">${page-2}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page-1}">${page-1}</a></li>
+			                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}">${page}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+1}">${page+1}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+2}">${page+2}</a></li>
+					    	<c:if test="${page < nbMaxPages-2}">
+					    		<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+					    		<li class="page-item"><a class="page-link" href="dashboard?page=${nbMaxPages}">${nbMaxPages}</a></li>
+					    	</c:if>
+					    </c:otherwise>
+	                </c:choose>
+
+	                <c:choose>
+	            		<c:when test="${page < nbMaxPages}">
+	                		<li class="page-item">
+	                			<a class="page-link" href="dashboard?page=${page+1}" aria-label="Next">
+			                      <span aria-hidden="true">&raquo;</span>
+			                    </a>
+			                 </li>
+	                	</c:when>
+	                	<c:otherwise>
+	                		<li class="page-item disabled">
+		                		<a class="page-link" href="#" aria-label="Next">
+			                      <span aria-hidden="true">&raquo;</span>
+			                    </a>
+		                    </li>
+	                	</c:otherwise>
+					</c:choose>
 	            </ul>
 	        </div>
 	

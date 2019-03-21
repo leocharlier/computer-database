@@ -2,10 +2,8 @@ package com.excilys.cdb.mapper;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.excilys.cdb.dto.ComputerDto;
@@ -31,9 +29,8 @@ public class ComputerDtoMapper {
 		return computerDto;
 	}
 	
-	public ArrayList<ComputerDto> map(ArrayList<Computer> computers){
-		return (ArrayList<ComputerDto>) computers.stream().map( computer -> map(computer))
-				                                          .collect(Collectors.toList());
+	public List<ComputerDto> map(List<Computer> computers){
+		return computers.stream().map( computer -> map(computer)).collect(Collectors.toList());
 	}
 
 }

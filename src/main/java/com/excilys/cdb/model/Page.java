@@ -6,7 +6,7 @@ public class Page<T> {
   private List<T> data;
   private int start;
   private int size;
-  private static final int NB_ELEMENTS = 10;
+  private static final int NB_ELEMENTS = 20;
 
   public Page(List<T> pdata) {
     super();
@@ -37,6 +37,15 @@ public class Page<T> {
 
   public void previous() {
     this.start = Math.max(this.start - NB_ELEMENTS,  0);
+  }
+  
+  public List<T> getPageData(int page) {
+	  this.start = page * NB_ELEMENTS;
+	  return this.data.subList(this.start, Math.min(this.start + NB_ELEMENTS, this.size));
+  }
+  
+  public int getMaxPages() {
+	  return this.size / NB_ELEMENTS + 1;
   }
 
   public List<T> getPageData() {

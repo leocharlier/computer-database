@@ -174,9 +174,7 @@ public class CliUI {
 					System.out.print( "Invalid pagination input.\n" );
 					break;
 			}
-		}
-		
-		
+		}	
 	}
 	
 	public void listCompanies() {
