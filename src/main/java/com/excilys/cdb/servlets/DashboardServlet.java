@@ -16,9 +16,7 @@ import com.excilys.cdb.service.ComputerService;
 
 public class DashboardServlet extends HttpServlet {
   public static final String CONF_DAO_FACTORY = "daofactory";
-  public static final String ATT_USER         = "utilisateur";
-  public static final String ATT_FORM         = "form";
-  public static final String VUE              = "/WEB-INF/inscription.jsp";
+  public static final String VIEW             = "/views/dashboard.jsp";
   
   private ComputerService computerService;
   private ComputerDtoMapper computerDtoMapper;
@@ -33,6 +31,6 @@ public class DashboardServlet extends HttpServlet {
 	  ArrayList<ComputerDto> computerDtos = computerDtoMapper.map(computers);
 	  request.setAttribute("computers", computerDtos);
 	  request.setAttribute("nbOfComputers", computerDtos.size());
-	  this.getServletContext().getRequestDispatcher( "/views/dashboard.jsp" ).forward( request, response );
+	  this.getServletContext().getRequestDispatcher( VIEW ).forward( request, response );
   }
 }

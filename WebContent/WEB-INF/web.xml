@@ -11,12 +11,22 @@
     
     <servlet>
 		<servlet-name>Dashboard</servlet-name>
-		<servlet-class>com.excilys.cdb.servlets.Dashboard</servlet-class>
+		<servlet-class>com.excilys.cdb.servlets.DashboardServlet</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
 	    <servlet-name>Dashboard</servlet-name>
 	    <url-pattern>/dashboard</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AddComputer</servlet-name>
+		<servlet-class>com.excilys.cdb.servlets.AddComputerServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	    <servlet-name>AddComputer</servlet-name>
+	    <url-pattern>/addComputer</url-pattern>
 	</servlet-mapping>
 	
 	<welcome-file-list>
