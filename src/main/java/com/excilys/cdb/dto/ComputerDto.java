@@ -1,13 +1,18 @@
 package com.excilys.cdb.dto;
 
-import com.excilys.cdb.model.Computer;
-
 public class ComputerDto {
+	private int id;
 	private String name;
 	private String introduced;
 	private String discontinued;
 	private String company;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}

@@ -1,6 +1,7 @@
 package com.excilys.cdb.service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import com.excilys.cdb.model.Computer;
 import com.excilys.cdb.persistence.ComputerDao;
@@ -16,6 +17,10 @@ public class ComputerService {
 	
 	public ArrayList<Computer> listService() throws DaoException {
 		return this.computerDao.list();
+	}
+	
+	public Optional<Computer> findService(int id) throws DaoException {
+		return this.computerDao.find(id);
 	}
 
 }

@@ -77,12 +77,11 @@
 		                            <input type="checkbox" name="cb" class="cb" value="0">
 		                        </td>
 		                        <td>
-		                            <a href="editComputer" onclick="">${computer.name}</a>
+		                            <a href="editComputer?computerId=${computer.id}" onclick="">${computer.name}</a>
 		                        </td>
 		                        <td>${computer.introduced}</td>
 		                        <td>${computer.discontinued}</td>
 		                        <td>${computer.company}</td>
-		                        <td>${page}</td>
 		                    </tr>
 	                    </c:forEach>
 	                </tbody>

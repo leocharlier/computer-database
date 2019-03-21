@@ -15,6 +15,7 @@ public class ComputerDtoMapper {
 	
 	public ComputerDto map(Computer computer) {
 		ComputerDto computerDto = new ComputerDto();
+		computerDto.setId(computer.getId());
 		computerDto.setName(computer.getName());
 		computerDto.setIntroduced( computer.getIntroduced()
 				.map(someDate -> dateFormat.format(new Date(someDate.getTime())))
