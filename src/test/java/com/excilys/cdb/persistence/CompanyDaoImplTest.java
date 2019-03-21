@@ -2,11 +2,14 @@ package com.excilys.cdb.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import com.excilys.cdb.model.Company;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,7 +21,7 @@ class CompanyDaoImplTest {
   private static CompanyDao companyDAO;
   static final Logger LOGGER = Logger.getLogger(CompanyDaoImplTest.class);
   private static final int NB_COMPANIES = 42;
-  private Company company;
+  private Optional<Company> company;
   
   @BeforeAll
   public static void setUp() {
@@ -42,7 +45,7 @@ class CompanyDaoImplTest {
     int companyId = 12;
     try {
       company = companyDAO.find(companyId);
-      assertEquals(company.getId(), companyId);
+      assertEquals(company.get().getId(), companyId);
     } catch (DaoException e) {
       LOGGER.warn("Find company test failed.");
       fail("Find company test failed : database error.");
@@ -54,12 +57,12 @@ class CompanyDaoImplTest {
   void findUnknownCompanyTest() {
     int unknownId = -1;
     try {
-      company = companyDAO.find(unknownId);
-      assertNull(company);
-    } catch (DaoException e) {
-      LOGGER.warn("Find unknown company test failed.");
-      fail("Find unknown company test failed : database error.");
-    }
+        company = companyDAO.find(unknownId);
+        assertEquals(company, Optional.empty());
+      } catch (DaoException e) {
+        LOGGER.warn("Find company test failed.");
+        fail("Find company test failed : database error.");
+      }
   }
 
 }

@@ -2,7 +2,9 @@ package com.excilys.cdb.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 
+import com.excilys.cdb.model.Company;
 import com.excilys.cdb.model.Computer;
 import com.excilys.cdb.persistence.CompanyDao;
 import com.excilys.cdb.persistence.DaoFactory;
@@ -18,8 +20,8 @@ public class ComputerMapper {
     computer.setName(resultSet.getString("name"));
     computer.setIntroduced(resultSet.getTimestamp("introduced"));
     computer.setDiscontinued(resultSet.getTimestamp("discontinued"));
-    computer.setCompany(companyDao.find(resultSet.getInt("company_id")));
-
+    computer.setCompany(companyDao.find(resultSet.getInt("company_id")).orElse(null));
+    
     return computer;
   }
 

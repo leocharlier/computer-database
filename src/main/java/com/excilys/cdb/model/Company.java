@@ -23,11 +23,7 @@ public class Company {
   
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder("Company ");
-    sb.append(this.getId());
-    sb.append(" : ");
-    sb.append(this.getName());
-    return sb.toString();
+    return String.format("Company %s : %s", this.getId(), this.getName());
   }
 
 }

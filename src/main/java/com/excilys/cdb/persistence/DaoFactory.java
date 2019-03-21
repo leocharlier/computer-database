@@ -65,10 +65,10 @@ public class DaoFactory {
   }
 
   public CompanyDao getCompanyDao() {
-    return new CompanyDaoImpl(this);
+    return new CompanyDao(this);
   }
     
   public ComputerDao getComputerDao() {
-    return new ComputerDaoImpl(this);
+    return new ComputerDao(this);
   }
 }

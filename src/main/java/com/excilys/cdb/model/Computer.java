@@ -1,6 +1,7 @@
 package com.excilys.cdb.model;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 public class Computer {
   private int id;
@@ -42,24 +43,24 @@ public class Computer {
     this.name = name;
   }
 
-  public Timestamp getIntroduced() {
-    return introduced;
+  public Optional<Timestamp> getIntroduced() {
+    return Optional.ofNullable(introduced);
   }
 
   public void setIntroduced(Timestamp introduced) {
     this.introduced = introduced;
   }
 
-  public Timestamp getDiscontinued() {
-    return discontinued;
+  public Optional<Timestamp> getDiscontinued() {
+    return Optional.ofNullable(discontinued);
   }
 
   public void setDiscontinued(Timestamp discontinued) {
     this.discontinued = discontinued;
   }
 
-  public Company getCompany() {
-    return company;
+  public Optional<Company> getCompany() {
+    return Optional.ofNullable(company);
   }
 
   public void setCompany(Company company) {
@@ -67,44 +68,20 @@ public class Computer {
   }
 
   public String toString() {
-    StringBuilder sb = new StringBuilder("Computer ");
-    sb.append(this.getId());
-    sb.append(" : ");
-    sb.append(this.getName());
-    return sb.toString();
+    return String.format("Computer %s : %s", this.getId(), this.getName());
   }
 
   public String toDetailedString() {
-    StringBuilder sb = new StringBuilder("Computer ");
-
-    sb.append(this.getId());
-    sb.append(" : ");
-    sb.append(this.getName());
-    sb.append("\n");
-
-    if (this.getIntroduced() == null) {
-      sb.append("\t| Introducing date unknown \n");
-    } else {
-      sb.append("\t| Introduced the ");
-      sb.append(this.getIntroduced());
-      sb.append("\n");
-    }
-
-    if (this.getDiscontinued() == null) {
-      sb.append("\t| Discontinuing date unknown \n");
-    } else {
-      sb.append("\t| Discontinued the ");
-      sb.append(this.getDiscontinued());
-      sb.append("\n");
-    }
-
-    if (this.getCompany() == null) {
-      sb.append("\t| Manufacturer unknown \n");
-    } else {
-      sb.append("\t| Manufactured by ");
-      sb.append(this.getCompany().getName());
-      sb.append("\n");
-    }
+    StringBuilder sb = new StringBuilder(this.toString());
+    
+    sb.append(this.getIntroduced().map(someDate -> String.format("\n\t| Introduced the %s\n", someDate))
+                                  .orElse("\t| Introducing date unknown \n"));
+    
+    sb.append(this.getDiscontinued().map(someDate -> String.format("\t| Discontinued the %s\n", someDate))
+                                  .orElse("\t| Discontinuing date unknown \n"));
+    
+    sb.append(this.getCompany().map(someCompanyName -> String.format("\t| Manufactured by %s\n", someCompanyName.getName()))
+            .orElse("\t| Manufacturer unknown \n"));
 
     return sb.toString();
   }

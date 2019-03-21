@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
@@ -22,6 +23,7 @@ class ComputerDaoImplTest {
   private static ComputerDao computerDAO;
   static final Logger LOGGER = Logger.getLogger(CompanyDaoImplTest.class);
   private static DateFormat dateFormat;
+  private Optional<Computer> computerToFind;
   private Computer computer;
   
   @BeforeAll
@@ -35,21 +37,24 @@ class ComputerDaoImplTest {
   void findComputerTest() {
     int computerId = 123;
     try {
-      computer = computerDAO.find(computerId);
-      assertEquals(computer.getId(), computerId);
+    	computerToFind = computerDAO.find(computerId);
+      assertEquals(computerToFind.get().getId(), computerId);
     } catch (DaoException e) {
       LOGGER.warn("Find computer test failed.");
       fail("Find computer test failed : database error.");
     }
-    
   }
   
   @Test
   void findUnknownComputerTest() {
     int unknownId = -1;
-    assertThrows(DaoException.class, () -> {
-      computerDAO.find(unknownId);
-    });
+    try {
+    	computerToFind = computerDAO.find(unknownId);
+      assertEquals(computerToFind, Optional.empty());
+    } catch (DaoException e) {
+      LOGGER.warn("Find computer test failed.");
+      fail("Find computer test failed : database error.");
+    }
   }
   
   @Test
@@ -121,7 +126,7 @@ class ComputerDaoImplTest {
       String newName = "New Computer Name";
       computer.setName(newName);
       computerDAO.update(computer);
-      assertEquals(computerDAO.find(computer.getId()).getName(), newName);
+      assertEquals(computerDAO.find(computer.getId()).get().getName(), newName);
       computerDAO.delete(computer);
     } catch (DaoException e) {
       LOGGER.warn("Update computer name test failed.");

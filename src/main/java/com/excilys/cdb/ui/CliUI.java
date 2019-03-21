@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 import java.util.Scanner;
 
 import com.excilys.cdb.model.Company;
@@ -192,12 +193,11 @@ public class CliUI {
 	
 	public void showComputer() {
 		String input = computerIDInput();
-		
 		if( !input.equals( "0" ) ) {
-			try {
-				Computer computer = computerDAO.find( Integer.parseInt( input ) );
-				System.out.println( computer.toDetailedString() );
-			} catch ( DaoException e) {
+			Optional<Computer> computer = computerDAO.find(Integer.parseInt(input));
+			if(computer.isPresent()) {
+				System.out.println( computer.get().toDetailedString());
+			} else {
 				System.out.println( "Sorry, this computer doesn't exist.\n" );
 			}
 		}
@@ -219,20 +219,20 @@ public class CliUI {
 		
 		System.out.print( "Enter the date (Format 'dd/MM/yyyy' only) of introduction (press Enter if it's unknown and 0 to exit the creation) : " );
 		input = keyboard.nextLine().trim();
-		Timestamp introduced = null;
+		Optional<Timestamp> introduced = Optional.empty();
 		if( !input.equals( "0" ) && !StringUtils.isNullOrEmpty( input ) ) {
-			introduced = convertToTimestamp(input);
+			introduced = Optional.ofNullable(convertToTimestamp(input));
 		} else if ( input.equals( "0" ) ) {
 			System.out.println();
 			return;
 		}
 		
-		Timestamp discontinued = null;
-		if( introduced != null) {
+		Optional<Timestamp> discontinued = Optional.empty();
+		if( introduced.isPresent() ) {
 			System.out.print( "Enter the date (Format 'dd/MM/yyyy' only) of discontinuation (press Enter if it's unknown and 0 to exit the creation) : " );
 			input = keyboard.nextLine().trim();
 			if( !input.equals( "0" )  && !StringUtils.isNullOrEmpty( input ) ) {
-				discontinued = checkDiscontinued(input, introduced);
+				discontinued = Optional.ofNullable(checkDiscontinued(input, introduced.get()));
 			} else if ( input.equals( "0" ) ) {
 				System.out.println();
 				return;
@@ -240,10 +240,10 @@ public class CliUI {
 		}
 		
 		input = companyIDInput();
-		Company company = null;
+		Optional<Company> company = Optional.empty();
 		if( !input.equals( "0" ) && !StringUtils.isNullOrEmpty( input ) ) {
-			company = companyDAO.find( Integer.parseInt( input ) );
-			if( company == null ) {
+			company = companyDAO.find(Integer.parseInt(input));
+			if(!company.isPresent()) {
 				System.out.println( "This company doesn't exist. The manufacturer will be null." );
 			}
 		} else if ( input.equals( "0" ) ){
@@ -260,88 +260,85 @@ public class CliUI {
 	
 	public void updateComputer() {
 		String input = computerIDInput();
+		Optional<Computer> computer = computerDAO.find( Integer.parseInt( input ) );
 		
-		Computer computer;
 		if( !input.equals( "0" ) ) {
-			try {
-				computer = computerDAO.find( Integer.parseInt( input ) );
-			} catch ( DaoException e) {
+			if( computer.isPresent() ) {
+				Computer computerToUpdate = computer.get();
+				
+				input = askForUpdate("name", computerToUpdate);
+				if( input.equals( "y" ) ) {
+					System.out.print( "New computer name : " );
+					input = keyboard.nextLine().trim();
+					
+					while( StringUtils.isNullOrEmpty( input ) ) {
+						System.out.print( "The name cannot be null. Enter a valid name : " );
+						input = keyboard.nextLine().trim();
+					}
+					
+					computerToUpdate.setName( input );
+				}
+				
+				input = askForUpdate("introduced", computerToUpdate);
+				if( input.equals( "y" ) ) {
+					System.out.print( "New introduction date (Format 'dd/MM/yyyy' or press Enter to make it null) : " );
+					input = keyboard.nextLine().trim();
+					
+					Optional<Timestamp> introduced = Optional.empty();
+					if( !StringUtils.isNullOrEmpty( input ) ) {
+						introduced = Optional.ofNullable(convertToTimestamp( input ));
+					}
+					computerToUpdate.setIntroduced( introduced.orElse(null) );
+				}
+				
+				if( computerToUpdate.getIntroduced().isPresent() ) {
+					if( computerToUpdate.getDiscontinued().isPresent() && !computerToUpdate.getDiscontinued().get().after( computerToUpdate.getIntroduced().get() ) ) {
+						System.out.println( "The date of discontinuation is now before the date of introduction."
+								+ "\nNew date of discontinuation (Format 'dd/MM/yyyy' or press Enter to make it null) : " );
+					} else {
+						input = askForUpdate("discontinued", computerToUpdate);
+						if( input.equals( "y" ) ) {
+							System.out.print( "New discontinuation date (Format 'dd/MM/yyyy' or press Enter to make it null) : " );
+						}
+					}
+					
+					if( !input.equals( "n" ) ) {
+						input = keyboard.nextLine().trim();
+						
+						Optional<Timestamp> discontinued = Optional.empty();
+						if( !StringUtils.isNullOrEmpty( input ) ) {
+							discontinued = Optional.ofNullable(checkDiscontinued( input, computerToUpdate.getIntroduced().get() ));
+						}
+						
+						computerToUpdate.setDiscontinued( discontinued.orElse(null) );
+					}
+				} else {
+					computerToUpdate.setDiscontinued( null );
+				}
+				
+				input = askForUpdate("company", computerToUpdate);
+				while( !input.equals( "y" ) && !input.equals( "n" ) ) {
+					System.out.print( "Enter 'y' to update the manufacturer company or 'n' to continue : " );
+					input = keyboard.nextLine().trim();
+				}
+				if( input.equals( "y" ) ) {
+					input = companyIDInput();
+					Optional<Company> company = companyDAO.find( Integer.parseInt( input ) );
+					if( !input.equals( "0" ) &&  !StringUtils.isNullOrEmpty( input ) && !company.isPresent() ) {
+						System.out.println( "This company doesn't exist. The manufacturer will be null." );
+					} else if ( input.equals( "0" ) ) {
+						System.out.println();
+						return;
+					}
+					
+					computerToUpdate.setCompany( company.orElse(null) );
+				}
+				
+				computerDAO.update( computerToUpdate );
+			} else {
 				System.out.println( "Sorry, this computer doesn't exist.\n" );
 				return;
 			}
-			
-			input = askForUpdate("name", computer);
-			if( input.equals( "y" ) ) {
-				System.out.print( "New computer name : " );
-				input = keyboard.nextLine().trim();
-				
-				while( StringUtils.isNullOrEmpty( input ) ) {
-					System.out.print( "The name cannot be null. Enter a valid name : " );
-					input = keyboard.nextLine().trim();
-				}
-				
-				computer.setName( input );
-			}
-			
-			input = askForUpdate("introduced", computer);
-			if( input.equals( "y" ) ) {
-				System.out.print( "New introduction date (Format 'dd/MM/yyyy' or press Enter to make it null) : " );
-				input = keyboard.nextLine().trim();
-				
-				Timestamp introduced = null;
-				if( !StringUtils.isNullOrEmpty( input ) ) {
-					introduced = convertToTimestamp( input );
-				} else {
-					computer.setDiscontinued( null );
-				}
-				computer.setIntroduced( introduced );
-			}
-			
-			if( computer.getIntroduced() != null ) {
-				if( computer.getDiscontinued() != null && !computer.getDiscontinued().after( computer.getIntroduced() ) ) {
-					System.out.println( "The date of discontinuation is now before the date of introduction."
-							+ "\nNew date of discontinuation (Format 'dd/MM/yyyy' or press Enter to make it null) : " );
-				} else {
-					input = askForUpdate("discontinued", computer);
-					if( input.equals( "y" ) ) {
-						System.out.print( "New discontinuation date (Format 'dd/MM/yyyy' or press Enter to make it null) : " );
-					}
-				}
-				
-				if( !input.equals( "n" ) ) {
-					input = keyboard.nextLine().trim();
-					
-					Timestamp discontinued = null;
-					if( !StringUtils.isNullOrEmpty( input ) ) {
-						discontinued = checkDiscontinued( input, computer.getIntroduced() );
-					}
-					
-					computer.setDiscontinued( discontinued );
-				}
-			}
-			
-			input = askForUpdate("company", computer);
-			while( !input.equals( "y" ) && !input.equals( "n" ) ) {
-				System.out.print( "Enter 'y' to update the manufacturer company or 'n' to continue : " );
-				input = keyboard.nextLine().trim();
-			}
-			if( input.equals( "y" ) ) {
-				input = companyIDInput();
-				Company company = null;
-				if( !input.equals( "0" ) &&  !StringUtils.isNullOrEmpty( input ) ) {
-					company = companyDAO.find( Integer.parseInt( input ) );
-					if( company == null ) {
-						System.out.println( "This company doesn't exist. The manufacturer will be null." );
-					}
-				} else if ( input.equals( "0" ) ) {
-					System.out.println();
-					return;
-				}
-				
-				computer.setCompany( company );
-			}
-			
-			computerDAO.update( computer );
 			
 			System.out.println( "\n||||||||||||||||||||||||" );
 			System.out.println( "|| Computer updated ! ||" );
@@ -360,9 +357,10 @@ public class CliUI {
 		}
 		
 		if( !input.equals( "0" ) ) {
-			try {
-				Computer computer = computerDAO.find( Integer.parseInt( input ) );
-				System.out.println( computer.toDetailedString() );
+			Optional<Computer> computer = computerDAO.find( Integer.parseInt( input ) );
+			if( computer.isPresent() ) {
+				Computer computerToDelete = computer.get();
+				System.out.println( computerToDelete.toDetailedString() );
 				System.out.print( "Are you sure you want to delete this computer ? (y\\n) : " );
 				input = keyboard.nextLine().trim();
 				while( !input.equals( "y" ) && !input.equals( "n" ) ) {
@@ -370,7 +368,7 @@ public class CliUI {
 					input = keyboard.nextLine().trim();
 				}
 				if( input.equals( "y" ) ) {
-					computerDAO.delete( computer );
+					computerDAO.delete( computerToDelete );
 					
 					System.out.println( "\n||||||||||||||||||||||||" );
 					System.out.println( "|| Computer deleted ! ||" );
@@ -380,10 +378,11 @@ public class CliUI {
 					System.out.println();
 					return;
 				}
-			} catch ( DaoException e) {
-				System.out.println( "Sorry, this computer doesn't exist.\n" );
-			}
+			} 
+		} else {
+			System.out.println( "Sorry, this computer doesn't exist.\n" );
 		}
+				
 	}
 	
 	public String nameInput() {
@@ -427,7 +426,7 @@ public class CliUI {
 	public Timestamp checkDiscontinued(String input, Timestamp introduced) {
 		Timestamp discontinued = convertToTimestamp(input);
 		
-		if(discontinued.after(introduced)) {
+		if(!discontinued.after(introduced)) {
 			System.out.println( "The date of discontinuation must be after the date of introduction. It will be null." );
 			discontinued = null;
 		}
@@ -447,12 +446,12 @@ public class CliUI {
 		return input;
 	}
 	
-	public void createSQLComputer(String name, Timestamp introduced, Timestamp discontinued, Company company) {
+	public void createSQLComputer(String name, Optional<Timestamp> introduced, Optional<Timestamp> discontinued, Optional<Company> company) {
 		Computer computer = new Computer();
 		computer.setName( name );
-		computer.setIntroduced( introduced );
-		computer.setDiscontinued( discontinued );
-		computer.setCompany( company );
+		computer.setIntroduced( introduced.orElse(null) );
+		computer.setDiscontinued( discontinued.orElse(null) );
+		computer.setCompany( company.orElse(null) );
 		
 		computerDAO.create( computer );
 	}
@@ -466,18 +465,13 @@ public class CliUI {
 				sbUpdate.append( computerToUpdate.getName() );
 				break;
 			case "introduced" :
-				sbUpdate.append( computerToUpdate.getIntroduced() );
+				sbUpdate.append( computerToUpdate.getIntroduced().orElse(null) );
 				break;
 			case "discontinued " :
-				sbUpdate.append( computerToUpdate.getDiscontinued() );
+				sbUpdate.append( computerToUpdate.getDiscontinued().orElse(null) );
 				break;
 			case "company" :
-				try {
-					sbUpdate.append( computerToUpdate.getCompany().getName() );
-				} catch ( NullPointerException e) {
-					sbUpdate.append( "none" );
-				}
-				break;
+				sbUpdate.append( computerToUpdate.getCompany().map( someCompany -> someCompany.getName()).orElse("none") );
 		}
 		
 		sbUpdate.append( ". Do you want to update it ? (y/n)");
