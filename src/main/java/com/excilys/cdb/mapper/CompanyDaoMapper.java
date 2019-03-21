@@ -5,7 +5,7 @@ import com.excilys.cdb.model.Company;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CompanyMapper {
+public class CompanyDaoMapper {
 
   public Company map(ResultSet resultSet) throws SQLException {
     Company company = new Company();

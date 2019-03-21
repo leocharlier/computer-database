@@ -22,7 +22,7 @@
 	    <section id="main">
 	        <div class="container">
 	            <h1 id="homeTitle">
-	                121 Computers found
+	                ${nbOfComputers} Computers found
 	            </h1>
 	            <div id="actions" class="form-horizontal">
 	                <div class="pull-left">
@@ -81,7 +81,7 @@
 		                        </td>
 		                        <td>${computer.introduced}</td>
 		                        <td>${computer.discontinued}</td>
-		                        <td>${computer.company.name}</td>
+		                        <td>${computer.company}</td>
 		                    </tr>
 	                    </c:forEach>
 	                </tbody>

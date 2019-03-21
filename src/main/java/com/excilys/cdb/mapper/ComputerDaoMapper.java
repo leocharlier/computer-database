@@ -2,14 +2,12 @@ package com.excilys.cdb.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Optional;
 
-import com.excilys.cdb.model.Company;
 import com.excilys.cdb.model.Computer;
 import com.excilys.cdb.persistence.CompanyDao;
 import com.excilys.cdb.persistence.DaoFactory;
 
-public class ComputerMapper {
+public class ComputerDaoMapper {
 
   public Computer map( ResultSet resultSet ) throws SQLException {
     Computer computer = new Computer();

@@ -2,7 +2,7 @@ package com.excilys.cdb.persistence;
 
 import static com.excilys.cdb.persistence.DaoUtility.preparedStatementInitialization;
 
-import com.excilys.cdb.mapper.CompanyMapper;
+import com.excilys.cdb.mapper.CompanyDaoMapper;
 import com.excilys.cdb.model.Company;
 
 import java.sql.Connection;
@@ -17,13 +17,13 @@ import org.apache.log4j.Logger;
 public class CompanyDao {
   static final Logger LOGGER = Logger.getLogger(CompanyDao.class);
   private final DaoFactory daoFactory;
-  private CompanyMapper companyMapper;
+  private CompanyDaoMapper companyMapper;
   private static final String SQL_SELECT_ALL = "SELECT id, name FROM company;";
   private static final String SQL_SELECT_BY_ID = "SELECT id, name FROM company WHERE id = ?;";
 
   CompanyDao(final DaoFactory daoFactory) {
     this.daoFactory = daoFactory;
-    this.companyMapper = new CompanyMapper();
+    this.companyMapper = new CompanyDaoMapper();
   }
   
   public ArrayList<Company> list() throws DaoException {

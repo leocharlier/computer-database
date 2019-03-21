@@ -2,7 +2,7 @@ package com.excilys.cdb.persistence;
 
 import static com.excilys.cdb.persistence.DaoUtility.preparedStatementInitialization;
 
-import com.excilys.cdb.mapper.ComputerMapper;
+import com.excilys.cdb.mapper.ComputerDaoMapper;
 import com.excilys.cdb.model.Computer;
 
 import java.sql.Connection;
@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 public class ComputerDao {
   static final Logger LOGGER = Logger.getLogger(ComputerDao.class);
   private DaoFactory daoFactory;
-  private ComputerMapper computerMapper;
+  private ComputerDaoMapper computerMapper;
 
   private static final String SQL_SELECT_BY_ID = 
       "SELECT id, name, introduced, discontinued, company_id FROM computer WHERE id = ?;";
@@ -33,7 +33,7 @@ public class ComputerDao {
 
   ComputerDao(DaoFactory daoFactory) {
     this.daoFactory = daoFactory;
-    this.computerMapper = new ComputerMapper();
+    this.computerMapper = new ComputerDaoMapper();
   }
 
   public ArrayList<Computer> list() throws DaoException {
