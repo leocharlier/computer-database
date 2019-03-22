@@ -95,7 +95,7 @@
 	            	<c:choose>
 	            		<c:when test="${page > 1}">
 	                		<li class="page-item">
-	                			<a class="page-link" href="dashboard?page=${page-1}" aria-label="Previous">
+	                			<a class="page-link" href="dashboard?page=${page-1}&size=${size}" aria-label="Previous">
 			                      <span aria-hidden="true">&laquo;</span>
 			                    </a>
 			                 </li>
@@ -111,54 +111,54 @@
 
 	                <c:choose>
 	                	<c:when test="${page == 1}">
-					        <li class="page-item active"><a class="page-link" href="dashboard?page=${page}">${page}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+1}">${page+1}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+2}">${page+2}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+3}">${page+3}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+4}">${page+4}</a></li>
+					        <li class="page-item active"><a class="page-link" href="dashboard?page=${page}&size=${size}">${page}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+1}&size=${size}">${page+1}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+2}&size=${size}">${page+2}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+3}&size=${size}">${page+3}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+4}&size=${size}">${page+4}</a></li>
 			                <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-			                <li class="page-item"><a class="page-link" href="dashboard?page=${nbMaxPages}">${nbMaxPages}</a></li>
+			                <li class="page-item"><a class="page-link" href="dashboard?page=${nbMaxPages}&size=${size}">${nbMaxPages}</a></li>
 					    </c:when>
 					    <c:when test="${page == 2}">
-					        <li><a class="page-link" href="dashboard?page=${page-1}">${page-1}</a></li>
-			                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}">${page}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+1}">${page+1}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+2}">${page+2}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+3}">${page+3}</a></li>
+					        <li><a class="page-link" href="dashboard?page=${page-1}&size=${size}">${page-1}</a></li>
+			                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}&size=${size}">${page}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+1}&size=${size}">${page+1}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+2}&size=${size}">${page+2}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+3}&size=${size}">${page+3}</a></li>
 			                <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-			                <li class="page-item"><a class="page-link" href="dashboard?page=${nbMaxPages}">${nbMaxPages}</a></li>
+			                <li class="page-item"><a class="page-link" href="dashboard?page=${nbMaxPages}&size=${size}">${nbMaxPages}</a></li>
 					    </c:when>
 					    <c:when test="${page == nbMaxPages-1}">
-					    	<li class="page-item"><a class="page-link" href="dashboard?page=1">1</a></li>
+					    	<li class="page-item"><a class="page-link" href="dashboard?page=1&size=${size}">1</a></li>
 					    	<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-					        <li><a class="page-link" href="dashboard?page=${page-3}">${page-3}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page-2}">${page-2}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page-1}">${page-1}</a></li>
-			                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}">${page}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+1}">${page+1}</a></li>
+					        <li><a class="page-link" href="dashboard?page=${page-3}&size=${size}">${page-3}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page-2}&size=${size}">${page-2}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page-1}&size=${size}">${page-1}</a></li>
+			                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}&size=${size}">${page}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+1}&size=${size}">${page+1}</a></li>
 					    </c:when>
 					    <c:when test="${page == nbMaxPages}">
-					    	<li class="page-item"><a class="page-link" href="dashboard?page=1">1</a></li>
+					    	<li class="page-item"><a class="page-link" href="dashboard?page=1&size=${size}">1</a></li>
 					    	<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-					        <li><a class="page-link" href="dashboard?page=${page-4}">${page-4}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page-3}">${page-3}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page-2}">${page-2}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page-1}">${page-1}</a></li>
-			                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}">${page}</a></li>
+					        <li><a class="page-link" href="dashboard?page=${page-4}&size=${size}">${page-4}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page-3}&size=${size}">${page-3}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page-2}&size=${size}">${page-2}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page-1}&size=${size}">${page-1}</a></li>
+			                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}&size=${size}">${page}</a></li>
 					    </c:when>
 					    <c:otherwise>
 					    	<c:if test="${page > 3}">
-					    		<li class="page-item"><a class="page-link" href="dashboard?page=1">1</a></li>
+					    		<li class="page-item"><a class="page-link" href="dashboard?page=1&size=${size}">1</a></li>
 					    		<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
 					    	</c:if>
-					        <li><a class="page-link" href="dashboard?page=${page-2}">${page-2}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page-1}">${page-1}</a></li>
-			                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}">${page}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+1}">${page+1}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+2}">${page+2}</a></li>
+					        <li><a class="page-link" href="dashboard?page=${page-2}&size=${size}">${page-2}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page-1}&size=${size}">${page-1}</a></li>
+			                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}&size=${size}">${page}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+1}&size=${size}">${page+1}</a></li>
+			                <li><a class="page-link" href="dashboard?page=${page+2}&size=${size}">${page+2}</a></li>
 					    	<c:if test="${page < nbMaxPages-2}">
 					    		<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-					    		<li class="page-item"><a class="page-link" href="dashboard?page=${nbMaxPages}">${nbMaxPages}</a></li>
+					    		<li class="page-item"><a class="page-link" href="dashboard?page=${nbMaxPages}&size=${size}">${nbMaxPages}</a></li>
 					    	</c:if>
 					    </c:otherwise>
 	                </c:choose>
@@ -180,12 +180,27 @@
 	                	</c:otherwise>
 					</c:choose>
 	            </ul>
-	        </div>
 	
-	        <div class="btn-group btn-group-sm pull-right" role="group" >
-	            <button type="button" class="btn btn-default">10</button>
-	            <button type="button" class="btn btn-default">50</button>
-	            <button type="button" class="btn btn-default">100</button>
+		        <div class="btn-group btn-group-sm pull-right" role="group" >
+		        	<c:choose>
+	                	<c:when test="${size == 50}">
+	                		<a href="dashboard?page=${page}&size=10" class="btn btn-default">10</a>
+				        	<a href="dashboard?page=${page}&size=50" class="btn btn-default active">50</a>
+				        	<a href="dashboard?page=${page}&size=100" class="btn btn-default">100</a>
+	                	</c:when>
+	                	<c:when test="${size == 100}">
+	                		<a href="dashboard?page=${page}&size=10" class="btn btn-default">10</a>
+				        	<a href="dashboard?page=${page}&size=50" class="btn btn-default">50</a>
+				        	<a href="dashboard?page=${page}&size=100" class="btn btn-default active">100</a>
+	                	</c:when>
+	                	<c:otherwise>
+	                		<a href="dashboard?page=${page}&size=10" class="btn btn-default active">10</a>
+				        	<a href="dashboard?page=${page}&size=50" class="btn btn-default">50</a>
+				        	<a href="dashboard?page=${page}&size=100" class="btn btn-default">100</a>
+	                	</c:otherwise>
+	                </c:choose>
+		        	
+		        </div>
 	        </div>
 	
 	    </footer>

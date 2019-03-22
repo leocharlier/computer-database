@@ -19,11 +19,13 @@ import com.excilys.cdb.service.ComputerService;
 public class DashboardServlet extends HttpServlet {
   public static final String CONF_DAO_FACTORY = "daofactory";
   public static final String VIEW             = "/views/dashboard.jsp";
+  public static final int DEFAULT_PAGE_SIZE   = 10; 
   
   private ComputerService computerService;
   private ComputerDtoMapper computerDtoMapper;
   private Page<Computer> page;
   private int currentPage;
+  private int currentSize;
   
   public void init() throws ServletException {
 	  this.computerService = new ComputerService(( (DaoFactory) getServletContext().getAttribute(CONF_DAO_FACTORY) ));
@@ -32,7 +34,15 @@ public class DashboardServlet extends HttpServlet {
 	    
   public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 	  ArrayList<Computer> computers = this.computerService.listService();
-	  this.page = new Page<Computer>(computers);
+	  
+	  if(request.getParameter("size") != null) {
+		  this.currentSize = Integer.parseInt(request.getParameter("size"));
+	  } else {
+		  this.currentSize = DEFAULT_PAGE_SIZE;
+	  }
+	  
+	  this.page = new Page<Computer>(computers, this.currentSize);
+	  request.setAttribute("size", this.currentSize );
 	  
 	  if(request.getParameter("page") != null) {
 		  int currentPageInt = Integer.parseInt(request.getParameter("page"));
@@ -41,6 +51,10 @@ public class DashboardServlet extends HttpServlet {
 		  }
 	  } else {
 		  this.currentPage = 1;
+	  }
+	  
+	  if(this.currentPage > this.page.getMaxPages()) {
+		  this.currentPage = this.page.getMaxPages();
 	  }
 	  
 	  request.setAttribute("page", this.currentPage );

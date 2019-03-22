@@ -6,13 +6,22 @@ public class Page<T> {
   private List<T> data;
   private int start;
   private int size;
-  private static final int NB_ELEMENTS = 20;
+  private int nbElements;
 
   public Page(List<T> pdata) {
     super();
     this.data = pdata;
     this.start = 0;
     this.size = data.size();
+    this.nbElements = 10;
+  }
+  
+  public Page(List<T> pdata, int nbElmt) {
+    super();
+    this.data = pdata;
+    this.start = 0;
+    this.size = data.size();
+    this.nbElements = nbElmt;
   }
 
   public List<T> getData() {
@@ -32,23 +41,23 @@ public class Page<T> {
   }
 
   public void next() {
-    this.start = Math.min(this.start + NB_ELEMENTS, this.size - 1);
+    this.start = Math.min(this.start + this.nbElements, this.size - 1);
   }
 
   public void previous() {
-    this.start = Math.max(this.start - NB_ELEMENTS,  0);
+    this.start = Math.max(this.start - this.nbElements,  0);
   }
   
   public List<T> getPageData(int page) {
-	  this.start = page * NB_ELEMENTS;
-	  return this.data.subList(this.start, Math.min(this.start + NB_ELEMENTS, this.size));
+	  this.start = page * this.nbElements;
+	  return this.data.subList(this.start, Math.min(this.start + this.nbElements, this.size));
   }
   
   public int getMaxPages() {
-	  return this.size / NB_ELEMENTS + 1;
+	  return this.size / this.nbElements + 1;
   }
 
   public List<T> getPageData() {
-    return this.data.subList(this.start, Math.min(this.start + NB_ELEMENTS, this.size));
+    return this.data.subList(this.start, Math.min(this.start + this.nbElements, this.size));
   }
 }
