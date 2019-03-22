@@ -110,6 +110,18 @@
 					</c:choose>
 
 	                <c:choose>
+	                	<c:when test="${nbMaxPages < 5}">
+							<c:forEach var = "i" begin = "1" end ="${nbMaxPages}">
+								<c:choose>
+									<c:when test="${i == page}">
+										<li class="page-item active"><a class="page-link" href="dashboard?page=${i}&size=${size}">${i}</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a class="page-link" href="dashboard?page=${i}&size=${size}">${i}</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+					    </c:when>
 	                	<c:when test="${page == 1}">
 					        <li class="page-item active"><a class="page-link" href="dashboard?page=${page}&size=${size}">${page}</a></li>
 			                <li><a class="page-link" href="dashboard?page=${page+1}&size=${size}">${page+1}</a></li>
@@ -183,6 +195,11 @@
 	
 		        <div class="btn-group btn-group-sm pull-right" role="group" >
 		        	<c:choose>
+		        		<c:when test="${size == 10}">
+	                		<a href="dashboard?page=${page}&size=10" class="btn btn-default active">10</a>
+				        	<a href="dashboard?page=${page}&size=50" class="btn btn-default">50</a>
+				        	<a href="dashboard?page=${page}&size=100" class="btn btn-default">100</a>
+	                	</c:when>
 	                	<c:when test="${size == 50}">
 	                		<a href="dashboard?page=${page}&size=10" class="btn btn-default">10</a>
 				        	<a href="dashboard?page=${page}&size=50" class="btn btn-default active">50</a>
@@ -194,7 +211,7 @@
 				        	<a href="dashboard?page=${page}&size=100" class="btn btn-default active">100</a>
 	                	</c:when>
 	                	<c:otherwise>
-	                		<a href="dashboard?page=${page}&size=10" class="btn btn-default active">10</a>
+	                		<a href="dashboard?page=${page}&size=10" class="btn btn-default">10</a>
 				        	<a href="dashboard?page=${page}&size=50" class="btn btn-default">50</a>
 				        	<a href="dashboard?page=${page}&size=100" class="btn btn-default">100</a>
 	                	</c:otherwise>
