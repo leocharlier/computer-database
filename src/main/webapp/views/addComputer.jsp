@@ -59,7 +59,25 @@
 	        </div>
 	    </section>
 	    
+	    <section id="result">
+	        <div class="container" style="margin-top: 15px;">
+	            <div class="row">
+	            	<div class="col-xs-8 col-xs-offset-2 box">
+					    <c:choose>
+				       		<c:when test="${addResult == 'succeed'}">
+				        		<div class="alert alert-success" role="alert">The computer ${computerName} has been created !</div>
+				         	</c:when>
+				       	    <c:when test="${addResult == 'failed'}">
+				         	    <div class="alert alert-danger" role="alert">An error has occurred during the computer creation... Please try again later.</div>
+				         	</c:when>
+				       	</c:choose>
+			       	</div>
+       			</div>
+       		</div>
+	    </section>
+	    
 	    <script src="js/jquery.min.js"></script>
+	    <script src="js/bootstrap.min.js"></script>
 	    <script src="js/addComputer.js"></script>
 	</body>
 </html>

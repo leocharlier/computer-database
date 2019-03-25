@@ -18,7 +18,7 @@ public class DtoComputerMapper {
 	    CompanyDao companyDao = daoFactory.getCompanyDao();
 	    
 		Computer computer = new Computer();
-		computer.setName(dtoComputer.getName());
+		computer.setName(dtoComputer.getName().trim());
 		
 		if(dtoComputer.getIntroduced().isEmpty()) {
 			computer.setIntroduced(null);
@@ -32,19 +32,19 @@ public class DtoComputerMapper {
 			} catch(ParseException e) {
 				throw new DtoDateParseException("Introduced date parsing error.");
 			}
-		}
-		
-		if(dtoComputer.getDiscontinued().isEmpty()) {
-			computer.setDiscontinued(null);
-		} else {
-			String dateString = dtoComputer.getDiscontinued();
-			try {
-				Date date = ComputerDtoMapper.DATE_FORMAT.parse(dateString);
-				long time = date.getTime();
-				Timestamp discontinued = new Timestamp(time);
-				computer.setDiscontinued(discontinued);
-			} catch(ParseException e) {
-				throw new DtoDateParseException("Discontinued date parsing error.");
+			
+			if(dtoComputer.getDiscontinued().isEmpty()) {
+				computer.setDiscontinued(null);
+			} else {
+				dateString = dtoComputer.getDiscontinued();
+				try {
+					Date date = ComputerDtoMapper.DATE_FORMAT.parse(dateString);
+					long time = date.getTime();
+					Timestamp discontinued = new Timestamp(time);
+					computer.setDiscontinued(discontinued);
+				} catch(ParseException e) {
+					throw new DtoDateParseException("Discontinued date parsing error.");
+				}
 			}
 		}
 		
