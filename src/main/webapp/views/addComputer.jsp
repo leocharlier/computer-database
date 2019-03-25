@@ -28,15 +28,15 @@
 	                            <div class="form-group">
 	                                <label for="computerName">Computer name</label>
 	                                <input type="text" class="form-control" id="computerName" name="computerName" placeholder="Computer name" required>
-	                            	<span class="erreur">${errors['computerName']}</span>
+	                            	<span id="emptyNameError" class="error">Computer name must be set.</span>
 	                            </div>
 	                            <div class="form-group">
 	                                <label for="introduced">Introduced date</label>
-	                                <input type="date" class="form-control" id="introduced" name="introduced" placeholder="Introduced date">
+	                                <input type="date" class="form-control" id="introduced" name="introduced" placeholder="Introduced date" min="1950-01-01">
 	                            </div>
 	                            <div class="form-group">
 	                                <label for="discontinued">Discontinued date</label>
-	                                <input type="date" class="form-control" id="discontinued" name="discontinued" placeholder="Discontinued date">
+	                                <input type="date" class="form-control" id="discontinued" name="discontinued" placeholder="Discontinued date" disabled>
 	                            </div>
 	                            <div class="form-group">
 	                                <label for="companyName">Company</label>
@@ -58,5 +58,8 @@
 	            </div>
 	        </div>
 	    </section>
+	    
+	    <script src="js/jquery.min.js"></script>
+	    <script src="js/addComputer.js"></script>
 	</body>
 </html>

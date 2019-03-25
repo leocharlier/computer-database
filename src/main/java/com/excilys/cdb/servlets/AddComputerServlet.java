@@ -2,8 +2,6 @@ package com.excilys.cdb.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.excilys.cdb.dto.ComputerDto;
-import com.excilys.cdb.exception.ComputerNullNameException;
-import com.excilys.cdb.mapper.ComputerDtoMapper;
 import com.excilys.cdb.mapper.DtoComputerMapper;
 import com.excilys.cdb.model.Company;
 import com.excilys.cdb.model.Computer;
@@ -27,7 +23,6 @@ public class AddComputerServlet extends HttpServlet {
   public static final String INTRODUCED_FIELD   = "introduced";
   public static final String DISCONTINUED_FIELD = "discontinued";
   public static final String COMPANY_FIELD      = "companyName";
-  public static final String ATT_ERRORS         = "errors";
   
   private ComputerService computerService;
   private CompanyService companyService;
@@ -46,32 +41,19 @@ public class AddComputerServlet extends HttpServlet {
   }
   
   public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
-	String result;
-    Map<String, String> errors = new HashMap<String, String>();
 	
 	String computerName = request.getParameter(NAME_FIELD);
     String introduced = request.getParameter(INTRODUCED_FIELD);
     String discontinued = request.getParameter(DISCONTINUED_FIELD);
     String companyName = request.getParameter(COMPANY_FIELD);
     
-    try {
-    	computerNameValidation(computerName);
-    } catch (ComputerNullNameException e) {
-    	errors.put(NAME_FIELD, e.getMessage());
-    }
-//    
-//    ComputerDto dtoComputer = new ComputerDto(computerName, introduced, discontinued, companyName);
-//    
-//    System.out.println(introduced + discontinued);
-//    Computer computer = dtoComputerMapper.map(dtoComputer);
-//    
-//    this.computerService.createService(computer);
+    ComputerDto dtoComputer = new ComputerDto(computerName, introduced, discontinued, companyName);
+    
+    System.out.println(introduced + discontinued);
+    Computer computer = dtoComputerMapper.map(dtoComputer);
+    
+    this.computerService.createService(computer);
+    
     this.getServletContext().getRequestDispatcher( VIEW ).forward( request, response );
-  }
-
-  private void computerNameValidation( String name ) throws ComputerNullNameException {
-	  if(name.trim().isEmpty()) {
-		  throw new ComputerNullNameException("Computer name must be set.");
-	  }
   }
 }
