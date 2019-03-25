@@ -35,15 +35,18 @@
 	                            </div>
 	                            <div class="form-group">
 	                                <label for="introduced">Introduced date</label>
-	                                <input type="date" class="form-control" id="introduced" placeholder="">
+	                                <input type="date" class="form-control" id="introduced" value="${computer.introduced}">
 	                            </div>
 	                            <div class="form-group">
 	                                <label for="discontinued">Discontinued date</label>
-	                                <input type="date" class="form-control" id="discontinued" placeholder="">
+	                                <input type="date" class="form-control" id="discontinued" value="${computer.discontinued}">
 	                            </div>
 	                            <div class="form-group">
 	                                <label for="companyId">Company</label>
 	                                <select class="form-control" id="companyId" >
+	                                	<c:if test="${empty computer.company}">
+	                                		<option selected value="">--</option>
+	                                	</c:if>
 	                                	<c:forEach items="${companies}" var="company">
 	                                		<c:choose>
 							            		<c:when test="${computer.company == company.name}">
@@ -53,7 +56,6 @@
 							                		<option value="${company.id}">${company.name}</option>
 							                	</c:otherwise>
 											</c:choose>
-	                                		
 	                                	</c:forEach>
 	                                </select>
 	                            </div>            

@@ -2,6 +2,7 @@ package com.excilys.cdb.persistence;
 
 import static com.excilys.cdb.persistence.DaoUtility.preparedStatementInitialization;
 
+import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.mapper.ComputerDaoMapper;
 import com.excilys.cdb.model.Computer;
 
@@ -65,9 +66,9 @@ public class ComputerDao {
     return computers;
   }
 
-  public Optional<Computer> find(int pid) throws DaoException {
+  public Optional<Computer> findById(int pid) throws DaoException {
     ResultSet resultSet = null;
-    Computer computer = null;
+    Optional<Computer> computer = null;
 
     try (
         Connection connection = daoFactory.getConnection();
@@ -76,15 +77,20 @@ public class ComputerDao {
       resultSet = preparedStatement.executeQuery();
 
       if (resultSet.next()) {
-        computer = this.computerMapper.map(resultSet);
+        computer = Optional.ofNullable(this.computerMapper.map(resultSet));
       }
 
     } catch (SQLException e) {
       throw new DaoException(e);
     }
-
-    LOGGER.info("Computer " + pid + " found.");
-    return Optional.ofNullable(computer);
+    
+    if(computer.isPresent()) {
+    	LOGGER.info("Computer " + pid + " found.");
+    } else {
+    	LOGGER.warn("Computer " + pid + " not found.");
+    }
+    
+    return computer;
   }
 
   public void create(Computer computer) throws DaoException {

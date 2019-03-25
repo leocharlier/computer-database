@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.model.Computer;
 
 import java.sql.Timestamp;
@@ -37,7 +38,7 @@ class ComputerDaoImplTest {
   void findComputerTest() {
     int computerId = 123;
     try {
-    	computerToFind = computerDAO.find(computerId);
+    	computerToFind = computerDAO.findById(computerId);
       assertEquals(computerToFind.get().getId(), computerId);
     } catch (DaoException e) {
       LOGGER.warn("Find computer test failed.");
@@ -49,7 +50,7 @@ class ComputerDaoImplTest {
   void findUnknownComputerTest() {
     int unknownId = -1;
     try {
-    	computerToFind = computerDAO.find(unknownId);
+    	computerToFind = computerDAO.findById(unknownId);
       assertEquals(computerToFind, Optional.empty());
     } catch (DaoException e) {
       LOGGER.warn("Find computer test failed.");
@@ -126,7 +127,7 @@ class ComputerDaoImplTest {
       String newName = "New Computer Name";
       computer.setName(newName);
       computerDAO.update(computer);
-      assertEquals(computerDAO.find(computer.getId()).get().getName(), newName);
+      assertEquals(computerDAO.findById(computer.getId()).get().getName(), newName);
       computerDAO.delete(computer);
     } catch (DaoException e) {
       LOGGER.warn("Update computer name test failed.");

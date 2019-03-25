@@ -3,9 +3,9 @@ package com.excilys.cdb.service;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.model.Computer;
 import com.excilys.cdb.persistence.ComputerDao;
-import com.excilys.cdb.persistence.DaoException;
 import com.excilys.cdb.persistence.DaoFactory;
 
 public class ComputerService {
@@ -20,7 +20,11 @@ public class ComputerService {
 	}
 	
 	public Optional<Computer> findService(int id) throws DaoException {
-		return this.computerDao.find(id);
+		return this.computerDao.findById(id);
+	}
+	
+	public void createService(Computer computer) throws DaoException {
+		this.computerDao.create(computer);
 	}
 
 }

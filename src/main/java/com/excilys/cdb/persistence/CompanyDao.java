@@ -2,6 +2,7 @@ package com.excilys.cdb.persistence;
 
 import static com.excilys.cdb.persistence.DaoUtility.preparedStatementInitialization;
 
+import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.mapper.CompanyDaoMapper;
 import com.excilys.cdb.model.Company;
 
@@ -20,6 +21,7 @@ public class CompanyDao {
   private CompanyDaoMapper companyMapper;
   private static final String SQL_SELECT_ALL = "SELECT id, name FROM company;";
   private static final String SQL_SELECT_BY_ID = "SELECT id, name FROM company WHERE id = ?;";
+  private static final String SQL_SELECT_BY_NAME = "SELECT id, name FROM company WHERE name = ?;";
 
   CompanyDao(final DaoFactory daoFactory) {
     this.daoFactory = daoFactory;
@@ -55,7 +57,7 @@ public class CompanyDao {
     return companies;
   }
 
-  public Optional<Company> find(int pid) throws DaoException {
+  public Optional<Company> findById(int pid) throws DaoException {
     ResultSet resultSet;
     Company company = null;
 
@@ -75,5 +77,26 @@ public class CompanyDao {
 
     return Optional.ofNullable(company);
   }
+  
+  public Optional<Company> findByName(String pname) throws DaoException {
+	    ResultSet resultSet;
+	    Company company = null;
+
+	    try (
+	        Connection connection = daoFactory.getConnection();
+	        PreparedStatement preparedStatement =
+	            preparedStatementInitialization(connection, SQL_SELECT_BY_NAME, false, pname)
+	    ) {
+	      resultSet = preparedStatement.executeQuery();
+
+	      if (resultSet.next()) {
+	        company = this.companyMapper.map(resultSet);
+	      }
+	    } catch (SQLException e) {
+	      throw new DaoException(e);
+	    }
+
+	    return Optional.ofNullable(company);
+	  }
 
 }

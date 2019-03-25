@@ -1,4 +1,4 @@
-package com.excilys.cdb.persistence;
+package com.excilys.cdb.exception;
 
 import org.apache.log4j.Logger;
 

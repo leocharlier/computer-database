@@ -1,10 +1,11 @@
 package com.excilys.cdb.service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import com.excilys.cdb.persistence.CompanyDao;
-import com.excilys.cdb.persistence.DaoException;
 import com.excilys.cdb.persistence.DaoFactory;
+import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.model.Company;
 
 public class CompanyService {
@@ -14,7 +15,11 @@ public class CompanyService {
 		this.companyDao = daoFactory.getCompanyDao();
 	}
 	
-	public ArrayList<Company> listService() throws DaoException{
+	public ArrayList<Company> listService() throws DaoException {
 		return companyDao.list();
 	}
-}
+	
+	public Optional<Company> findByName(String name) throws DaoException {
+		return companyDao.findByName(name);
+	}
+} 

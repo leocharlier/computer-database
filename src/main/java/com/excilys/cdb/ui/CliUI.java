@@ -192,7 +192,7 @@ public class CliUI {
 	public void showComputer() {
 		String input = computerIDInput();
 		if( !input.equals( "0" ) ) {
-			Optional<Computer> computer = computerDAO.find(Integer.parseInt(input));
+			Optional<Computer> computer = computerDAO.findById(Integer.parseInt(input));
 			if(computer.isPresent()) {
 				System.out.println( computer.get().toDetailedString());
 			} else {
@@ -240,7 +240,7 @@ public class CliUI {
 		input = companyIDInput();
 		Optional<Company> company = Optional.empty();
 		if( !input.equals( "0" ) && !StringUtils.isNullOrEmpty( input ) ) {
-			company = companyDAO.find(Integer.parseInt(input));
+			company = companyDAO.findById(Integer.parseInt(input));
 			if(!company.isPresent()) {
 				System.out.println( "This company doesn't exist. The manufacturer will be null." );
 			}
@@ -258,7 +258,7 @@ public class CliUI {
 	
 	public void updateComputer() {
 		String input = computerIDInput();
-		Optional<Computer> computer = computerDAO.find( Integer.parseInt( input ) );
+		Optional<Computer> computer = computerDAO.findById( Integer.parseInt( input ) );
 		
 		if( !input.equals( "0" ) ) {
 			if( computer.isPresent() ) {
@@ -321,7 +321,7 @@ public class CliUI {
 				}
 				if( input.equals( "y" ) ) {
 					input = companyIDInput();
-					Optional<Company> company = companyDAO.find( Integer.parseInt( input ) );
+					Optional<Company> company = companyDAO.findById( Integer.parseInt( input ) );
 					if( !input.equals( "0" ) &&  !StringUtils.isNullOrEmpty( input ) && !company.isPresent() ) {
 						System.out.println( "This company doesn't exist. The manufacturer will be null." );
 					} else if ( input.equals( "0" ) ) {
@@ -355,7 +355,7 @@ public class CliUI {
 		}
 		
 		if( !input.equals( "0" ) ) {
-			Optional<Computer> computer = computerDAO.find( Integer.parseInt( input ) );
+			Optional<Computer> computer = computerDAO.findById( Integer.parseInt( input ) );
 			if( computer.isPresent() ) {
 				Computer computerToDelete = computer.get();
 				System.out.println( computerToDelete.toDetailedString() );

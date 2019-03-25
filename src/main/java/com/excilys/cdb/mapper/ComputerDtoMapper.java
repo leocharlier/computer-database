@@ -11,27 +11,23 @@ import com.excilys.cdb.model.Computer;
 
 public class ComputerDtoMapper {
 	
-	private final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public ComputerDto map(Computer computer) {
-		ComputerDto computerDto = new ComputerDto();
-		computerDto.setId(computer.getId());
-		computerDto.setName(computer.getName());
-		computerDto.setIntroduced( computer.getIntroduced()
-				.map(someDate -> dateFormat.format(new Date(someDate.getTime())))
-				.orElse(""));
-		computerDto.setDiscontinued( computer.getDiscontinued()
-				.map(someDate -> dateFormat.format(new Date(someDate.getTime())))
-				.orElse(""));
-		computerDto.setCompany( computer.getCompany()
-				.map(someCompany -> someCompany.getName())
-				.orElse(""));
-		
-		return computerDto;
+		return new ComputerDto(computer.getId(),
+				               computer.getName(),
+				               computer.getIntroduced()
+								.map(someDate -> DATE_FORMAT.format(new Date(someDate.getTime())))
+								.orElse(""),
+							   computer.getDiscontinued()
+								.map(someDate -> DATE_FORMAT.format(new Date(someDate.getTime())))
+								.orElse(""),
+							   computer.getCompany()
+								.map(someCompany -> someCompany.getName())
+								.orElse(""));
 	}
-	
+
 	public List<ComputerDto> map(List<Computer> computers){
 		return computers.stream().map( computer -> map(computer)).collect(Collectors.toList());
 	}
-
 }

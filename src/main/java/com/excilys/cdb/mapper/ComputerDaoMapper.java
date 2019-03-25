@@ -18,7 +18,7 @@ public class ComputerDaoMapper {
     computer.setName(resultSet.getString("name"));
     computer.setIntroduced(resultSet.getTimestamp("introduced"));
     computer.setDiscontinued(resultSet.getTimestamp("discontinued"));
-    computer.setCompany(companyDao.find(resultSet.getInt("company_id")).orElse(null));
+    computer.setCompany(companyDao.findById(resultSet.getInt("company_id")).orElse(null));
     
     return computer;
   }

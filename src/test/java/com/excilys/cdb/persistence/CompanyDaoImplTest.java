@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.model.Company;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ class CompanyDaoImplTest {
   void findCompanyTest() {
     int companyId = 12;
     try {
-      company = companyDAO.find(companyId);
+      company = companyDAO.findById(companyId);
       assertEquals(company.get().getId(), companyId);
     } catch (DaoException e) {
       LOGGER.warn("Find company test failed.");
@@ -57,7 +58,7 @@ class CompanyDaoImplTest {
   void findUnknownCompanyTest() {
     int unknownId = -1;
     try {
-        company = companyDAO.find(unknownId);
+        company = companyDAO.findById(unknownId);
         assertEquals(company, Optional.empty());
       } catch (DaoException e) {
         LOGGER.warn("Find company test failed.");
