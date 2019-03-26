@@ -25,6 +25,7 @@ import com.excilys.cdb.service.ComputerService;
 public class EditComputerServlet extends HttpServlet {
   public static final String CONF_DAO_FACTORY   = "daofactory";
   public static final String VIEW               = "/views/editComputer.jsp";
+  public static final String NOT_FOUND_VIEW     = "/views/404.jsp";
   public static final String ID_FIELD           = "id";
   public static final String NAME_FIELD         = "computerName";
   public static final String INTRODUCED_FIELD   = "introduced";
@@ -52,26 +53,22 @@ public class EditComputerServlet extends HttpServlet {
 	  if(computer.isPresent()) {
 		  Computer computerToEdit = computer.get();
 		  ComputerDto computerDto = computerDtoMapper.map(computerToEdit);
-		  
-		  request.setAttribute("computerFound", true);
 		  request.setAttribute("computer", computerDto);
 		  request.setAttribute("companies", companies);
+		  this.getServletContext().getRequestDispatcher( VIEW ).forward( request, response );
 	  } else {
-		  request.setAttribute("computerFound", false);
-		  request.setAttribute("computerNotFoundMessage", "Sorry, the computer <strong>" + computerId + "</strong> doesn't exist.");
+		  request.setAttribute("errorMessage", "Sorry, the computer <strong>" + computerId + "</strong> doesn't exist.");
+		  this.getServletContext().getRequestDispatcher( NOT_FOUND_VIEW ).forward( request, response );
 	  }
 	} else {
-      request.setAttribute("computerFound", false);
-      request.setAttribute("computerNotFoundMessage", "Sorry, there is no computer ID to check.");
+      request.setAttribute("errorMessage", "Sorry, there is <strong>no computer ID</strong> to check.");
+      this.getServletContext().getRequestDispatcher( NOT_FOUND_VIEW ).forward( request, response );
 	}
-	
-	this.getServletContext().getRequestDispatcher( VIEW ).forward( request, response );
   }
   
   public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 	String updateResult;
 	String resultMessage;
-	request.setAttribute("computerFound", true);
 	
 	String id = request.getParameter(ID_FIELD);
 	String computerName = request.getParameter(NAME_FIELD);

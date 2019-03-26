@@ -39,8 +39,24 @@
 	    <url-pattern>/editComputer</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>Error404</servlet-name>
+		<servlet-class>com.excilys.cdb.servlets.Error404Servlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+	    <servlet-name>Error404</servlet-name>
+	    <url-pattern>/404</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
 	    <welcome-file>dashboard</welcome-file>
 	</welcome-file-list>
+	
+	<error-page>
+	    <!-- Missing resource -->
+	    <error-code>404</error-code>
+	    <location>/404</location>
+	</error-page>
 
 </web-app>
