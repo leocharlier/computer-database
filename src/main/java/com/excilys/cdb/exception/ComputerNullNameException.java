@@ -9,15 +9,4 @@ public class ComputerNullNameException extends RuntimeException {
     super(message);
     LOGGER.warn(message);
   }
-
-  public ComputerNullNameException(String message, Throwable cause) {
-    super(message, cause);
-    LOGGER.warn(cause.toString() + " : " + message);
-  }
-
-  public ComputerNullNameException(Throwable cause) {
-    super(cause);
-    LOGGER.warn(cause.toString());
-  }
-    
 }

@@ -14,10 +14,4 @@ public class DtoDateParseException extends RuntimeException {
     super(message, cause);
     LOGGER.warn(cause.toString() + " : " + message);
   }
-
-  public DtoDateParseException(Throwable cause) {
-    super(cause);
-    LOGGER.warn(cause.toString());
-  }
-    
 }

@@ -10,7 +10,6 @@ import com.excilys.cdb.dto.ComputerDto;
 import com.excilys.cdb.model.Computer;
 
 public class ComputerDtoMapper {
-	
 	public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public ComputerDto map(Computer computer) {

@@ -9,14 +9,4 @@ public class DiscontinuedBeforeIntroducedException extends RuntimeException {
     super(message);
     LOGGER.error(message);
   }
-
-  public DiscontinuedBeforeIntroducedException(String message, Throwable cause) {
-    super(message, cause);
-    LOGGER.error(cause.toString() + " : " + message);
-  }
-
-  public DiscontinuedBeforeIntroducedException(Throwable cause) {
-    super(cause);
-    LOGGER.error(cause.toString());
-  }
 }

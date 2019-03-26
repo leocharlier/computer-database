@@ -9,14 +9,4 @@ public class DiscontinuedButNoIntroducedException extends RuntimeException {
     super(message);
     LOGGER.error(message);
   }
-
-  public DiscontinuedButNoIntroducedException(String message, Throwable cause) {
-    super(message, cause);
-    LOGGER.error(cause.toString() + " : " + message);
-  }
-
-  public DiscontinuedButNoIntroducedException(Throwable cause) {
-    super(cause);
-    LOGGER.error(cause.toString());
-  }
 }

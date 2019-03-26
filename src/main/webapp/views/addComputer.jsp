@@ -68,24 +68,21 @@
 	        </div>
 	    </section>
 	    
-	    <section id="result">
-	        <div class="container" style="margin-top: 15px;">
-	            <div class="row">
-	            	<div class="col-xs-8 col-xs-offset-2 box">
-					    <c:choose>
-				       		<c:when test="${addResult == 'succeed'}">
-				        		<div class="alert alert-success" role="alert">${resultMessage} <a href="dashboard">Go back to dashboard.</a></div>
-				         	</c:when>
-				       	    <c:when test="${addResult == 'failed'}">
-				         	    <div class="alert alert-danger" role="alert">${resultMessage} <a href="dashboard">Go back to dashboard.</a></div>
-				         	</c:when>
-				       	</c:choose>
-			       	</div>
-       			</div>
-       		</div>
-	    </section>
+	    <c:if test="${not empty resultMessage}">
+	    	<section id="result">
+		        <div class="container" style="margin-top: 15px;">
+		            <div class="row">
+		            	<div class="col-xs-8 col-xs-offset-2 box">
+					        <div class="alert alert-success" role="alert">
+					        	${resultMessage} <a href="dashboard">Go back to dashboard.</a>
+					        </div>
+				       	</div>
+	       			</div>
+	       		</div>
+		    </section>
+	    </c:if>
 	    
 	    <script src="js/jquery.min.js"></script>
-	    <script src="js/addAndEditComputer.js"></script>
+	    <script src="js/validator.js"></script>
 	</body>
 </html>

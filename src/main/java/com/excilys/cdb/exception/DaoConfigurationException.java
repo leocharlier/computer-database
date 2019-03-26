@@ -14,9 +14,4 @@ public class DaoConfigurationException extends RuntimeException {
     super(message, cause);
     LOGGER.error(cause.toString() + " : " + message);
   }
-
-  public DaoConfigurationException(Throwable cause) {
-    super(cause);
-    LOGGER.error(cause.toString());
-  }
 }
