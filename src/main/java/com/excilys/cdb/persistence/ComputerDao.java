@@ -71,7 +71,7 @@ public class ComputerDao {
 
   public Optional<Computer> findById(int pid) throws DaoException {
     ResultSet resultSet = null;
-    Optional<Computer> computer = null;
+    Optional<Computer> computer = Optional.empty();
 
     try (
         Connection connection = daoFactory.getConnection();

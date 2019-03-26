@@ -74,10 +74,10 @@
 	            	<div class="col-xs-8 col-xs-offset-2 box">
 					    <c:choose>
 				       		<c:when test="${addResult == 'succeed'}">
-				        		<div class="alert alert-success" role="alert">${resultMessage}</div>
+				        		<div class="alert alert-success" role="alert">${resultMessage} <a href="dashboard">Go back to dashboard.</a></div>
 				         	</c:when>
 				       	    <c:when test="${addResult == 'failed'}">
-				         	    <div class="alert alert-danger" role="alert">${resultMessage}</div>
+				         	    <div class="alert alert-danger" role="alert">${resultMessage} <a href="dashboard">Go back to dashboard.</a></div>
 				         	</c:when>
 				       	</c:choose>
 			       	</div>
@@ -86,6 +86,6 @@
 	    </section>
 	    
 	    <script src="js/jquery.min.js"></script>
-	    <script src="js/addComputer.js"></script>
+	    <script src="js/addAndEditComputer.js"></script>
 	</body>
 </html>

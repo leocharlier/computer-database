@@ -53,9 +53,16 @@ public class EditComputerServlet extends HttpServlet {
 		  Computer computerToEdit = computer.get();
 		  ComputerDto computerDto = computerDtoMapper.map(computerToEdit);
 		  
+		  request.setAttribute("computerFound", true);
 		  request.setAttribute("computer", computerDto);
 		  request.setAttribute("companies", companies);
+	  } else {
+		  request.setAttribute("computerFound", false);
+		  request.setAttribute("computerNotFoundMessage", "Sorry, the computer <strong>" + computerId + "</strong> doesn't exist.");
 	  }
+	} else {
+      request.setAttribute("computerFound", false);
+      request.setAttribute("computerNotFoundMessage", "Sorry, there is no computer ID to check.");
 	}
 	
 	this.getServletContext().getRequestDispatcher( VIEW ).forward( request, response );
@@ -64,6 +71,7 @@ public class EditComputerServlet extends HttpServlet {
   public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 	String updateResult;
 	String resultMessage;
+	request.setAttribute("computerFound", true);
 	
 	String id = request.getParameter(ID_FIELD);
 	String computerName = request.getParameter(NAME_FIELD);

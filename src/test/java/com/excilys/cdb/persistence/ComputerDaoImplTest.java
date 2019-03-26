@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import com.excilys.cdb.exception.ComputerNullNameException;
 import com.excilys.cdb.exception.DaoException;
+import com.excilys.cdb.exception.DiscontinuedBeforeIntroducedException;
+import com.excilys.cdb.exception.DiscontinuedButNoIntroducedException;
 import com.excilys.cdb.model.Computer;
 
 import java.sql.Timestamp;
@@ -50,7 +53,7 @@ class ComputerDaoImplTest {
   void findUnknownComputerTest() {
     int unknownId = -1;
     try {
-    	computerToFind = computerDAO.findById(unknownId);
+      computerToFind = computerDAO.findById(unknownId);
       assertEquals(computerToFind, Optional.empty());
     } catch (DaoException e) {
       LOGGER.warn("Find computer test failed.");
@@ -83,7 +86,7 @@ class ComputerDaoImplTest {
   @Test
   void createComputerWithoutNameTest() {
     computer = new Computer();
-    assertThrows(DaoException.class, () -> {
+    assertThrows(ComputerNullNameException.class, () -> {
       computerDAO.create(computer);
     });
   }
@@ -94,7 +97,7 @@ class ComputerDaoImplTest {
     long time = date.getTime();
     Timestamp dateTest = new Timestamp(time);
     computer = new Computer("TestCreation", dateTest);
-    assertThrows(DaoException.class, () -> {
+    assertThrows(DiscontinuedButNoIntroducedException.class, () -> {
       computerDAO.create(computer);
     });
   }
@@ -110,7 +113,7 @@ class ComputerDaoImplTest {
       Timestamp discontinuedDate = new Timestamp(time);
       
       computer = new Computer("TestCreation", introducedDate, discontinuedDate);
-      assertThrows(DaoException.class, () -> {
+      assertThrows(DiscontinuedBeforeIntroducedException.class, () -> {
         computerDAO.create(computer);
       });
     } catch (ParseException e) {
@@ -153,7 +156,7 @@ class ComputerDaoImplTest {
       Timestamp discontinuedDateUpdate = new Timestamp(time);
       computer.setDiscontinued(discontinuedDateUpdate);
       
-      assertThrows(DaoException.class, () -> {
+      assertThrows(DiscontinuedBeforeIntroducedException.class, () -> {
         computerDAO.update(computer);
       });
       
