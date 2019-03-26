@@ -27,7 +27,16 @@
 	                        <fieldset>
 	                            <div class="form-group">
 	                                <label for="computerName">Computer name</label>
-	                                <input type="text" class="form-control" id="computerName" name="computerName" placeholder="Computer name" required>
+	                                <input 
+	                                	type="text" 
+	                                	class="form-control" 
+	                                	id="computerName" 
+	                                	name="computerName" 
+	                                	placeholder="Computer name" 
+	                                	required pattern=".*\S+.*" 
+	                                	oninvalid="this.setCustomValidity('The name must contain at least one non white space character.')"
+	                                	onchange="try{setCustomValidity('')}catch(e){}"
+	                                	oninput="setCustomValidity(' ')">
 	                            	<span id="emptyNameError" class="error">Computer name must be set.</span>
 	                            </div>
 	                            <div class="form-group">
@@ -65,10 +74,10 @@
 	            	<div class="col-xs-8 col-xs-offset-2 box">
 					    <c:choose>
 				       		<c:when test="${addResult == 'succeed'}">
-				        		<div class="alert alert-success" role="alert">The computer ${computerName} has been created !</div>
+				        		<div class="alert alert-success" role="alert">${resultMessage}</div>
 				         	</c:when>
 				       	    <c:when test="${addResult == 'failed'}">
-				         	    <div class="alert alert-danger" role="alert">An error has occurred during the computer creation... Please try again later.</div>
+				         	    <div class="alert alert-danger" role="alert">${resultMessage}</div>
 				         	</c:when>
 				       	</c:choose>
 			       	</div>
@@ -77,7 +86,6 @@
 	    </section>
 	    
 	    <script src="js/jquery.min.js"></script>
-	    <script src="js/bootstrap.min.js"></script>
 	    <script src="js/addComputer.js"></script>
 	</body>
 </html>

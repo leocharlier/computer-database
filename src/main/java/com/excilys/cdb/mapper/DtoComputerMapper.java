@@ -18,6 +18,8 @@ public class DtoComputerMapper {
 	    CompanyDao companyDao = daoFactory.getCompanyDao();
 	    
 		Computer computer = new Computer();
+		
+		computer.setId(dtoComputer.getId());
 		computer.setName(dtoComputer.getName().trim());
 		
 		if(dtoComputer.getIntroduced().isEmpty()) {

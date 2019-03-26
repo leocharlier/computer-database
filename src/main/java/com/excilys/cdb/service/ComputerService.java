@@ -3,7 +3,10 @@ package com.excilys.cdb.service;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import com.excilys.cdb.exception.ComputerNullNameException;
 import com.excilys.cdb.exception.DaoException;
+import com.excilys.cdb.exception.DiscontinuedBeforeIntroducedException;
+import com.excilys.cdb.exception.DiscontinuedButNoIntroducedException;
 import com.excilys.cdb.model.Computer;
 import com.excilys.cdb.persistence.ComputerDao;
 import com.excilys.cdb.persistence.DaoFactory;
@@ -23,8 +26,12 @@ public class ComputerService {
 		return this.computerDao.findById(id);
 	}
 	
-	public void createService(Computer computer) throws DaoException {
+	public void createService(Computer computer) throws DaoException, DaoException, ComputerNullNameException, DiscontinuedButNoIntroducedException, DiscontinuedBeforeIntroducedException {
 		this.computerDao.create(computer);
+	}
+	
+	public void updateService(Computer computer) throws DaoException, DaoException, ComputerNullNameException, DiscontinuedButNoIntroducedException, DiscontinuedBeforeIntroducedException {
+		this.computerDao.update(computer);
 	}
 
 }
