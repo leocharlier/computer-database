@@ -36,7 +36,11 @@ public class ComputerService {
 		this.computerDao.update(computer);
 	}
 	
-	public void checkData(Computer computer) {
+	public void deleteService(Computer computer) throws DaoException {
+		this.computerDao.delete(computer);
+	}
+	
+	private void checkData(Computer computer) {
 	    if (computer.getName() == null || computer.getName().trim().isEmpty()) {
 	      throw new ComputerNullNameException("Failed to create/update computer : Computer name is null or empty.");
 	    }
