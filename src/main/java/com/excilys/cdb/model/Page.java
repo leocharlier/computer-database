@@ -54,7 +54,7 @@ public class Page<T> {
   }
   
   public int getMaxPages() {
-	  return this.size / this.nbElements + 1;
+	  return (int) Math.ceil((double) this.size / this.nbElements);
   }
 
   public List<T> getPageData() {

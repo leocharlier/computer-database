@@ -1027,3 +1027,5 @@
 2019-03-27 11:28:21 INFO  CompanyDao:54 - Comapnies list created.
 2019-03-27 11:28:28 INFO  ComputerDao:90 - Computer 432 found.
 2019-03-27 11:31:28 ERROR DaoConfigurationException:15 - java.lang.IllegalArgumentException: Cannot find property file: qiosudh : Impossible to load the property file /properties/hikari.properties
+2019-03-27 12:16:59 ERROR DaoConfigurationException:10 - java.lang.RuntimeException: java.lang.reflect.InvocationTargetException : Property file issue in /properties/hikari.properties
+2019-03-27 12:17:01 ERROR DaoConfigurationException:10 - java.lang.RuntimeException: java.lang.reflect.InvocationTargetException : Property file issue in /properties/hikari.properties
