@@ -40,6 +40,10 @@ public class ComputerService {
 		this.computerDao.delete(computer);
 	}
 	
+	public ArrayList<Computer> searchService(String search) throws DaoException {
+		return this.computerDao.search(search);
+	}
+	
 	private void checkData(Computer computer) {
 	    if (computer.getName() == null || computer.getName().trim().isEmpty()) {
 	      throw new ComputerNullNameException("Failed to create/update computer : Computer name is null or empty.");

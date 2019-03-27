@@ -37,9 +37,15 @@ public class DashboardServlet extends HttpServlet {
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Computer> computers = this.computerService.listService();
+		ArrayList<Computer> computers;
+		if(request.getParameterMap().containsKey("search") && !request.getParameter("search").equals("")) {
+			computers = this.computerService.searchService(request.getParameter("search").trim());
+			request.setAttribute("search", request.getParameter("search"));
+		} else {
+			computers = this.computerService.listService();
+		}
 
-		if (request.getParameter("size") != null) {
+		if (request.getParameterMap().containsKey("size")) {
 			this.currentSize = Integer.parseInt(request.getParameter("size"));
 		} else {
 			this.currentSize = DEFAULT_PAGE_SIZE;
@@ -48,7 +54,7 @@ public class DashboardServlet extends HttpServlet {
 		this.page = new Page<Computer>(computers, this.currentSize);
 		request.setAttribute("size", this.currentSize);
 
-		if (request.getParameter("page") != null && Integer.parseInt(request.getParameter("page")) >= 1) {
+		if (request.getParameterMap().containsKey("page") && Integer.parseInt(request.getParameter("page")) >= 1) {
 			int currentPageInt = Integer.parseInt(request.getParameter("page"));
 			if(currentPageInt <= this.page.getMaxPages()) {
 				this.currentPage = currentPageInt;
