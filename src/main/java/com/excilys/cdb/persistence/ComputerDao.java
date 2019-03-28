@@ -34,7 +34,7 @@ public class ComputerDao {
   private static final String SQL_UPDATE = 
       "UPDATE computer SET name = ?, introduced = ?, discontinued = ?, company_id = ? WHERE id = ?";
   private static final String SQL_SEARCH = 
-	  "SELECT cpt.id, cpt.name, cpt.introduced, cpt.discontinued, cpt.company_id FROM computer cpt JOIN company cpn ON cpt.company_id=cpn.id WHERE cpt.name LIKE ? OR cpn.name LIKE ?";
+	  "SELECT cpt.id, cpt.name, cpt.introduced, cpt.discontinued, cpt.company_id FROM computer cpt LEFT OUTER JOIN company cpn ON cpt.company_id=cpn.id WHERE cpt.name LIKE ? OR cpn.name LIKE ?";
 
   ComputerDao(DaoFactory daoFactory) {
     this.daoFactory = daoFactory;
