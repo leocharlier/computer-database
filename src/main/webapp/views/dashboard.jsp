@@ -74,41 +74,89 @@
 			                        </th>
 			                        <th>
 			                        	<c:choose>
-			                        		<c:when test="${empty sort}">
-			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=nameDesc">Computer name</a>
+			                        		<c:when test="${empty sort || sort == 'nameAsc'}">
+			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=nameDesc">
+			                        				Computer name
+			                        				<span class="glyphicon glyphicon-sort-by-alphabet sort-icon" aria-hidden="true"></span>
+			                        			</a>
+			                        		</c:when>
+			                        		<c:when test="${sort == 'nameDesc'}">
+			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=nameAsc">
+			                        				Computer name
+			                        				<span class="glyphicon glyphicon-sort-by-alphabet-alt sort-icon" aria-hidden="true"></span>
+			                        			</a>
 			                        		</c:when>
 			                        		<c:otherwise>
-			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=nameAsc">Computer name</a>
+			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=nameAsc">
+			                        				Computer name
+			                        				<span class="glyphicon glyphicon-sort sort-icon" aria-hidden="true"></span>
+			                        			</a>
 			                        		</c:otherwise>
 			                        	</c:choose>
 			                        </th>
 			                        <th>
 			                        	<c:choose>
 			                        		<c:when test="${sort == 'introducedAsc'}">
-			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=introducedDesc">Introduced date</a>
+			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=introducedDesc">
+			                        				Introduced date
+			                        				<span class="glyphicon glyphicon-sort-by-order sort-icon" aria-hidden="true"></span>
+			                        			</a>
+			                        		</c:when>
+			                        		<c:when test="${sort == 'introducedDesc'}">
+			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=introducedAsc">
+			                        				Introduced date
+			                        				<span class="glyphicon glyphicon-sort-by-order-alt sort-icon" aria-hidden="true"></span>
+			                        			</a>
 			                        		</c:when>
 			                        		<c:otherwise>
-			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=introducedAsc">Introduced date</a>
+			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=introducedAsc">
+			                        				Introduced date
+			                        				<span class="glyphicon glyphicon-sort sort-icon" aria-hidden="true"></span>
+			                        			</a>
 			                        		</c:otherwise>
 			                        	</c:choose>
 			                        </th>
 			                        <th>
 			                        	<c:choose>
 			                        		<c:when test="${sort == 'discontinuedAsc'}">
-			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=discontinuedDesc">Discontinued date</a>
+			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=discontinuedDesc">
+			                        				Discontinued date
+			                        				<span class="glyphicon glyphicon-sort-by-order sort-icon" aria-hidden="true"></span>
+			                        			</a>
+			                        		</c:when>
+			                        		<c:when test="${sort == 'discontinuedDesc'}">
+			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=discontinuedAsc">
+			                        				Discontinued date
+			                        				<span class="glyphicon glyphicon-sort-by-order-alt sort-icon" aria-hidden="true"></span>
+			                        			</a>
 			                        		</c:when>
 			                        		<c:otherwise>
-			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=discontinuedAsc">Discontinued date</a>
+			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=discontinuedAsc">
+			                        				Discontinued date
+			                        				<span class="glyphicon glyphicon-sort sort-icon" aria-hidden="true"></span>
+			                        			</a>
 			                        		</c:otherwise>
 			                        	</c:choose>
 			                        </th>
 			                        <th>
 			                            <c:choose>
 			                        		<c:when test="${sort == 'companyAsc'}">
-			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=companyDesc">Company</a>
+			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=companyDesc">
+			                        				Company
+			                        				<span class="glyphicon glyphicon-sort-by-alphabet sort-icon" aria-hidden="true"></span>
+			                        			</a>
+			                        		</c:when>
+			                        		<c:when test="${sort == 'companyDesc'}">
+			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=companyAsc">
+			                        				Company
+			                        				<span class="glyphicon glyphicon-sort-by-alphabet-alt sort-icon" aria-hidden="true"></span>
+			                        			</a>
 			                        		</c:when>
 			                        		<c:otherwise>
-			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=companyAsc">Company</a>
+			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=companyAsc">
+			                        				Company
+			                        				<span class="glyphicon glyphicon-sort sort-icon" aria-hidden="true"></span>
+			                        			</a>
 			                        		</c:otherwise>
 			                        	</c:choose>
 			                        </th>
