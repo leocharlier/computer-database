@@ -44,182 +44,199 @@
 	        </form>
 	
 	        <div class="container" style="margin-top: 10px;">
-	            <table class="table table-striped table-bordered">
-	                <thead>
-	                    <tr>
-							<th class="editMode" style="width: 60px; height: 22px;">
-	                            <input type="checkbox" id="selectall" /> 
-	                            <span style="vertical-align: top;">
-	                                 -  <a href="#" id="deleteSelected" onclick="$.fn.deleteSelected();">
-	                                        <i class="fa fa-trash-o fa-lg"></i>
-	                                    </a>
-	                            </span>
-	                        </th>
-	                        <th>
-	                            Computer name
-	                        </th>
-	                        <th>
-	                            Introduced date
-	                        </th>
-	                        <th>
-	                            Discontinued date
-	                        </th>
-	                        <th>
-	                            Company
-	                        </th>
-	                    </tr>
-	                </thead>
-	                <tbody id="results">
-	                	<c:forEach items="${computers}" var="computer">	
-		                    <tr>
-		                        <td class="editMode">
-		                            <input type="checkbox" name="cb" class="cb" value="${computer.id}">
-		                        </td>
-		                        <td>
-		                            <a href="editComputer?computerId=${computer.id}">${computer.name}</a>
-		                        </td>
-		                        <td>${computer.introduced}</td>
-		                        <td>${computer.discontinued}</td>
-		                        <td>${computer.company}</td>
-		                    </tr>
-	                    </c:forEach>
-	                </tbody>
-	            </table>
+	        	<c:choose>
+	        		<c:when test="${noComputersFound}">
+				        <div class="alert alert-warning" role="alert">
+				        	<c:choose>
+				        		<c:when test="${not empty search}">
+				        			No computer found for the research "<strong>${search}</strong>"... <a href="dashboard">Go back to dashboard.</a> 
+				        		</c:when>
+				        		<c:otherwise>
+				        			No computer found in database... <a href="addComputer">Add the first one here !</a> 
+				        		</c:otherwise>
+				        	</c:choose>
+				        </div>
+	        		</c:when>
+	        		<c:otherwise>
+	        			<table class="table table-striped table-bordered">
+			                <thead>
+			                    <tr>
+									<th class="editMode" style="width: 60px; height: 22px;">
+			                            <input type="checkbox" id="selectall" /> 
+			                            <span style="vertical-align: top;">
+			                                 -  <a href="#" id="deleteSelected" onclick="$.fn.deleteSelected();">
+			                                        <i class="fa fa-trash-o fa-lg"></i>
+			                                    </a>
+			                            </span>
+			                        </th>
+			                        <th>
+			                            Computer name
+			                        </th>
+			                        <th>
+			                            Introduced date
+			                        </th>
+			                        <th>
+			                            Discontinued date
+			                        </th>
+			                        <th>
+			                            Company
+			                        </th>
+			                    </tr>
+			                </thead>
+		               		<tbody id="results">
+			                	<c:forEach items="${computers}" var="computer">	
+				                    <tr>
+				                        <td class="editMode">
+				                            <input type="checkbox" name="cb" class="cb" value="${computer.id}">
+				                        </td>
+				                        <td>
+				                            <a href="editComputer?computerId=${computer.id}">${computer.name}</a>
+				                        </td>
+				                        <td>${computer.introduced}</td>
+				                        <td>${computer.discontinued}</td>
+				                        <td>${computer.company}</td>
+				                    </tr>
+			                    </c:forEach>
+			                </tbody>
+			            </table>
+	        		</c:otherwise>
+	        	</c:choose>
 	        </div>
 	    </section>
 	
-	    <footer class="navbar-fixed-bottom">
-	        <div class="container text-center">
-	            <ul class="pagination">
-	            	<c:choose>
-	            		<c:when test="${page > 1}">
-	                		<li class="page-item">
-	                			<a class="page-link" href="dashboard?page=${page-1}&size=${size}&search=${search}" aria-label="Previous">
-			                      <span aria-hidden="true">&laquo;</span>
-			                    </a>
-			                 </li>
-	                	</c:when>
-	                	<c:otherwise>
-	                		<li class="page-item disabled">
-		                		<a class="page-link" href="#" aria-label="Previous">
-			                      <span aria-hidden="true">&laquo;</span>
-			                    </a>
-		                    </li>
-	                	</c:otherwise>
-					</c:choose>
-
-	                <c:choose>
-	                	<c:when test="${nbMaxPages < 5}">
-							<c:forEach var = "i" begin = "1" end ="${nbMaxPages}">
-								<c:choose>
-									<c:when test="${i == page}">
-										<li class="page-item active"><a class="page-link" href="dashboard?page=${i}&size=${size}&search=${search}">${i}</a></li>
-									</c:when>
-									<c:otherwise>
-										<li><a class="page-link" href="dashboard?page=${i}&size=${size}&search=${search}">${i}</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-					    </c:when>
-	                	<c:when test="${page == 1}">
-					        <li class="page-item active"><a class="page-link" href="dashboard?page=${page}&size=${size}&search=${search}">${page}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+1}&size=${size}&search=${search}">${page+1}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+2}&size=${size}&search=${search}">${page+2}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+3}&size=${size}&search=${search}">${page+3}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+4}&size=${size}&search=${search}">${page+4}</a></li>
-			                <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-			                <li class="page-item"><a class="page-link" href="dashboard?page=${nbMaxPages}&size=${size}&search=${search}">${nbMaxPages}</a></li>
-					    </c:when>
-					    <c:when test="${page == 2}">
-					        <li><a class="page-link" href="dashboard?page=${page-1}&size=${size}&search=${search}">${page-1}</a></li>
-			                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}&size=${size}&search=${search}">${page}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+1}&size=${size}&search=${search}">${page+1}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+2}&size=${size}&search=${search}">${page+2}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+3}&size=${size}&search=${search}">${page+3}</a></li>
-			                <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-			                <li class="page-item"><a class="page-link" href="dashboard?page=${nbMaxPages}&size=${size}&search=${search}">${nbMaxPages}</a></li>
-					    </c:when>
-					    <c:when test="${page == nbMaxPages-1}">
-					    	<li class="page-item"><a class="page-link" href="dashboard?page=1&size=${size}&search=${search}">1</a></li>
-					    	<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-					        <li><a class="page-link" href="dashboard?page=${page-3}&size=${size}&search=${search}">${page-3}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page-2}&size=${size}&search=${search}">${page-2}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page-1}&size=${size}&search=${search}">${page-1}</a></li>
-			                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}&size=${size}&search=${search}">${page}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+1}&size=${size}&search=${search}">${page+1}</a></li>
-					    </c:when>
-					    <c:when test="${page == nbMaxPages}">
-					    	<li class="page-item"><a class="page-link" href="dashboard?page=1&size=${size}&search=${search}">1</a></li>
-					    	<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-					        <li><a class="page-link" href="dashboard?page=${page-4}&size=${size}&search=${search}">${page-4}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page-3}&size=${size}&search=${search}">${page-3}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page-2}&size=${size}&search=${search}">${page-2}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page-1}&size=${size}&search=${search}">${page-1}</a></li>
-			                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}&size=${size}&search=${search}">${page}</a></li>
-					    </c:when>
-					    <c:otherwise>
-					    	<c:if test="${page > 3}">
-					    		<li class="page-item"><a class="page-link" href="dashboard?page=1&size=${size}&search=${search}">1</a></li>
-					    		<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-					    	</c:if>
-					        <li><a class="page-link" href="dashboard?page=${page-2}&size=${size}&search=${search}">${page-2}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page-1}&size=${size}&search=${search}">${page-1}</a></li>
-			                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}&size=${size}&search=${search}">${page}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+1}&size=${size}&search=${search}">${page+1}</a></li>
-			                <li><a class="page-link" href="dashboard?page=${page+2}&size=${size}&search=${search}">${page+2}</a></li>
-					    	<c:if test="${page < nbMaxPages-2}">
-					    		<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-					    		<li class="page-item"><a class="page-link" href="dashboard?page=${nbMaxPages}&size=${size}&search=${search}">${nbMaxPages}</a></li>
-					    	</c:if>
-					    </c:otherwise>
-	                </c:choose>
-
-	                <c:choose>
-	            		<c:when test="${page < nbMaxPages}">
-	                		<li class="page-item">
-	                			<a class="page-link" href="dashboard?page=${page+1}&size=${size}&search=${search}" aria-label="Next">
-			                      <span aria-hidden="true">&raquo;</span>
-			                    </a>
-			                 </li>
-	                	</c:when>
-	                	<c:otherwise>
-	                		<li class="page-item disabled">
-		                		<a class="page-link" href="#" aria-label="Next">
-			                      <span aria-hidden="true">&raquo;</span>
-			                    </a>
-		                    </li>
-	                	</c:otherwise>
-					</c:choose>
-	            </ul>
+		<c:if test="${not noComputersFound}">
+			<footer class="navbar-fixed-bottom">
+		        <div class="container text-center">
+		            <ul class="pagination">
+		            	<c:choose>
+		            		<c:when test="${page > 1}">
+		                		<li class="page-item">
+		                			<a class="page-link" href="dashboard?page=${page-1}&size=${size}&search=${search}" aria-label="Previous">
+				                      <span aria-hidden="true">&laquo;</span>
+				                    </a>
+				                 </li>
+		                	</c:when>
+		                	<c:otherwise>
+		                		<li class="page-item disabled">
+			                		<a class="page-link" href="#" aria-label="Previous">
+				                      <span aria-hidden="true">&laquo;</span>
+				                    </a>
+			                    </li>
+		                	</c:otherwise>
+						</c:choose>
 	
-		        <div class="btn-group btn-group-sm pull-right" role="group" >
-		        	<c:choose>
-		        		<c:when test="${size == 10}">
-	                		<a href="dashboard?page=${page}&size=10&search=${search}" class="btn btn-default active">10</a>
-				        	<a href="dashboard?page=${page}&size=50&search=${search}" class="btn btn-default">50</a>
-				        	<a href="dashboard?page=${page}&size=100&search=${search}" class="btn btn-default">100</a>
-	                	</c:when>
-	                	<c:when test="${size == 50}">
-	                		<a href="dashboard?page=${page}&size=10&search=${search}" class="btn btn-default">10</a>
-				        	<a href="dashboard?page=${page}&size=50&search=${search}" class="btn btn-default active">50</a>
-				        	<a href="dashboard?page=${page}&size=100&search=${search}" class="btn btn-default">100</a>
-	                	</c:when>
-	                	<c:when test="${size == 100}">
-	                		<a href="dashboard?page=${page}&size=10&search=${search}" class="btn btn-default">10</a>
-				        	<a href="dashboard?page=${page}&size=50&search=${search}" class="btn btn-default">50</a>
-				        	<a href="dashboard?page=${page}&size=100&search=${search}" class="btn btn-default active">100</a>
-	                	</c:when>
-	                	<c:otherwise>
-	                		<a href="dashboard?page=${page}&size=10" class="btn btn-default">10</a>
-				        	<a href="dashboard?page=${page}&size=50" class="btn btn-default">50</a>
-				        	<a href="dashboard?page=${page}&size=100" class="btn btn-default">100</a>
-	                	</c:otherwise>
-	                </c:choose>
-		        	
+		                <c:choose>
+		                	<c:when test="${nbMaxPages < 5}">
+								<c:forEach var = "i" begin = "1" end ="${nbMaxPages}">
+									<c:choose>
+										<c:when test="${i == page}">
+											<li class="page-item active"><a class="page-link" href="dashboard?page=${i}&size=${size}&search=${search}">${i}</a></li>
+										</c:when>
+										<c:otherwise>
+											<li><a class="page-link" href="dashboard?page=${i}&size=${size}&search=${search}">${i}</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+						    </c:when>
+		                	<c:when test="${page == 1}">
+						        <li class="page-item active"><a class="page-link" href="dashboard?page=${page}&size=${size}&search=${search}">${page}</a></li>
+				                <li><a class="page-link" href="dashboard?page=${page+1}&size=${size}&search=${search}">${page+1}</a></li>
+				                <li><a class="page-link" href="dashboard?page=${page+2}&size=${size}&search=${search}">${page+2}</a></li>
+				                <li><a class="page-link" href="dashboard?page=${page+3}&size=${size}&search=${search}">${page+3}</a></li>
+				                <li><a class="page-link" href="dashboard?page=${page+4}&size=${size}&search=${search}">${page+4}</a></li>
+				                <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+				                <li class="page-item"><a class="page-link" href="dashboard?page=${nbMaxPages}&size=${size}&search=${search}">${nbMaxPages}</a></li>
+						    </c:when>
+						    <c:when test="${page == 2}">
+						        <li><a class="page-link" href="dashboard?page=${page-1}&size=${size}&search=${search}">${page-1}</a></li>
+				                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}&size=${size}&search=${search}">${page}</a></li>
+				                <li><a class="page-link" href="dashboard?page=${page+1}&size=${size}&search=${search}">${page+1}</a></li>
+				                <li><a class="page-link" href="dashboard?page=${page+2}&size=${size}&search=${search}">${page+2}</a></li>
+				                <li><a class="page-link" href="dashboard?page=${page+3}&size=${size}&search=${search}">${page+3}</a></li>
+				                <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+				                <li class="page-item"><a class="page-link" href="dashboard?page=${nbMaxPages}&size=${size}&search=${search}">${nbMaxPages}</a></li>
+						    </c:when>
+						    <c:when test="${page == nbMaxPages-1}">
+						    	<li class="page-item"><a class="page-link" href="dashboard?page=1&size=${size}&search=${search}">1</a></li>
+						    	<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+						        <li><a class="page-link" href="dashboard?page=${page-3}&size=${size}&search=${search}">${page-3}</a></li>
+				                <li><a class="page-link" href="dashboard?page=${page-2}&size=${size}&search=${search}">${page-2}</a></li>
+				                <li><a class="page-link" href="dashboard?page=${page-1}&size=${size}&search=${search}">${page-1}</a></li>
+				                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}&size=${size}&search=${search}">${page}</a></li>
+				                <li><a class="page-link" href="dashboard?page=${page+1}&size=${size}&search=${search}">${page+1}</a></li>
+						    </c:when>
+						    <c:when test="${page == nbMaxPages}">
+						    	<li class="page-item"><a class="page-link" href="dashboard?page=1&size=${size}&search=${search}">1</a></li>
+						    	<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+						        <li><a class="page-link" href="dashboard?page=${page-4}&size=${size}&search=${search}">${page-4}</a></li>
+				                <li><a class="page-link" href="dashboard?page=${page-3}&size=${size}&search=${search}">${page-3}</a></li>
+				                <li><a class="page-link" href="dashboard?page=${page-2}&size=${size}&search=${search}">${page-2}</a></li>
+				                <li><a class="page-link" href="dashboard?page=${page-1}&size=${size}&search=${search}">${page-1}</a></li>
+				                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}&size=${size}&search=${search}">${page}</a></li>
+						    </c:when>
+						    <c:otherwise>
+						    	<c:if test="${page > 3}">
+						    		<li class="page-item"><a class="page-link" href="dashboard?page=1&size=${size}&search=${search}">1</a></li>
+						    		<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+						    	</c:if>
+						        <li><a class="page-link" href="dashboard?page=${page-2}&size=${size}&search=${search}">${page-2}</a></li>
+				                <li><a class="page-link" href="dashboard?page=${page-1}&size=${size}&search=${search}">${page-1}</a></li>
+				                <li class="page-item active"><a class="page-link" href="dashboard?page=${page}&size=${size}&search=${search}">${page}</a></li>
+				                <li><a class="page-link" href="dashboard?page=${page+1}&size=${size}&search=${search}">${page+1}</a></li>
+				                <li><a class="page-link" href="dashboard?page=${page+2}&size=${size}&search=${search}">${page+2}</a></li>
+						    	<c:if test="${page < nbMaxPages-2}">
+						    		<li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+						    		<li class="page-item"><a class="page-link" href="dashboard?page=${nbMaxPages}&size=${size}&search=${search}">${nbMaxPages}</a></li>
+						    	</c:if>
+						    </c:otherwise>
+		                </c:choose>
+	
+		                <c:choose>
+		            		<c:when test="${page < nbMaxPages}">
+		                		<li class="page-item">
+		                			<a class="page-link" href="dashboard?page=${page+1}&size=${size}&search=${search}" aria-label="Next">
+				                      <span aria-hidden="true">&raquo;</span>
+				                    </a>
+				                 </li>
+		                	</c:when>
+		                	<c:otherwise>
+		                		<li class="page-item disabled">
+			                		<a class="page-link" href="#" aria-label="Next">
+				                      <span aria-hidden="true">&raquo;</span>
+				                    </a>
+			                    </li>
+		                	</c:otherwise>
+						</c:choose>
+		            </ul>
+		
+			        <div class="btn-group btn-group-sm pull-right" role="group" >
+			        	<c:choose>
+			        		<c:when test="${size == 10}">
+		                		<a href="dashboard?page=${page}&size=10&search=${search}" class="btn btn-default active">10</a>
+					        	<a href="dashboard?page=${page}&size=50&search=${search}" class="btn btn-default">50</a>
+					        	<a href="dashboard?page=${page}&size=100&search=${search}" class="btn btn-default">100</a>
+		                	</c:when>
+		                	<c:when test="${size == 50}">
+		                		<a href="dashboard?page=${page}&size=10&search=${search}" class="btn btn-default">10</a>
+					        	<a href="dashboard?page=${page}&size=50&search=${search}" class="btn btn-default active">50</a>
+					        	<a href="dashboard?page=${page}&size=100&search=${search}" class="btn btn-default">100</a>
+		                	</c:when>
+		                	<c:when test="${size == 100}">
+		                		<a href="dashboard?page=${page}&size=10&search=${search}" class="btn btn-default">10</a>
+					        	<a href="dashboard?page=${page}&size=50&search=${search}" class="btn btn-default">50</a>
+					        	<a href="dashboard?page=${page}&size=100&search=${search}" class="btn btn-default active">100</a>
+		                	</c:when>
+		                	<c:otherwise>
+		                		<a href="dashboard?page=${page}&size=10" class="btn btn-default">10</a>
+					        	<a href="dashboard?page=${page}&size=50" class="btn btn-default">50</a>
+					        	<a href="dashboard?page=${page}&size=100" class="btn btn-default">100</a>
+		                	</c:otherwise>
+		                </c:choose>
+			        </div>
 		        </div>
-	        </div>
-	
-	    </footer>
+		    </footer>
+		</c:if>
+	    
 		    
 		<script src="js/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
