@@ -49,6 +49,44 @@ public class DashboardServlet extends HttpServlet {
 			request.setAttribute("nbOfComputers", 0);
 			request.setAttribute("noComputersFound", true);
 		} else {
+			if(request.getParameterMap().containsKey("sort")) {
+				switch(request.getParameter("sort")) {
+					case "nameDesc" :
+						request.setAttribute("sort", request.getParameter("sort"));
+						computerService.sortByNameDescService(computers);
+						break;
+					case "introducedAsc" :
+						request.setAttribute("sort", request.getParameter("sort"));
+						computerService.sortByIntroducedAscService(computers);
+						break;
+					case "introducedDesc" :
+						request.setAttribute("sort", request.getParameter("sort"));
+						computerService.sortByIntroducedDescService(computers);
+						break;
+					case "discontinuedAsc" :
+						request.setAttribute("sort", request.getParameter("sort"));
+						computerService.sortByDiscontinuedAscService(computers);
+						break;
+					case "discontinuedDesc" :
+						request.setAttribute("sort", request.getParameter("sort"));
+						computerService.sortByDiscontinuedDescService(computers);
+						break;
+					case "companyAsc" :
+						request.setAttribute("sort", request.getParameter("sort"));
+						computerService.sortByCompanyNameAscService(computers);
+						break;
+					case "companyDesc" :
+						request.setAttribute("sort", request.getParameter("sort"));
+						computerService.sortByCompanyNameDescService(computers);
+						break;
+					default :
+						computerService.sortByNameAscService(computers);
+						break;
+				}
+			} else {
+				computerService.sortByNameAscService(computers);
+			}
+			
 			if (request.getParameterMap().containsKey("size")) {
 				this.currentSize = Integer.parseInt(request.getParameter("size"));
 			} else {
@@ -71,9 +109,9 @@ public class DashboardServlet extends HttpServlet {
 
 			request.setAttribute("page", this.currentPage);
 
-			List<ComputerDto> computerDtos = computerDtoMapper.map(this.page.getPageData(this.currentPage - 1));
+			List<ComputerDto> pageComputerDtos = computerDtoMapper.map(this.page.getPageData(this.currentPage - 1));
 
-			request.setAttribute("computers", computerDtos);
+			request.setAttribute("computers", pageComputerDtos);
 			request.setAttribute("nbOfComputers", computers.size());
 			request.setAttribute("nbMaxPages", this.page.getMaxPages());
 		}

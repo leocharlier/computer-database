@@ -1,6 +1,7 @@
 package com.excilys.cdb.service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Optional;
 
 import com.excilys.cdb.exception.ComputerNullNameException;
@@ -13,6 +14,45 @@ import com.excilys.cdb.persistence.DaoFactory;
 
 public class ComputerService {
 	private ComputerDao computerDao;
+	
+	private static Comparator<Computer> introducedComparator = (computer1, computer2) -> {
+		if(!computer1.getIntroduced().isPresent() && !computer2.getIntroduced().isPresent()) {
+			return 0;
+		}
+		if(!computer1.getIntroduced().isPresent()) {
+			return 1;
+		}
+		if(!computer2.getIntroduced().isPresent()) {
+			return -1;
+		}
+		return Long.compare(computer1.getIntroduced().get().getTime(), computer2.getIntroduced().get().getTime());
+	};
+	
+	private static Comparator<Computer> discontinuedComparator = (computer1, computer2) -> {
+		if(!computer1.getDiscontinued().isPresent() && !computer2.getDiscontinued().isPresent()) {
+			return 0;
+		}
+		if(!computer1.getDiscontinued().isPresent()) {
+			return 1;
+		}
+		if(!computer2.getDiscontinued().isPresent()) {
+			return -1;
+		}
+		return Long.compare(computer1.getDiscontinued().get().getTime(), computer2.getDiscontinued().get().getTime());
+	};
+	
+	private static Comparator<Computer> companyComparator = (computer1, computer2) -> {
+		if(!computer1.getCompany().isPresent() && !computer2.getCompany().isPresent()) {
+			return 0;
+		}
+		if(!computer1.getCompany().isPresent()) {
+			return 1;
+		}
+		if(!computer2.getCompany().isPresent()) {
+			return -1;
+		}
+		return computer1.getCompany().get().getName().compareTo(computer2.getCompany().get().getName());
+	};
 	
 	public ComputerService(DaoFactory daoFactory) {
 		this.computerDao = daoFactory.getComputerDao();
@@ -42,6 +82,38 @@ public class ComputerService {
 	
 	public ArrayList<Computer> searchService(String search) throws DaoException {
 		return this.computerDao.search(search);
+	}
+	
+	public void sortByNameAscService(ArrayList<Computer> computers) {
+		computers.sort((computer1, computer2) -> computer1.getName().toLowerCase().compareTo(computer2.getName().toLowerCase()));
+	}
+	
+	public void sortByNameDescService(ArrayList<Computer> computers) {
+		computers.sort((computer1, computer2) -> computer2.getName().toLowerCase().compareTo(computer1.getName().toLowerCase()));
+	}
+	
+	public void sortByIntroducedAscService(ArrayList<Computer> computers) {
+		computers.sort(introducedComparator);
+	}
+	
+	public void sortByIntroducedDescService(ArrayList<Computer> computers) {
+		computers.sort(introducedComparator.reversed());
+	}
+	
+	public void sortByCompanyNameAscService(ArrayList<Computer> computers) {
+		computers.sort(companyComparator);
+	}
+	
+	public void sortByCompanyNameDescService(ArrayList<Computer> computers) {
+		computers.sort(companyComparator.reversed());
+	}
+	
+	public void sortByDiscontinuedAscService(ArrayList<Computer> computers) {
+		computers.sort(discontinuedComparator);
+	}
+	
+	public void sortByDiscontinuedDescService(ArrayList<Computer> computers) {
+		computers.sort(discontinuedComparator.reversed());
 	}
 	
 	private void checkData(Computer computer) {

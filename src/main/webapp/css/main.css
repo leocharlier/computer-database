@@ -33,3 +33,7 @@ input[type='checkbox'] {
 	color: #e13f3f;
 	font-style: italic;
 }
+
+.sort-icon {
+	float: right;
+}
