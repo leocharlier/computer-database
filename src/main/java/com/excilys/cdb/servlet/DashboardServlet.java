@@ -44,34 +44,40 @@ public class DashboardServlet extends HttpServlet {
 		} else {
 			computers = this.computerService.listService();
 		}
-
-		if (request.getParameterMap().containsKey("size")) {
-			this.currentSize = Integer.parseInt(request.getParameter("size"));
+		
+		if(computers.isEmpty()) {
+			request.setAttribute("nbOfComputers", 0);
+			request.setAttribute("noComputersFound", true);
 		} else {
-			this.currentSize = DEFAULT_PAGE_SIZE;
-		}
-
-		this.page = new Page<Computer>(computers, this.currentSize);
-		request.setAttribute("size", this.currentSize);
-
-		if (request.getParameterMap().containsKey("page") && Integer.parseInt(request.getParameter("page")) >= 1) {
-			int currentPageInt = Integer.parseInt(request.getParameter("page"));
-			if(currentPageInt <= this.page.getMaxPages()) {
-				this.currentPage = currentPageInt;
+			if (request.getParameterMap().containsKey("size")) {
+				this.currentSize = Integer.parseInt(request.getParameter("size"));
 			} else {
-				this.currentPage = this.page.getMaxPages();
+				this.currentSize = DEFAULT_PAGE_SIZE;
 			}
-		} else {
-			this.currentPage = 1;
+
+			this.page = new Page<Computer>(computers, this.currentSize);
+			request.setAttribute("size", this.currentSize);
+
+			if (request.getParameterMap().containsKey("page") && Integer.parseInt(request.getParameter("page")) >= 1) {
+				int currentPageInt = Integer.parseInt(request.getParameter("page"));
+				if(currentPageInt <= this.page.getMaxPages()) {
+					this.currentPage = currentPageInt;
+				} else {
+					this.currentPage = this.page.getMaxPages();
+				}
+			} else {
+				this.currentPage = 1;
+			}
+
+			request.setAttribute("page", this.currentPage);
+
+			List<ComputerDto> computerDtos = computerDtoMapper.map(this.page.getPageData(this.currentPage - 1));
+
+			request.setAttribute("computers", computerDtos);
+			request.setAttribute("nbOfComputers", computers.size());
+			request.setAttribute("nbMaxPages", this.page.getMaxPages());
 		}
 
-		request.setAttribute("page", this.currentPage);
-
-		List<ComputerDto> computerDtos = computerDtoMapper.map(this.page.getPageData(this.currentPage - 1));
-
-		request.setAttribute("computers", computerDtos);
-		request.setAttribute("nbOfComputers", computers.size());
-		request.setAttribute("nbMaxPages", this.page.getMaxPages());
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
 	
