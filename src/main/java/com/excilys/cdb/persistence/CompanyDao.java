@@ -5,6 +5,7 @@ import static com.excilys.cdb.persistence.DaoUtility.preparedStatementInitializa
 import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.mapper.CompanyDaoMapper;
 import com.excilys.cdb.model.Company;
+import com.excilys.cdb.model.Computer;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,9 +20,11 @@ public class CompanyDao {
   static final Logger LOGGER = Logger.getLogger(CompanyDao.class);
   private final DaoFactory daoFactory;
   private CompanyDaoMapper companyMapper;
-  private static final String SQL_SELECT_ALL = "SELECT id, name FROM company;";
-  private static final String SQL_SELECT_BY_ID = "SELECT id, name FROM company WHERE id = ?;";
-  private static final String SQL_SELECT_BY_NAME = "SELECT id, name FROM company WHERE name = ?;";
+  private static final String SQL_SELECT_ALL      = "SELECT id, name FROM company;";
+  private static final String SQL_SELECT_BY_ID    = "SELECT id, name FROM company WHERE id = ?;";
+  private static final String SQL_SELECT_BY_NAME  = "SELECT id, name FROM company WHERE name = ?;";
+  private static final String SQL_DELETE          = "DELETE FROM company WHERE id = ?";
+  private static final String SQL_DELETE_COMPUTER = "DELETE FROM computer WHERE company_id = ?";
 
   CompanyDao(final DaoFactory daoFactory) {
     this.daoFactory = daoFactory;
@@ -44,6 +47,8 @@ public class CompanyDao {
       while (resultSet.next()) {
         companies.add(this.companyMapper.map(resultSet));
       }
+      
+      connection.commit();
     } catch (SQLException e) {
       throw new DaoException(e);
     }
@@ -71,6 +76,8 @@ public class CompanyDao {
       if (resultSet.next()) {
         company = this.companyMapper.map(resultSet);
       }
+      
+      connection.commit();
     } catch (SQLException e) {
       throw new DaoException(e);
     }
@@ -79,24 +86,52 @@ public class CompanyDao {
   }
   
   public Optional<Company> findByName(String pname) throws DaoException {
-	    ResultSet resultSet;
-	    Company company = null;
+    ResultSet resultSet;
+    Company company = null;
 
+    try (
+        Connection connection = daoFactory.getConnection();
+        PreparedStatement preparedStatement =
+            preparedStatementInitialization(connection, SQL_SELECT_BY_NAME, false, pname)
+    ) {
+      resultSet = preparedStatement.executeQuery();
+
+      if (resultSet.next()) {
+        company = this.companyMapper.map(resultSet);
+      }
+      
+      connection.commit();
+    } catch (SQLException e) {
+      throw new DaoException(e);
+    }
+
+    return Optional.ofNullable(company);
+  }
+  
+  public void delete(Company company) throws DaoException {
 	    try (
-	        Connection connection = daoFactory.getConnection();
-	        PreparedStatement preparedStatement =
-	            preparedStatementInitialization(connection, SQL_SELECT_BY_NAME, false, pname)
+	         Connection connection = daoFactory.getConnection();
+	         PreparedStatement preparedStatement = preparedStatementInitialization(connection, SQL_DELETE, false, company.getId());
+	    	 PreparedStatement preparedStatementComputer = preparedStatementInitialization(connection, SQL_DELETE_COMPUTER, true, company.getId());
 	    ) {
-	      resultSet = preparedStatement.executeQuery();
-
-	      if (resultSet.next()) {
-	        company = this.companyMapper.map(resultSet);
+    	  int statut = preparedStatementComputer.executeUpdate();
+	      if (statut == 0) {
+	        throw new DaoException("Failed to delete the company(ies) related to the company in database, no line deleted in the computer table.");
+	      } else {
+	    	  LOGGER.info(statut + " computers deleted.");
 	      }
+	      
+	      statut = preparedStatement.executeUpdate();
+	      if (statut == 0) {
+	        throw new DaoException("Failed to delete the company in database, no line deleted in the company table.");
+	      }
+	      
+	      connection.commit();
 	    } catch (SQLException e) {
-	      throw new DaoException(e);
+	      throw new DaoException("SQL error during deletion.", e);
 	    }
 
-	    return Optional.ofNullable(company);
+	    LOGGER.info("Company " + company.getId() + " deleted.");
 	  }
 
 }

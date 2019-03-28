@@ -55,7 +55,8 @@ public class ComputerDao {
       while (resultSet.next()) {
         computers.add(this.computerMapper.map(resultSet));
       }
-
+      
+      connection.commit();
     } catch (SQLException e) {
       throw new DaoException(e);
     }
@@ -82,7 +83,8 @@ public class ComputerDao {
       if (resultSet.next()) {
         computer = Optional.ofNullable(this.computerMapper.map(resultSet));
       }
-
+      
+      connection.commit();
     } catch (SQLException e) {
       throw new DaoException(e);
     }
@@ -120,7 +122,8 @@ public class ComputerDao {
       } else {
         throw new DaoException("Failed to create the computer in database, no auto-generated ID returned.");
       }
-
+      
+      connection.commit();
     } catch (SQLException e) {
       throw new DaoException("SQL error during creation.", e);
     }
@@ -143,7 +146,8 @@ public class ComputerDao {
       if (statut == 0) {
         throw new DaoException("Failed to update the computer in database, no line updated in the table.");
       }
-
+      
+      connection.commit();
     } catch (SQLException e) {
       throw new DaoException("SQL error during update.", e);
     }
@@ -157,11 +161,11 @@ public class ComputerDao {
          PreparedStatement preparedStatement = preparedStatementInitialization(connection, SQL_DELETE, false, computer.getId())
     ) {
       int statut = preparedStatement.executeUpdate();
-
       if (statut == 0) {
         throw new DaoException("Failed to delete the computer in database, no line deleted in the table.");
       }
-
+      
+      connection.commit();
     } catch (SQLException e) {
       throw new DaoException("SQL error during deletion.", e);
     }
@@ -183,7 +187,8 @@ public class ComputerDao {
       while (resultSet.next()) {
         computers.add(this.computerMapper.map(resultSet));
       }
-
+      
+      connection.commit();
     } catch (SQLException e) {
       throw new DaoException(e);
     }
