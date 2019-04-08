@@ -2,7 +2,9 @@ package com.excilys.cdb.service;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.excilys.cdb.exception.ComputerNullNameException;
 import com.excilys.cdb.exception.DaoException;
@@ -98,14 +100,9 @@ public class ComputerService {
 	
 	public void sortByIntroducedDescService(ArrayList<Computer> computers) {
 		computers.sort(introducedComparator.reversed());
-	}
-	
-	public void sortByCompanyNameAscService(ArrayList<Computer> computers) {
-		computers.sort(companyComparator);
-	}
-	
-	public void sortByCompanyNameDescService(ArrayList<Computer> computers) {
-		computers.sort(companyComparator.reversed());
+		List<Computer> nullIntroducedComputers = computers.stream().filter(computer -> !computer.getIntroduced().isPresent()).collect(Collectors.toList());
+		computers.removeIf(computer -> !computer.getIntroduced().isPresent());
+		computers.addAll(nullIntroducedComputers);
 	}
 	
 	public void sortByDiscontinuedAscService(ArrayList<Computer> computers) {
@@ -114,6 +111,20 @@ public class ComputerService {
 	
 	public void sortByDiscontinuedDescService(ArrayList<Computer> computers) {
 		computers.sort(discontinuedComparator.reversed());
+		List<Computer> nullDiscontinuedComputers = computers.stream().filter(computer -> !computer.getDiscontinued().isPresent()).collect(Collectors.toList());
+		computers.removeIf(computer -> !computer.getDiscontinued().isPresent());
+		computers.addAll(nullDiscontinuedComputers);
+	}
+	
+	public void sortByCompanyNameAscService(ArrayList<Computer> computers) {
+		computers.sort(companyComparator);
+	}
+	
+	public void sortByCompanyNameDescService(ArrayList<Computer> computers) {
+		computers.sort(companyComparator.reversed());
+		List<Computer> nullCompanyComputers = computers.stream().filter(computer -> !computer.getCompany().isPresent()).collect(Collectors.toList());
+		computers.removeIf(computer -> !computer.getCompany().isPresent());
+		computers.addAll(nullCompanyComputers);
 	}
 	
 	private void checkData(Computer computer) {

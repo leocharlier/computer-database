@@ -54,11 +54,13 @@ public class AddComputerServlet extends HttpServlet {
 
 		ComputerDto dtoComputer = new ComputerDto(computerName, introduced, discontinued, companyName);
 		Computer computer = dtoComputerMapper.map(dtoComputer);
+		System.out.println(computer.getIntroduced());
+		System.out.println(introduced);
 
 		try {
 			this.computerService.createService(computer);
 			request.setAttribute("companies", companies);
-			request.setAttribute("resultMessage", "The computer <strong>" + computer.getName() + "</strong> has been created !");
+			request.setAttribute("resultMessage", "The computer <strong>" + computer.getName() + " introduced : " + computer.getIntroduced() + "</strong> has been created !");
 			this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 		} catch (DaoException e) {
 			request.setAttribute("errorMessage", "An <strong>SQL error</strong> has occured during the creation...");

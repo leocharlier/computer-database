@@ -1,25 +1,23 @@
 package com.excilys.cdb.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import com.excilys.cdb.exception.DaoException;
-import com.excilys.cdb.model.Company;
-
 import java.util.ArrayList;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import com.excilys.cdb.exception.DaoException;
+import com.excilys.cdb.model.Company;
+import com.excilys.cdb.service.CompanyService;
+
 class CompanyDaoImplTest {
 
   private static DaoFactory daoFactory;
-  private static CompanyDao companyDAO;
+  private static CompanyService companyService;
   static final Logger LOGGER = Logger.getLogger(CompanyDaoImplTest.class);
   private static final int NB_COMPANIES = 42;
   private Optional<Company> company;
@@ -27,13 +25,13 @@ class CompanyDaoImplTest {
   @BeforeAll
   public static void setUp() {
     daoFactory = DaoFactory.getInstance();
-    companyDAO = daoFactory.getCompanyDao();
+    companyService = new CompanyService(daoFactory);
   }
 
   @Test
   void listCompaniesTest() {
     try {
-      ArrayList<Company> companies = companyDAO.list();
+      ArrayList<Company> companies = companyService.listService();
       assertEquals(companies.size(), NB_COMPANIES);
     } catch (DaoException e) {
       LOGGER.warn("List companies test failed.");
@@ -45,7 +43,7 @@ class CompanyDaoImplTest {
   void findCompanyTest() {
     int companyId = 12;
     try {
-      company = companyDAO.findById(companyId);
+      company = companyService.findById(companyId);
       assertEquals(company.get().getId(), companyId);
     } catch (DaoException e) {
       LOGGER.warn("Find company test failed.");
@@ -58,7 +56,7 @@ class CompanyDaoImplTest {
   void findUnknownCompanyTest() {
     int unknownId = -1;
     try {
-        company = companyDAO.findById(unknownId);
+        company = companyService.findById(unknownId);
         assertEquals(company, Optional.empty());
       } catch (DaoException e) {
         LOGGER.warn("Find company test failed.");

@@ -109,6 +109,7 @@ public class ComputerDao {
                  computer.getName(), computer.getIntroduced().orElse(null),
                  computer.getDiscontinued().orElse(null), computer.getCompany().map(someCompany -> someCompany.getId()).orElse(null))
     ) {
+
       int statut = preparedStatement.executeUpdate();
 
       if (statut == 0) {
