@@ -2,11 +2,6 @@ package com.excilys.cdb.persistence;
 
 import static com.excilys.cdb.persistence.DaoUtility.preparedStatementInitialization;
 
-import com.excilys.cdb.exception.DaoException;
-import com.excilys.cdb.mapper.CompanyDaoMapper;
-import com.excilys.cdb.model.Company;
-import com.excilys.cdb.model.Computer;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.apache.log4j.Logger;
+
+import com.excilys.cdb.exception.DaoException;
+import com.excilys.cdb.mapper.CompanyDaoMapper;
+import com.excilys.cdb.model.Company;
 
 public class CompanyDao {
   static final Logger LOGGER = Logger.getLogger(CompanyDao.class);
@@ -112,11 +111,11 @@ public class CompanyDao {
 	    try (
 	         Connection connection = daoFactory.getConnection();
 	         PreparedStatement preparedStatement = preparedStatementInitialization(connection, SQL_DELETE, false, company.getId());
-	    	 PreparedStatement preparedStatementComputer = preparedStatementInitialization(connection, SQL_DELETE_COMPUTER, true, company.getId());
+	    	 PreparedStatement preparedStatementComputer = preparedStatementInitialization(connection, SQL_DELETE_COMPUTER, false, company.getId());
 	    ) {
     	  int statut = preparedStatementComputer.executeUpdate();
 	      if (statut == 0) {
-	        throw new DaoException("Failed to delete the company(ies) related to the company in database, no line deleted in the computer table.");
+	        throw new DaoException("Failed to delete the computer(s) related to the company in database, no line deleted in the computer table.");
 	      } else {
 	    	  LOGGER.info(statut + " computers deleted.");
 	      }

@@ -2,7 +2,9 @@ package com.excilys.cdb.service;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.excilys.cdb.exception.ComputerNullNameException;
 import com.excilys.cdb.exception.DaoException;
@@ -14,6 +16,10 @@ import com.excilys.cdb.persistence.DaoFactory;
 
 public class ComputerService {
 	private ComputerDao computerDao;
+	
+	public ComputerService(DaoFactory daoFactory) {
+		this.computerDao = daoFactory.getComputerDao();
+	}
 	
 	private static Comparator<Computer> introducedComparator = (computer1, computer2) -> {
 		if(!computer1.getIntroduced().isPresent() && !computer2.getIntroduced().isPresent()) {
@@ -53,10 +59,6 @@ public class ComputerService {
 		}
 		return computer1.getCompany().get().getName().compareTo(computer2.getCompany().get().getName());
 	};
-	
-	public ComputerService(DaoFactory daoFactory) {
-		this.computerDao = daoFactory.getComputerDao();
-	}
 	
 	public ArrayList<Computer> listService() throws DaoException {
 		return this.computerDao.list();
@@ -98,14 +100,9 @@ public class ComputerService {
 	
 	public void sortByIntroducedDescService(ArrayList<Computer> computers) {
 		computers.sort(introducedComparator.reversed());
-	}
-	
-	public void sortByCompanyNameAscService(ArrayList<Computer> computers) {
-		computers.sort(companyComparator);
-	}
-	
-	public void sortByCompanyNameDescService(ArrayList<Computer> computers) {
-		computers.sort(companyComparator.reversed());
+		List<Computer> nullIntroducedComputers = computers.stream().filter(computer -> !computer.getIntroduced().isPresent()).collect(Collectors.toList());
+		computers.removeIf(computer -> !computer.getIntroduced().isPresent());
+		computers.addAll(nullIntroducedComputers);
 	}
 	
 	public void sortByDiscontinuedAscService(ArrayList<Computer> computers) {
@@ -114,6 +111,20 @@ public class ComputerService {
 	
 	public void sortByDiscontinuedDescService(ArrayList<Computer> computers) {
 		computers.sort(discontinuedComparator.reversed());
+		List<Computer> nullDiscontinuedComputers = computers.stream().filter(computer -> !computer.getDiscontinued().isPresent()).collect(Collectors.toList());
+		computers.removeIf(computer -> !computer.getDiscontinued().isPresent());
+		computers.addAll(nullDiscontinuedComputers);
+	}
+	
+	public void sortByCompanyNameAscService(ArrayList<Computer> computers) {
+		computers.sort(companyComparator);
+	}
+	
+	public void sortByCompanyNameDescService(ArrayList<Computer> computers) {
+		computers.sort(companyComparator.reversed());
+		List<Computer> nullCompanyComputers = computers.stream().filter(computer -> !computer.getCompany().isPresent()).collect(Collectors.toList());
+		computers.removeIf(computer -> !computer.getCompany().isPresent());
+		computers.addAll(nullCompanyComputers);
 	}
 	
 	private void checkData(Computer computer) {
