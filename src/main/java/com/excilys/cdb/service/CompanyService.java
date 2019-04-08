@@ -19,6 +19,10 @@ public class CompanyService {
 		return companyDao.list();
 	}
 	
+	public Optional<Company> findById(int id) throws DaoException {
+		return companyDao.findById(id);
+	}
+	
 	public Optional<Company> findByName(String name) throws DaoException {
 		return companyDao.findByName(name);
 	}

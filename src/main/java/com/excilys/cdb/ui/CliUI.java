@@ -30,7 +30,8 @@ public class CliUI {
 		SHOW_COMPUTER( "3" ), 
 		CREATE_COMPUTER( "4" ),
 		UPDATE_COMPUTER( "5" ),
-		DELETE_COMPUTER( "6" );
+		DELETE_COMPUTER( "6" ),
+		DELETE_COMPANY( "7" );
 		
 		private String code;
 		
@@ -125,6 +126,9 @@ public class CliUI {
 					case DELETE_COMPUTER :
 						deleteComputer();
 						break;
+					case DELETE_COMPANY :
+						deleteCompany();
+						break;
 					default :
 						
 				}
@@ -143,6 +147,7 @@ public class CliUI {
 		System.out.println( "4 : Create a Computer" );
 		System.out.println( "5 : Update a Computer" );
 		System.out.println( "6 : Delete a Computer" );
+		System.out.println( "7 : Delete a Company" );
 	}
 	
 	public void showPage(Page<?> page) {
@@ -370,6 +375,44 @@ public class CliUI {
 					
 					System.out.println( "\n||||||||||||||||||||||||" );
 					System.out.println( "|| Computer deleted ! ||" );
+					System.out.println( "||||||||||||||||||||||||\n\n" );
+					
+				} else {
+					System.out.println();
+					return;
+				}
+			} 
+		} else {
+			System.out.println( "Sorry, this computer doesn't exist.\n" );
+		}
+				
+	}
+	
+	public void deleteCompany() {
+		System.out.print( "Enter the ID of the company (0 to come back to the menu) : " );
+		String input = keyboard.nextLine().trim();
+		
+		while( ( StringUtils.isNullOrEmpty( input ) || !StringUtils.isStrictlyNumeric( input ) ) && !input.equals( "0" ) ) {
+			System.out.print( "Invalid company ID. Enter a valid ID (0 to come back to the menu) : " );
+			input = keyboard.nextLine().trim();
+		}
+		
+		if( !input.equals( "0" ) ) {
+			Optional<Company> company = companyDAO.findById( Integer.parseInt( input ) );
+			if( company.isPresent() ) {
+				Company companyToDelete = company.get();
+				System.out.println( companyToDelete.toString() );
+				System.out.print( "Are you sure you want to delete this company ? (y\\n) : " );
+				input = keyboard.nextLine().trim();
+				while( !input.equals( "y" ) && !input.equals( "n" ) ) {
+					System.out.print( "Enter 'y' to confirm the deletion or 'n' to come back to the menu : " );
+					input = keyboard.nextLine().trim();
+				}
+				if( input.equals( "y" ) ) {
+					companyDAO.delete( companyToDelete );
+					
+					System.out.println( "\n||||||||||||||||||||||||" );
+					System.out.println( "|| Company deleted ! ||" );
 					System.out.println( "||||||||||||||||||||||||\n\n" );
 					
 				} else {

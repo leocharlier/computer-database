@@ -59,7 +59,7 @@ public class EditComputerServlet extends HttpServlet {
 				this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 			} else {
 				request.setAttribute("errorMessage", "Sorry, the computer <strong>" + computerId + "</strong> doesn't exist.");
-				this.getServletContext().getRequestDispatcher(NOT_FOUND_VIEW).forward(request, response);;
+				this.getServletContext().getRequestDispatcher(NOT_FOUND_VIEW).forward(request, response);
 			}
 		} else {
 			request.setAttribute("errorMessage", "Sorry, there is <strong>no computer ID</strong> to check.");
@@ -86,7 +86,7 @@ public class EditComputerServlet extends HttpServlet {
 
 			this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 		} catch (DaoException e) {
-			request.setAttribute("errorMessage", "An <strong>SQL error has occured during the update...");
+			request.setAttribute("errorMessage", "An <strong>SQL error</strong> has occured during the update...");
 			this.getServletContext().getRequestDispatcher(EXCEPTION_VIEW).forward(request, response);
 		} catch (ComputerNullNameException e) {
 			request.setAttribute("errorMessage", "An error has occurred <strong>due to the name</strong> of the computer...");

@@ -33,6 +33,8 @@ public class ComputerDao {
       "DELETE FROM computer WHERE id = ?";
   private static final String SQL_UPDATE = 
       "UPDATE computer SET name = ?, introduced = ?, discontinued = ?, company_id = ? WHERE id = ?";
+  private static final String SQL_SEARCH = 
+	  "SELECT cpt.id, cpt.name, cpt.introduced, cpt.discontinued, cpt.company_id FROM computer cpt LEFT OUTER JOIN company cpn ON cpt.company_id=cpn.id WHERE cpt.name LIKE ? OR cpn.name LIKE ?";
 
   ComputerDao(DaoFactory daoFactory) {
     this.daoFactory = daoFactory;
@@ -40,21 +42,21 @@ public class ComputerDao {
   }
 
   public ArrayList<Computer> list() throws DaoException {
-    LOGGER.info("Start cxomputers listing...");
+    LOGGER.info("Start computers listing...");
     ResultSet resultSet = null;
     ArrayList<Computer> computers = new ArrayList<Computer>();
  
     try (
         Connection connection = daoFactory.getConnection();
-        PreparedStatement preparedStatement = 
-             preparedStatementInitialization(connection, SQL_SELECT_ALL, false)
+        PreparedStatement preparedStatement = preparedStatementInitialization(connection, SQL_SELECT_ALL, false)
     ) {
       resultSet = preparedStatement.executeQuery();
       
       while (resultSet.next()) {
         computers.add(this.computerMapper.map(resultSet));
       }
-
+      
+      connection.commit();
     } catch (SQLException e) {
       throw new DaoException(e);
     }
@@ -81,7 +83,8 @@ public class ComputerDao {
       if (resultSet.next()) {
         computer = Optional.ofNullable(this.computerMapper.map(resultSet));
       }
-
+      
+      connection.commit();
     } catch (SQLException e) {
       throw new DaoException(e);
     }
@@ -106,6 +109,7 @@ public class ComputerDao {
                  computer.getName(), computer.getIntroduced().orElse(null),
                  computer.getDiscontinued().orElse(null), computer.getCompany().map(someCompany -> someCompany.getId()).orElse(null))
     ) {
+
       int statut = preparedStatement.executeUpdate();
 
       if (statut == 0) {
@@ -119,7 +123,8 @@ public class ComputerDao {
       } else {
         throw new DaoException("Failed to create the computer in database, no auto-generated ID returned.");
       }
-
+      
+      connection.commit();
     } catch (SQLException e) {
       throw new DaoException("SQL error during creation.", e);
     }
@@ -142,7 +147,8 @@ public class ComputerDao {
       if (statut == 0) {
         throw new DaoException("Failed to update the computer in database, no line updated in the table.");
       }
-
+      
+      connection.commit();
     } catch (SQLException e) {
       throw new DaoException("SQL error during update.", e);
     }
@@ -153,20 +159,48 @@ public class ComputerDao {
   public void delete(Computer computer) throws DaoException {
     try (
          Connection connection = daoFactory.getConnection();
-         PreparedStatement preparedStatement = 
-             preparedStatementInitialization(connection, SQL_DELETE, false, computer.getId())
+         PreparedStatement preparedStatement = preparedStatementInitialization(connection, SQL_DELETE, false, computer.getId())
     ) {
       int statut = preparedStatement.executeUpdate();
-
       if (statut == 0) {
         throw new DaoException("Failed to delete the computer in database, no line deleted in the table.");
       }
-
+      
+      connection.commit();
     } catch (SQLException e) {
       throw new DaoException("SQL error during deletion.", e);
     }
 
     LOGGER.info("Computer " + computer.getId() + " deleted.");
+  }
+  
+  public ArrayList<Computer> search(String search) throws DaoException {
+	LOGGER.info("Start research for '" + search + "'...");
+    ResultSet resultSet = null;
+    ArrayList<Computer> computers = new ArrayList<Computer>();
+ 
+    try (
+        Connection connection = daoFactory.getConnection();
+        PreparedStatement preparedStatement = preparedStatementInitialization(connection, SQL_SEARCH, false, "%" + search + "%", "%" + search + "%")
+    ) {
+      resultSet = preparedStatement.executeQuery();
+      
+      while (resultSet.next()) {
+        computers.add(this.computerMapper.map(resultSet));
+      }
+      
+      connection.commit();
+    } catch (SQLException e) {
+      throw new DaoException(e);
+    }
+
+    if (computers.isEmpty()) {
+      LOGGER.warn("No computer found for '" + search + "' search.");
+    } else {
+      LOGGER.info(computers.size() + " computer(s) found.");
+    }
+
+    return computers;
   }
 
   public Integer getCompanyId(Computer computer) {
