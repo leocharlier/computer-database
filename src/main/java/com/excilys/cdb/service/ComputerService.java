@@ -17,6 +17,10 @@ import com.excilys.cdb.persistence.DaoFactory;
 public class ComputerService {
 	private ComputerDao computerDao;
 	
+	public ComputerService(DaoFactory daoFactory) {
+		this.computerDao = daoFactory.getComputerDao();
+	}
+	
 	private static Comparator<Computer> introducedComparator = (computer1, computer2) -> {
 		if(!computer1.getIntroduced().isPresent() && !computer2.getIntroduced().isPresent()) {
 			return 0;
@@ -55,10 +59,6 @@ public class ComputerService {
 		}
 		return computer1.getCompany().get().getName().compareTo(computer2.getCompany().get().getName());
 	};
-	
-	public ComputerService(DaoFactory daoFactory) {
-		this.computerDao = daoFactory.getComputerDao();
-	}
 	
 	public ArrayList<Computer> listService() throws DaoException {
 		return this.computerDao.list();

@@ -14,11 +14,11 @@ import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.model.Company;
 import com.excilys.cdb.service.CompanyService;
 
-class CompanyDaoImplTest {
+class CompanyServiceTest {
 
   private static DaoFactory daoFactory;
   private static CompanyService companyService;
-  static final Logger LOGGER = Logger.getLogger(CompanyDaoImplTest.class);
+  static final Logger LOGGER = Logger.getLogger(CompanyServiceTest.class);
   private static final int NB_COMPANIES = 42;
   private Optional<Company> company;
   
@@ -40,7 +40,7 @@ class CompanyDaoImplTest {
   }
   
   @Test
-  void findCompanyTest() {
+  void findCompanyIdTest() {
     int companyId = 12;
     try {
       company = companyService.findById(companyId);
@@ -49,14 +49,37 @@ class CompanyDaoImplTest {
       LOGGER.warn("Find company test failed.");
       fail("Find company test failed : database error.");
     }
-    
   }
   
   @Test
-  void findUnknownCompanyTest() {
+  void findUnknownCompanyIdTest() {
     int unknownId = -1;
     try {
         company = companyService.findById(unknownId);
+        assertEquals(company, Optional.empty());
+      } catch (DaoException e) {
+        LOGGER.warn("Find company test failed.");
+        fail("Find company test failed : database error.");
+      }
+  }
+  
+  @Test
+  void findCompanyNameTest() {
+    String companyName = "Thinking Machines";
+    try {
+      company = companyService.findByName(companyName);
+      assertEquals(company.get().getName(), companyName);
+    } catch (DaoException e) {
+      LOGGER.warn("Find company test failed.");
+      fail("Find company test failed : database error.");
+    }
+  }
+  
+  @Test
+  void findUnknownCompanyNameTest() {
+    String unknownName = "unkown";
+    try {
+        company = companyService.findByName(unknownName);
         assertEquals(company, Optional.empty());
       } catch (DaoException e) {
         LOGGER.warn("Find company test failed.");

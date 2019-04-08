@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 
@@ -22,11 +23,11 @@ import org.apache.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class ComputerDaoImplTest {
+class ComputerServiceTest {
 
   private static DaoFactory daoFactory;
   private static ComputerService computerService;
-  static final Logger LOGGER = Logger.getLogger(CompanyDaoImplTest.class);
+  static final Logger LOGGER = Logger.getLogger(CompanyServiceTest.class);
   private static DateFormat dateFormat;
   private Optional<Computer> computerToFind;
   private Computer computer;
@@ -196,6 +197,26 @@ class ComputerDaoImplTest {
     assertThrows(DaoException.class, () -> {
       computerService.deleteService(computer);
     });
+  }
+  
+  @Test
+  void searchComputerTest() {
+	  ArrayList<Computer> computers = computerService.searchService("apple");
+	  assertEquals(computers.size(), 46);
+  }
+  
+  @Test
+  void sortByNameAsc() {
+	  ArrayList<Computer> computers = computerService.listService();
+	  computerService.sortByNameAscService(computers);
+	  assertEquals(computers.get(0).getName(), "ACE");
+  }
+  
+  @Test
+  void sortByCompanyNameAsc() {
+	  ArrayList<Computer> computers = computerService.listService();
+	  computerService.sortByCompanyNameAscService(computers);
+	  assertEquals(computers.get(0).getCompany().get().getName(), "ACVS");
   }
 
 }

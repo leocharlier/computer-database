@@ -111,7 +111,7 @@ public class CompanyDao {
 	    try (
 	         Connection connection = daoFactory.getConnection();
 	         PreparedStatement preparedStatement = preparedStatementInitialization(connection, SQL_DELETE, false, company.getId());
-	    	 PreparedStatement preparedStatementComputer = preparedStatementInitialization(connection, SQL_DELETE_COMPUTER, true, company.getId());
+	    	 PreparedStatement preparedStatementComputer = preparedStatementInitialization(connection, SQL_DELETE_COMPUTER, false, company.getId());
 	    ) {
     	  int statut = preparedStatementComputer.executeUpdate();
 	      if (statut == 0) {
