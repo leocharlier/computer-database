@@ -8,6 +8,7 @@ import com.excilys.cdb.persistence.DaoFactory;
 
 public class DaoFactoryInitialization implements ServletContextListener {
 	private static final String ATT_DAO_FACTORY = "daofactory";
+	
 	private DaoFactory daoFactory;
 
 	@Override

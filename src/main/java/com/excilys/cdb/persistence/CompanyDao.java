@@ -10,25 +10,26 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.mapper.CompanyDaoMapper;
 import com.excilys.cdb.model.Company;
 
+@Repository
 public class CompanyDao {
   static final Logger LOGGER = Logger.getLogger(CompanyDao.class);
-  private final DaoFactory daoFactory;
+  @Autowired
+  private DaoFactory daoFactory;
+  @Autowired
   private CompanyDaoMapper companyMapper;
+  
   private static final String SQL_SELECT_ALL      = "SELECT id, name FROM company;";
   private static final String SQL_SELECT_BY_ID    = "SELECT id, name FROM company WHERE id = ?;";
   private static final String SQL_SELECT_BY_NAME  = "SELECT id, name FROM company WHERE name = ?;";
   private static final String SQL_DELETE          = "DELETE FROM company WHERE id = ?";
   private static final String SQL_DELETE_COMPUTER = "DELETE FROM computer WHERE company_id = ?";
-
-  CompanyDao(final DaoFactory daoFactory) {
-    this.daoFactory = daoFactory;
-    this.companyMapper = new CompanyDaoMapper();
-  }
   
   public ArrayList<Company> list() throws DaoException {
     LOGGER.info("Start companies listing...");

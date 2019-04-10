@@ -78,5 +78,12 @@ src/main/resources/properties/
 
 .sts4-cache/
 
+### Log ###
+#logfile
+cdb.log
+
+### Properties ###
+*.properties
+
 # End of https://www.gitignore.io/api/eclipse
 /target/

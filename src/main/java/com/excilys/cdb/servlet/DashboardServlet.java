@@ -24,7 +24,7 @@ public class DashboardServlet extends HttpServlet {
 	public static final String EXCEPTION_VIEW     = "/views/500.jsp";
 	public static final String NOT_FOUND_VIEW   = "/views/404.jsp";
 	public static final int DEFAULT_PAGE_SIZE   = 10;
-
+	
 	private ComputerService computerService;
 	private ComputerDtoMapper computerDtoMapper;
 	private Page<Computer> page;

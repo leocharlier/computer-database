@@ -9,16 +9,24 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
+
+import com.excilys.cdb.config.SpringConfiguration;
 import com.excilys.cdb.model.Company;
 import com.excilys.cdb.model.Computer;
 import com.excilys.cdb.model.Page;
-import com.excilys.cdb.persistence.*;
+import com.excilys.cdb.persistence.CompanyDao;
+import com.excilys.cdb.persistence.ComputerDao;
 import com.mysql.cj.util.StringUtils;
 
+@Component
 public class CliUI {
-	
-	private DaoFactory daoFactory;
+	@Autowired
 	private CompanyDao companyDAO;
+	@Autowired
 	private ComputerDao computerDAO;
 	private Scanner keyboard;
 	private DateFormat dateFormat;
@@ -76,9 +84,6 @@ public class CliUI {
 	}
 	
 	public CliUI() {
-		this.daoFactory = DaoFactory.getInstance();
-		this.companyDAO = daoFactory.getCompanyDao();
-		this.computerDAO = daoFactory.getComputerDao();
 		this.keyboard = new Scanner(System.in);
 		this.dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	}
@@ -528,8 +533,10 @@ public class CliUI {
 	}
 
 	public static void main(String[] args) throws ParseException {
-		CliUI cliUI = new CliUI();
+		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+		CliUI cliUI = applicationContext.getBean("cliUI", CliUI.class);
 		cliUI.start();
+		applicationContext.close();
 		System.exit(0);
 	}	
 }

@@ -2,13 +2,6 @@ package com.excilys.cdb.persistence;
 
 import static com.excilys.cdb.persistence.DaoUtility.preparedStatementInitialization;
 
-import com.excilys.cdb.exception.ComputerNullNameException;
-import com.excilys.cdb.exception.DaoException;
-import com.excilys.cdb.exception.DiscontinuedBeforeIntroducedException;
-import com.excilys.cdb.exception.DiscontinuedButNoIntroducedException;
-import com.excilys.cdb.mapper.ComputerDaoMapper;
-import com.excilys.cdb.model.Computer;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,10 +10,22 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import com.excilys.cdb.exception.ComputerNullNameException;
+import com.excilys.cdb.exception.DaoException;
+import com.excilys.cdb.exception.DiscontinuedBeforeIntroducedException;
+import com.excilys.cdb.exception.DiscontinuedButNoIntroducedException;
+import com.excilys.cdb.mapper.ComputerDaoMapper;
+import com.excilys.cdb.model.Computer;
+
+@Repository
 public class ComputerDao {
   static final Logger LOGGER = Logger.getLogger(ComputerDao.class);
+  @Autowired
   private DaoFactory daoFactory;
+  @Autowired
   private ComputerDaoMapper computerMapper;
 
   private static final String SQL_SELECT_BY_ID = 
@@ -35,11 +40,6 @@ public class ComputerDao {
       "UPDATE computer SET name = ?, introduced = ?, discontinued = ?, company_id = ? WHERE id = ?";
   private static final String SQL_SEARCH = 
 	  "SELECT cpt.id, cpt.name, cpt.introduced, cpt.discontinued, cpt.company_id FROM computer cpt LEFT OUTER JOIN company cpn ON cpt.company_id=cpn.id WHERE cpt.name LIKE ? OR cpn.name LIKE ?";
-
-  ComputerDao(DaoFactory daoFactory) {
-    this.daoFactory = daoFactory;
-    this.computerMapper = new ComputerDaoMapper();
-  }
 
   public ArrayList<Computer> list() throws DaoException {
     LOGGER.info("Start computers listing...");

@@ -1,10 +1,13 @@
 package com.excilys.cdb.mapper;
 
-import com.excilys.cdb.model.Company;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Component;
+
+import com.excilys.cdb.model.Company;
+
+@Component
 public class CompanyDaoMapper {
 
   public Company map(ResultSet resultSet) throws SQLException {
