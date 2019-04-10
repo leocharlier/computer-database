@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 import com.excilys.cdb.dto.ComputerDto;
 import com.excilys.cdb.exception.DtoDateParseException;
@@ -12,6 +14,8 @@ import com.excilys.cdb.model.Company;
 import com.excilys.cdb.model.Computer;
 import com.excilys.cdb.persistence.CompanyDao;
 
+@Lazy
+@Component
 public class DtoComputerMapper {
 	@Autowired
 	private CompanyDao companyDao;

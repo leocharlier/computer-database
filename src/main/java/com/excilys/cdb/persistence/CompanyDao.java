@@ -11,12 +11,14 @@ import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
 import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.mapper.CompanyDaoMapper;
 import com.excilys.cdb.model.Company;
 
+@Lazy
 @Repository
 public class CompanyDao {
   static final Logger LOGGER = Logger.getLogger(CompanyDao.class);

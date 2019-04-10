@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
 import com.excilys.cdb.exception.ComputerNullNameException;
@@ -20,6 +21,7 @@ import com.excilys.cdb.exception.DiscontinuedButNoIntroducedException;
 import com.excilys.cdb.mapper.ComputerDaoMapper;
 import com.excilys.cdb.model.Computer;
 
+@Lazy
 @Repository
 public class ComputerDao {
   static final Logger LOGGER = Logger.getLogger(ComputerDao.class);

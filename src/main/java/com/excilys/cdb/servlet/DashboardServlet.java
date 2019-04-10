@@ -10,12 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import com.excilys.cdb.dto.ComputerDto;
 import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.mapper.ComputerDtoMapper;
 import com.excilys.cdb.model.Computer;
 import com.excilys.cdb.model.Page;
-import com.excilys.cdb.persistence.DaoFactory;
 import com.excilys.cdb.service.ComputerService;
 
 public class DashboardServlet extends HttpServlet {
@@ -25,15 +29,16 @@ public class DashboardServlet extends HttpServlet {
 	public static final String NOT_FOUND_VIEW   = "/views/404.jsp";
 	public static final int DEFAULT_PAGE_SIZE   = 10;
 	
+	@Autowired
 	private ComputerService computerService;
+	@Autowired
 	private ComputerDtoMapper computerDtoMapper;
 	private Page<Computer> page;
 	private int currentPage;
 	private int currentSize;
 
 	public void init() throws ServletException {
-		this.computerService = new ComputerService(((DaoFactory) getServletContext().getAttribute(CONF_DAO_FACTORY)));
-		this.computerDtoMapper = new ComputerDtoMapper();
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

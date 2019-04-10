@@ -6,20 +6,26 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+
 import com.excilys.cdb.exception.ComputerNullNameException;
 import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.exception.DiscontinuedBeforeIntroducedException;
 import com.excilys.cdb.exception.DiscontinuedButNoIntroducedException;
 import com.excilys.cdb.model.Computer;
 import com.excilys.cdb.persistence.ComputerDao;
-import com.excilys.cdb.persistence.DaoFactory;
 
+@Lazy
+@Service
 public class ComputerService {
+	@Autowired
 	private ComputerDao computerDao;
 	
-	public ComputerService(DaoFactory daoFactory) {
-		this.computerDao = daoFactory.getComputerDao();
-	}
+//	public ComputerService(DaoFactory daoFactory) {
+//		this.computerDao = daoFactory.getComputerDao();
+//	}
 	
 	private static Comparator<Computer> introducedComparator = (computer1, computer2) -> {
 		if(!computer1.getIntroduced().isPresent() && !computer2.getIntroduced().isPresent()) {
