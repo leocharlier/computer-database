@@ -12244,3 +12244,663 @@ java.net.URLClassLoader@1c20c684
 2019-04-11 13:53:05 DEBUG JndiPropertySource:101 - JNDI lookup for name [spring.liveBeansView.mbeanDomain] threw NamingException with message: Le Nom [spring.liveBeansView.mbeanDomain] n'est pas lié à ce Contexte. Returning null.
 2019-04-11 13:53:05 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 1020 ms
 2019-04-11 13:53:06 DEBUG AnnotationConfigWebApplicationContext:1002 - Closing Root WebApplicationContext, started on Thu Apr 11 13:53:04 CEST 2019
+2019-04-11 14:02:03 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-11 14:02:03 DEBUG AnnotationConfigWebApplicationContext:594 - Refreshing Root WebApplicationContext
+2019-04-11 14:02:03 DEBUG DefaultListableBeanFactory:213 - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
+2019-04-11 14:02:03 DEBUG ClassPathBeanDefinitionScanner:437 - Identified candidate component class: file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/service/CompanyService.class]
+2019-04-11 14:02:03 DEBUG ClassPathBeanDefinitionScanner:437 - Identified candidate component class: file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/service/ComputerService.class]
+2019-04-11 14:02:03 DEBUG ClassPathBeanDefinitionScanner:437 - Identified candidate component class: file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/persistence/CompanyDao.class]
+2019-04-11 14:02:03 DEBUG ClassPathBeanDefinitionScanner:437 - Identified candidate component class: file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/persistence/ComputerDao.class]
+2019-04-11 14:02:03 DEBUG ClassPathBeanDefinitionScanner:437 - Identified candidate component class: file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/mapper/CompanyDaoMapper.class]
+2019-04-11 14:02:03 DEBUG ClassPathBeanDefinitionScanner:437 - Identified candidate component class: file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/mapper/ComputerDaoMapper.class]
+2019-04-11 14:02:03 DEBUG ClassPathBeanDefinitionScanner:437 - Identified candidate component class: file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/mapper/ComputerDtoMapper.class]
+2019-04-11 14:02:03 DEBUG ClassPathBeanDefinitionScanner:437 - Identified candidate component class: file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/mapper/DtoComputerMapper.class]
+2019-04-11 14:02:03 DEBUG ClassPathBeanDefinitionScanner:437 - Identified candidate component class: file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/ui/CliUI.class]
+2019-04-11 14:02:03 DEBUG DefaultListableBeanFactory:213 - Creating shared instance of singleton bean 'org.springframework.context.event.internalEventListenerProcessor'
+2019-04-11 14:02:03 DEBUG DefaultListableBeanFactory:213 - Creating shared instance of singleton bean 'org.springframework.context.event.internalEventListenerFactory'
+2019-04-11 14:02:03 DEBUG DefaultListableBeanFactory:213 - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
+2019-04-11 14:02:03 DEBUG DefaultListableBeanFactory:213 - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
+2019-04-11 14:02:03 DEBUG UiApplicationContextUtils:85 - Unable to locate ThemeSource with name 'themeSource': using default [org.springframework.ui.context.support.ResourceBundleThemeSource@70b0b3cf]
+2019-04-11 14:02:03 DEBUG DefaultListableBeanFactory:213 - Creating shared instance of singleton bean 'cliUI'
+2019-04-11 14:02:03 DEBUG DefaultListableBeanFactory:213 - Creating shared instance of singleton bean 'companyDao'
+2019-04-11 14:02:03 DEBUG DefaultListableBeanFactory:213 - Creating shared instance of singleton bean 'getDataSource'
+2019-04-11 14:02:03 DEBUG DefaultListableBeanFactory:213 - Creating shared instance of singleton bean 'springConfiguration'
+2019-04-11 14:02:03 DEBUG JndiTemplate:154 - Looking up JNDI object with name [java:comp/env/driverClassName]
+2019-04-11 14:02:03 DEBUG JndiLocatorDelegate:102 - Converted JNDI name [java:comp/env/driverClassName] not found - trying original name [driverClassName]. javax.naming.NameNotFoundException: Le Nom [driverClassName] n'est pas lié à ce Contexte
+2019-04-11 14:02:03 DEBUG JndiTemplate:154 - Looking up JNDI object with name [driverClassName]
+2019-04-11 14:02:03 DEBUG JndiPropertySource:101 - JNDI lookup for name [driverClassName] threw NamingException with message: Le Nom [driverClassName] n'est pas lié à ce Contexte. Returning null.
+2019-04-11 14:02:03 DEBUG PropertySourcesPropertyResolver:115 - Found key 'driverClassName' in PropertySource 'class path resource [properties/hikari.properties]' with value of type String
+2019-04-11 14:02:03 DEBUG JndiTemplate:154 - Looking up JNDI object with name [java:comp/env/jdbcUrl]
+2019-04-11 14:02:03 DEBUG JndiLocatorDelegate:102 - Converted JNDI name [java:comp/env/jdbcUrl] not found - trying original name [jdbcUrl]. javax.naming.NameNotFoundException: Le Nom [jdbcUrl] n'est pas lié à ce Contexte
+2019-04-11 14:02:03 DEBUG JndiTemplate:154 - Looking up JNDI object with name [jdbcUrl]
+2019-04-11 14:02:03 DEBUG JndiPropertySource:101 - JNDI lookup for name [jdbcUrl] threw NamingException with message: Le Nom [jdbcUrl] n'est pas lié à ce Contexte. Returning null.
+2019-04-11 14:02:03 DEBUG PropertySourcesPropertyResolver:115 - Found key 'jdbcUrl' in PropertySource 'class path resource [properties/hikari.properties]' with value of type String
+2019-04-11 14:02:03 DEBUG JndiTemplate:154 - Looking up JNDI object with name [java:comp/env/userDb]
+2019-04-11 14:02:03 DEBUG JndiLocatorDelegate:102 - Converted JNDI name [java:comp/env/userDb] not found - trying original name [userDb]. javax.naming.NameNotFoundException: Le Nom [userDb] n'est pas lié à ce Contexte
+2019-04-11 14:02:03 DEBUG JndiTemplate:154 - Looking up JNDI object with name [userDb]
+2019-04-11 14:02:03 DEBUG JndiPropertySource:101 - JNDI lookup for name [userDb] threw NamingException with message: Le Nom [userDb] n'est pas lié à ce Contexte. Returning null.
+2019-04-11 14:02:03 DEBUG PropertySourcesPropertyResolver:115 - Found key 'userDb' in PropertySource 'class path resource [properties/hikari.properties]' with value of type String
+2019-04-11 14:02:03 DEBUG JndiTemplate:154 - Looking up JNDI object with name [java:comp/env/password]
+2019-04-11 14:02:03 DEBUG JndiLocatorDelegate:102 - Converted JNDI name [java:comp/env/password] not found - trying original name [password]. javax.naming.NameNotFoundException: Le Nom [password] n'est pas lié à ce Contexte
+2019-04-11 14:02:03 DEBUG JndiTemplate:154 - Looking up JNDI object with name [password]
+2019-04-11 14:02:03 DEBUG JndiPropertySource:101 - JNDI lookup for name [password] threw NamingException with message: Le Nom [password] n'est pas lié à ce Contexte. Returning null.
+2019-04-11 14:02:03 DEBUG PropertySourcesPropertyResolver:115 - Found key 'password' in PropertySource 'class path resource [properties/hikari.properties]' with value of type String
+2019-04-11 14:02:04 DEBUG HikariConfig:480 - Driver class com.mysql.cj.jdbc.Driver found in Thread context class loader ParallelWebappClassLoader
+  context: computer-data-base
+  delegate: false
+----------> Parent Classloader:
+java.net.URLClassLoader@1c20c684
+
+2019-04-11 14:02:04 DEBUG DefaultListableBeanFactory:213 - Creating shared instance of singleton bean 'companyDaoMapper'
+2019-04-11 14:02:04 DEBUG DefaultListableBeanFactory:213 - Creating shared instance of singleton bean 'computerDao'
+2019-04-11 14:02:04 DEBUG DefaultListableBeanFactory:213 - Creating shared instance of singleton bean 'computerDaoMapper'
+2019-04-11 14:02:04 DEBUG JndiTemplate:154 - Looking up JNDI object with name [java:comp/env/spring.liveBeansView.mbeanDomain]
+2019-04-11 14:02:04 DEBUG JndiLocatorDelegate:102 - Converted JNDI name [java:comp/env/spring.liveBeansView.mbeanDomain] not found - trying original name [spring.liveBeansView.mbeanDomain]. javax.naming.NameNotFoundException: Le Nom [spring.liveBeansView.mbeanDomain] n'est pas lié à ce Contexte
+2019-04-11 14:02:04 DEBUG JndiTemplate:154 - Looking up JNDI object with name [spring.liveBeansView.mbeanDomain]
+2019-04-11 14:02:04 DEBUG JndiPropertySource:101 - JNDI lookup for name [spring.liveBeansView.mbeanDomain] threw NamingException with message: Le Nom [spring.liveBeansView.mbeanDomain] n'est pas lié à ce Contexte. Returning null.
+2019-04-11 14:02:04 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 938 ms
+2019-04-11 14:02:05 DEBUG DefaultListableBeanFactory:213 - Creating shared instance of singleton bean 'computerService'
+2019-04-11 14:02:05 DEBUG DefaultListableBeanFactory:213 - Creating shared instance of singleton bean 'computerDtoMapper'
+2019-04-11 14:02:05 INFO  ComputerDao:49 - Start computers listing...
+2019-04-11 14:02:05 DEBUG HikariConfig:1020 - HikariPool-1 - configuration:
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - allowPoolSuspension.............false
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - autoCommit......................true
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - catalog.........................none
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - connectionInitSql...............none
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - connectionTestQuery.............none
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - connectionTimeout...............30000
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - dataSource......................none
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - dataSourceClassName.............none
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - dataSourceJNDI..................none
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - dataSourceProperties............{password=<masked>}
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - driverClassName................."com.mysql.cj.jdbc.Driver"
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - healthCheckProperties...........{}
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - healthCheckRegistry.............none
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - idleTimeout.....................600000
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - initializationFailTimeout.......1
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - isolateInternalQueries..........false
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - jdbcUrl.........................jdbc:mysql://localhost:3306/computer-database-db?serverTimezone=UTC
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - leakDetectionThreshold..........0
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - maxLifetime.....................1800000
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - maximumPoolSize.................10
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - metricRegistry..................none
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - metricsTrackerFactory...........none
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - minimumIdle.....................10
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - password........................<masked>
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - poolName........................"HikariPool-1"
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - readOnly........................false
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - registerMbeans..................false
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - scheduledExecutor...............none
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - schema..........................none
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - threadFactory...................internal
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - transactionIsolation............default
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - username........................"admincdb"
+2019-04-11 14:02:05 DEBUG HikariConfig:1052 - validationTimeout...............5000
+2019-04-11 14:02:05 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-11 14:02:05 DEBUG HikariPool:545 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1b27c36
+2019-04-11 14:02:05 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-11 14:02:05 DEBUG HikariPool:709 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG HikariPool:411 - HikariPool-1 - Pool stats (total=2, active=2, idle=0, waiting=0)
+2019-04-11 14:02:05 DEBUG HikariPool:709 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@21f4a18f
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG HikariPool:709 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@109f03cf
+2019-04-11 14:02:05 DEBUG HikariPool:709 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@41db5ec0
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG HikariPool:709 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@20c3e6b5
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG HikariPool:709 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4595e3a2
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG HikariPool:709 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@20f84410
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG HikariPool:709 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6d539878
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG HikariPool:709 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5a81045d
+2019-04-11 14:02:05 DEBUG HikariPool:411 - HikariPool-1 - After adding stats (total=10, active=2, idle=8, waiting=0)
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:05 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@60c9abb4
+2019-04-11 14:02:06 DEBUG PoolBase:236 - HikariPool-1 - Reset (autoCommit) on connection com.mysql.cj.jdbc.ConnectionImpl@1b27c36
+2019-04-11 14:02:06 INFO  ComputerDao:72 - Computers list created.
+2019-04-11 14:02:35 DEBUG HikariPool:411 - HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
