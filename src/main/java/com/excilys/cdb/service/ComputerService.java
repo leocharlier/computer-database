@@ -23,10 +23,6 @@ public class ComputerService {
 	@Autowired
 	private ComputerDao computerDao;
 	
-//	public ComputerService(DaoFactory daoFactory) {
-//		this.computerDao = daoFactory.getComputerDao();
-//	}
-	
 	private static Comparator<Computer> introducedComparator = (computer1, computer2) -> {
 		if(!computer1.getIntroduced().isPresent() && !computer2.getIntroduced().isPresent()) {
 			return 0;

@@ -1,7 +1,6 @@
 package com.excilys.cdb.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import javax.servlet.ServletException;
@@ -19,7 +18,6 @@ import com.excilys.cdb.exception.DiscontinuedBeforeIntroducedException;
 import com.excilys.cdb.exception.DiscontinuedButNoIntroducedException;
 import com.excilys.cdb.mapper.ComputerDtoMapper;
 import com.excilys.cdb.mapper.DtoComputerMapper;
-import com.excilys.cdb.model.Company;
 import com.excilys.cdb.model.Computer;
 import com.excilys.cdb.service.CompanyService;
 import com.excilys.cdb.service.ComputerService;
@@ -43,11 +41,9 @@ public class EditComputerServlet extends HttpServlet {
 	private ComputerDtoMapper computerDtoMapper;
 	@Autowired
 	private DtoComputerMapper dtoComputerMapper;
-	private ArrayList<Company> companies;
 
 	public void init() throws ServletException {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-		this.companies = companyService.listService();
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -58,7 +54,7 @@ public class EditComputerServlet extends HttpServlet {
 				Computer computerToEdit = computer.get();
 				ComputerDto computerDto = computerDtoMapper.map(computerToEdit);
 				request.setAttribute("computer", computerDto);
-				request.setAttribute("companies", companies);
+				request.setAttribute("companies", companyService.listService());
 				this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 			} else {
 				request.setAttribute("errorMessage", "Sorry, the computer <strong>" + computerId + "</strong> doesn't exist.");
@@ -84,7 +80,7 @@ public class EditComputerServlet extends HttpServlet {
 		try {
 			this.computerService.updateService(computer);
 			request.setAttribute("computer", dtoComputer);
-			request.setAttribute("companies", companies);
+			request.setAttribute("companies", companyService.listService());
 			request.setAttribute("resultMessage", "The computer <strong>" + computerName + "</strong> has been updated !");
 
 			this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);

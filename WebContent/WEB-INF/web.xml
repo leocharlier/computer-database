@@ -18,10 +18,6 @@
         <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
     </context-param>
     
-    <!-- <listener>
-        <listener-class>com.excilys.cdb.config.DaoFactoryInitialization</listener-class>
-    </listener> -->
-    
     <servlet>
 		<servlet-name>Dashboard</servlet-name>
 		<servlet-class>com.excilys.cdb.servlet.DashboardServlet</servlet-class>

@@ -1,7 +1,6 @@
 package com.excilys.cdb.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +16,6 @@ import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.exception.DiscontinuedBeforeIntroducedException;
 import com.excilys.cdb.exception.DiscontinuedButNoIntroducedException;
 import com.excilys.cdb.mapper.DtoComputerMapper;
-import com.excilys.cdb.model.Company;
 import com.excilys.cdb.model.Computer;
 import com.excilys.cdb.service.CompanyService;
 import com.excilys.cdb.service.ComputerService;
@@ -37,15 +35,14 @@ public class AddComputerServlet extends HttpServlet {
 	private CompanyService companyService;
 	@Autowired
 	private DtoComputerMapper dtoComputerMapper;
-	private ArrayList<Company> companies;
 
 	public void init() throws ServletException {
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-		this.companies = companyService.listService();
+		
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("companies", this.companies);
+		request.setAttribute("companies", companyService.listService());
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
 
@@ -62,7 +59,7 @@ public class AddComputerServlet extends HttpServlet {
 
 		try {
 			this.computerService.createService(computer);
-			request.setAttribute("companies", companies);
+			request.setAttribute("companies", companyService.listService());
 			request.setAttribute("resultMessage", "The computer <strong>" + computer.getName() + "</strong> has been created !");
 			this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 		} catch (DaoException e) {

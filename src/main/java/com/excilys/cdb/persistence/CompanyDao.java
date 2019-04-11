@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import javax.sql.DataSource;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -23,7 +25,7 @@ import com.excilys.cdb.model.Company;
 public class CompanyDao {
   static final Logger LOGGER = Logger.getLogger(CompanyDao.class);
   @Autowired
-  private DaoFactory daoFactory;
+  private DataSource dataSource;
   @Autowired
   private CompanyDaoMapper companyMapper;
   
@@ -39,11 +41,12 @@ public class CompanyDao {
     ResultSet resultSet = null;
     
     try (
-        Connection connection = daoFactory.getConnection();
+        Connection connection = dataSource.getConnection();
         PreparedStatement preparedStatement = 
             preparedStatementInitialization(connection, SQL_SELECT_ALL, false)
         ) {
-
+      
+      connection.setAutoCommit(false);
       resultSet = preparedStatement.executeQuery();
 
       while (resultSet.next()) {
@@ -69,10 +72,11 @@ public class CompanyDao {
     Company company = null;
 
     try (
-        Connection connection = daoFactory.getConnection();
+        Connection connection = dataSource.getConnection();
         PreparedStatement preparedStatement =
             preparedStatementInitialization(connection, SQL_SELECT_BY_ID, false, pid)
     ) {
+      connection.setAutoCommit(false);
       resultSet = preparedStatement.executeQuery();
 
       if (resultSet.next()) {
@@ -92,10 +96,11 @@ public class CompanyDao {
     Company company = null;
 
     try (
-        Connection connection = daoFactory.getConnection();
+        Connection connection = dataSource.getConnection();
         PreparedStatement preparedStatement =
             preparedStatementInitialization(connection, SQL_SELECT_BY_NAME, false, pname)
     ) {
+      connection.setAutoCommit(false);
       resultSet = preparedStatement.executeQuery();
 
       if (resultSet.next()) {
@@ -112,10 +117,11 @@ public class CompanyDao {
   
   public void delete(Company company) throws DaoException {
 	    try (
-	         Connection connection = daoFactory.getConnection();
+	         Connection connection = dataSource.getConnection();
 	         PreparedStatement preparedStatement = preparedStatementInitialization(connection, SQL_DELETE, false, company.getId());
 	    	 PreparedStatement preparedStatementComputer = preparedStatementInitialization(connection, SQL_DELETE_COMPUTER, false, company.getId());
 	    ) {
+	      connection.setAutoCommit(false);
     	  int statut = preparedStatementComputer.executeUpdate();
 	      if (statut == 0) {
 	        throw new DaoException("Failed to delete the computer(s) related to the company in database, no line deleted in the computer table.");
