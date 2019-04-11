@@ -1,20 +1,12 @@
-package com.excilys.cdb.persistence;
+package com.excilys.cdb.servicetest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import com.excilys.cdb.exception.ComputerNullNameException;
-import com.excilys.cdb.exception.DaoException;
-import com.excilys.cdb.exception.DiscontinuedBeforeIntroducedException;
-import com.excilys.cdb.exception.DiscontinuedButNoIntroducedException;
-import com.excilys.cdb.model.Computer;
-import com.excilys.cdb.service.ComputerService;
-
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
@@ -22,10 +14,19 @@ import java.util.Optional;
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.excilys.cdb.config.SpringConfiguration;
+import com.excilys.cdb.exception.ComputerNullNameException;
+import com.excilys.cdb.exception.DaoException;
+import com.excilys.cdb.exception.DiscontinuedBeforeIntroducedException;
+import com.excilys.cdb.exception.DiscontinuedButNoIntroducedException;
+import com.excilys.cdb.model.Computer;
+import com.excilys.cdb.service.ComputerService;
 
 class ComputerServiceTest {
-
-  private static DaoFactory daoFactory;
+  @Autowired
   private static ComputerService computerService;
   static final Logger LOGGER = Logger.getLogger(CompanyServiceTest.class);
   private static DateFormat dateFormat;
@@ -34,9 +35,7 @@ class ComputerServiceTest {
   
   @BeforeAll
   public static void setUp() {
-    daoFactory = DaoFactory.getInstance();
-    computerService = new ComputerService(daoFactory);
-    dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfiguration.class);
   }
 
   @Test

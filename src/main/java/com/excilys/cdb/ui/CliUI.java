@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -23,9 +22,7 @@ import com.mysql.cj.util.StringUtils;
 
 @Component
 public class CliUI {
-	@Autowired
 	private CompanyDao companyDAO;
-	@Autowired
 	private ComputerDao computerDAO;
 	private Scanner keyboard;
 	private DateFormat dateFormat;
@@ -82,7 +79,9 @@ public class CliUI {
 		}
 	}
 	
-	public CliUI() {
+	public CliUI(CompanyDao companyD, ComputerDao computerD) {
+		this.companyDAO = companyD;
+		this.computerDAO = computerD;
 		this.keyboard = new Scanner(System.in);
 		this.dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	}

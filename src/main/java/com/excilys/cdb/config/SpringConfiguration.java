@@ -16,7 +16,8 @@ import org.springframework.context.annotation.PropertySource;
 @ComponentScan({"com.excilys.cdb.service",
 				"com.excilys.cdb.persistence",
 				"com.excilys.cdb.mapper",
-				"com.excilys.cdb.ui"})
+				"com.excilys.cdb.ui",
+				"com.excilys.cdb.servicetest"})
 public class SpringConfiguration {
 	@Value("${driverClassName}")
 	String driverClassName;

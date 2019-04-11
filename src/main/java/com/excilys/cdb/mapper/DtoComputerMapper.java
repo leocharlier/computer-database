@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +16,11 @@ import com.excilys.cdb.persistence.CompanyDao;
 @Lazy
 @Component
 public class DtoComputerMapper {
-	@Autowired
 	private CompanyDao companyDao;
+	
+	public DtoComputerMapper(CompanyDao cd) {
+		companyDao = cd;
+	}
 	
 	public Computer map(ComputerDto dtoComputer) {
 		Computer computer = new Computer();

@@ -12,7 +12,6 @@ import java.util.Optional;
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
@@ -27,10 +26,13 @@ import com.excilys.cdb.model.Computer;
 @Repository
 public class ComputerDao {
   static final Logger LOGGER = Logger.getLogger(ComputerDao.class);
-  @Autowired
   private DataSource dataSource;
-  @Autowired
   private ComputerDaoMapper computerMapper;
+  
+  public ComputerDao(DataSource ds, ComputerDaoMapper cm) {
+	  dataSource = ds;
+	  computerMapper = cm;
+  }
 
   private static final String SQL_SELECT_BY_ID = 
       "SELECT id, name, introduced, discontinued, company_id FROM computer WHERE id = ?";

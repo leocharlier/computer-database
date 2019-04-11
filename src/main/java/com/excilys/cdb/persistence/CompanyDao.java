@@ -12,7 +12,6 @@ import java.util.Optional;
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
@@ -24,10 +23,13 @@ import com.excilys.cdb.model.Company;
 @Repository
 public class CompanyDao {
   static final Logger LOGGER = Logger.getLogger(CompanyDao.class);
-  @Autowired
   private DataSource dataSource;
-  @Autowired
   private CompanyDaoMapper companyMapper;
+  
+  public CompanyDao(DataSource ds, CompanyDaoMapper cm) {
+	  dataSource = ds;
+	  companyMapper = cm;
+  }
   
   private static final String SQL_SELECT_ALL      = "SELECT id, name FROM company;";
   private static final String SQL_SELECT_BY_ID    = "SELECT id, name FROM company WHERE id = ?;";
@@ -45,7 +47,6 @@ public class CompanyDao {
         PreparedStatement preparedStatement = 
             preparedStatementInitialization(connection, SQL_SELECT_ALL, false)
         ) {
-      
       connection.setAutoCommit(false);
       resultSet = preparedStatement.executeQuery();
 
