@@ -3,16 +3,23 @@ package com.excilys.cdb.mapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
+
 import com.excilys.cdb.model.Computer;
 import com.excilys.cdb.persistence.CompanyDao;
-import com.excilys.cdb.persistence.DaoFactory;
 
+@Lazy
+@Component
 public class ComputerDaoMapper {
+  private CompanyDao companyDao;
+  
+  public ComputerDaoMapper(CompanyDao cd) {
+	  companyDao = cd;
+  }
 
   public Computer map( ResultSet resultSet ) throws SQLException {
     Computer computer = new Computer();
-    DaoFactory daoFactory = DaoFactory.getInstance();
-    CompanyDao companyDao = daoFactory.getCompanyDao();
 
     computer.setId(resultSet.getInt("id"));
     computer.setName(resultSet.getString("name"));

@@ -1,4 +1,4 @@
-package com.excilys.cdb.persistence;
+package com.excilys.cdb.servicetest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -9,14 +9,16 @@ import java.util.Optional;
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.excilys.cdb.config.SpringConfiguration;
 import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.model.Company;
 import com.excilys.cdb.service.CompanyService;
 
 class CompanyServiceTest {
-
-  private static DaoFactory daoFactory;
+  @Autowired
   private static CompanyService companyService;
   static final Logger LOGGER = Logger.getLogger(CompanyServiceTest.class);
   private static final int NB_COMPANIES = 42;
@@ -24,8 +26,10 @@ class CompanyServiceTest {
   
   @BeforeAll
   public static void setUp() {
-    daoFactory = DaoFactory.getInstance();
-    companyService = new CompanyService(daoFactory);
+	AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+//    CliUI cliUI = applicationContext.getBean("cliUI", CliUI.class);
+//    daoFactory = DaoFactory.getInstance();
+//    companyService = new CompanyService(daoFactory);
   }
 
   @Test

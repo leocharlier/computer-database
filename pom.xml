@@ -16,6 +16,7 @@
     <junit-jupiter-engine.version>5.4.0</junit-jupiter-engine.version>
     <mysql-connector-java.version>8.0.15</mysql-connector-java.version>
     <log4j.version>1.2.17</log4j.version>
+    <spring-boot-starter-log4j.version>1.3.8.RELEASE</spring-boot-starter-log4j.version>
 	<mockito-all.version>1.8.4</mockito-all.version>
 	<maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
 	<maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
@@ -23,6 +24,8 @@
 	<jstl.version>1.2</jstl.version>
 	<taglibs.version>1.1.2</taglibs.version>
 	<HikariCP.version>2.7.8</HikariCP.version>
+	<springframework.version>5.1.6.RELEASE</springframework.version>
+	<springboot.version>2.1.4.RELEASE</springboot.version>
   </properties>
   
   <dependencies>
@@ -51,6 +54,12 @@
 	  <artifactId>log4j</artifactId>
 	  <version>${log4j.version}</version>
 	</dependency>
+	
+	<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-log4j</artifactId>
+        <version>${spring-boot-starter-log4j.version}</version>
+    </dependency>
     
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -72,12 +81,23 @@
       <version>${taglibs.version}</version>
       <scope>compile</scope>
     </dependency>
-    
-    <dependency>
-	    <groupId>com.zaxxer</groupId>
-	    <artifactId>HikariCP</artifactId>
-	    <version>${HikariCP.version}</version>
-	    <scope>compile</scope>
+	
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-context</artifactId>
+	    <version>${springframework.version}</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-web</artifactId>
+	    <version>${springframework.version}</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-jdbc</artifactId>
+	    <version>${springboot.version}</version>
 	</dependency>
   
   </dependencies>

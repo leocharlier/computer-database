@@ -75,7 +75,7 @@ public class Computer {
     StringBuilder sb = new StringBuilder(this.toString());
     
     sb.append(this.getIntroduced().map(someDate -> String.format("\n\t| Introduced the %s\n", someDate))
-                                  .orElse("\t| Introducing date unknown \n"));
+                                  .orElse("\n\t| Introducing date unknown \n"));
     
     sb.append(this.getDiscontinued().map(someDate -> String.format("\t| Discontinued the %s\n", someDate))
                                   .orElse("\t| Discontinuing date unknown \n"));

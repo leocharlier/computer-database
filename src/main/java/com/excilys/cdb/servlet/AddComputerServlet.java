@@ -1,12 +1,14 @@
 package com.excilys.cdb.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.excilys.cdb.dto.ComputerDto;
 import com.excilys.cdb.exception.ComputerNullNameException;
@@ -14,9 +16,7 @@ import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.exception.DiscontinuedBeforeIntroducedException;
 import com.excilys.cdb.exception.DiscontinuedButNoIntroducedException;
 import com.excilys.cdb.mapper.DtoComputerMapper;
-import com.excilys.cdb.model.Company;
 import com.excilys.cdb.model.Computer;
-import com.excilys.cdb.persistence.DaoFactory;
 import com.excilys.cdb.service.CompanyService;
 import com.excilys.cdb.service.ComputerService;
 
@@ -29,20 +29,20 @@ public class AddComputerServlet extends HttpServlet {
 	public static final String DISCONTINUED_FIELD = "discontinued";
 	public static final String COMPANY_FIELD      = "companyName";
 
+	@Autowired
 	private ComputerService computerService;
+	@Autowired
 	private CompanyService companyService;
+	@Autowired
 	private DtoComputerMapper dtoComputerMapper;
-	private ArrayList<Company> companies;
 
 	public void init() throws ServletException {
-		this.computerService = new ComputerService(((DaoFactory) getServletContext().getAttribute(CONF_DAO_FACTORY)));
-		this.companyService = new CompanyService(((DaoFactory) getServletContext().getAttribute(CONF_DAO_FACTORY)));
-		this.dtoComputerMapper = new DtoComputerMapper();
-		this.companies = companyService.listService();
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
+		
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("companies", this.companies);
+		request.setAttribute("companies", companyService.listService());
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
 
@@ -59,8 +59,8 @@ public class AddComputerServlet extends HttpServlet {
 
 		try {
 			this.computerService.createService(computer);
-			request.setAttribute("companies", companies);
-			request.setAttribute("resultMessage", "The computer <strong>" + computer.getName() + " introduced : " + computer.getIntroduced() + "</strong> has been created !");
+			request.setAttribute("companies", companyService.listService());
+			request.setAttribute("resultMessage", "The computer <strong>" + computer.getName() + "</strong> has been created !");
 			this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 		} catch (DaoException e) {
 			request.setAttribute("errorMessage", "An <strong>SQL error</strong> has occured during the creation...");
