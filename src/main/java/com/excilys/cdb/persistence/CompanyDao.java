@@ -38,7 +38,6 @@ public class CompanyDao {
   private static final String SQL_DELETE_COMPUTER = "DELETE FROM computer WHERE company_id = ?";
   
   public ArrayList<Company> list() throws DaoException {
-    LOGGER.info("Start companies listing...");
     ArrayList<Company> companies = new ArrayList<Company>();
     ResultSet resultSet = null;
     
@@ -62,7 +61,7 @@ public class CompanyDao {
     if (companies.isEmpty()) {
       LOGGER.warn("Companies list is empty.");
     } else {
-      LOGGER.info("Comapnies list created.");
+      LOGGER.info("Companies list created (size : " + companies.size() + ").");
     }
 
     return companies;
@@ -137,7 +136,7 @@ public class CompanyDao {
 	      
 	      connection.commit();
 	    } catch (SQLException e) {
-	      throw new DaoException("SQL error during deletion.", e);
+	      throw new DaoException("SQL error during company or computers deletion.", e);
 	    }
 
 	    LOGGER.info("Company " + company.getId() + " deleted.");

@@ -87,3 +87,4 @@ cdb.log
 
 # End of https://www.gitignore.io/api/eclipse
 /target/
+/bin/

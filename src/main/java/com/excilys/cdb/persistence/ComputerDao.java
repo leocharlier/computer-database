@@ -48,7 +48,6 @@ public class ComputerDao {
 	  "SELECT cpt.id, cpt.name, cpt.introduced, cpt.discontinued, cpt.company_id FROM computer cpt LEFT OUTER JOIN company cpn ON cpt.company_id=cpn.id WHERE cpt.name LIKE ? OR cpn.name LIKE ?";
 
   public ArrayList<Computer> list() throws DaoException {
-    LOGGER.info("Start computers listing...");
     ResultSet resultSet = null;
     ArrayList<Computer> computers = new ArrayList<Computer>();
  
@@ -71,7 +70,7 @@ public class ComputerDao {
     if (computers.isEmpty()) {
       LOGGER.warn("Computers list is empty.");
     } else {
-      LOGGER.info("Computers list created.");
+      LOGGER.info("Computers list created (size : " + computers.size() + ").");
     }
 
     return computers;
@@ -141,8 +140,6 @@ public class ComputerDao {
   }
 
   public void update(Computer computerUpdated) throws DaoException, ComputerNullNameException, DiscontinuedButNoIntroducedException, DiscontinuedBeforeIntroducedException {
-    LOGGER.info("Start computer " + computerUpdated.getId() + " update...");
-
     try (
          Connection connection = dataSource.getConnection();
          PreparedStatement preparedStatement = 
@@ -185,7 +182,6 @@ public class ComputerDao {
   }
   
   public ArrayList<Computer> search(String search) throws DaoException {
-	LOGGER.info("Start research for '" + search + "'...");
     ResultSet resultSet = null;
     ArrayList<Computer> computers = new ArrayList<Computer>();
  
@@ -208,7 +204,7 @@ public class ComputerDao {
     if (computers.isEmpty()) {
       LOGGER.warn("No computer found for '" + search + "' search.");
     } else {
-      LOGGER.info(computers.size() + " computer(s) found.");
+      LOGGER.info(computers.size() + " computer(s) found for '" + search + "' search.");
     }
 
     return computers;
