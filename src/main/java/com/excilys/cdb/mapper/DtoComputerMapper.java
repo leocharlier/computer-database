@@ -4,19 +4,25 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Date;
 
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
+
 import com.excilys.cdb.dto.ComputerDto;
 import com.excilys.cdb.exception.DtoDateParseException;
 import com.excilys.cdb.model.Company;
 import com.excilys.cdb.model.Computer;
 import com.excilys.cdb.persistence.CompanyDao;
-import com.excilys.cdb.persistence.DaoFactory;
 
+@Lazy
+@Component
 public class DtoComputerMapper {
+	private CompanyDao companyDao;
+	
+	public DtoComputerMapper(CompanyDao cd) {
+		companyDao = cd;
+	}
 	
 	public Computer map(ComputerDto dtoComputer) {
-		DaoFactory daoFactory = DaoFactory.getInstance();
-	    CompanyDao companyDao = daoFactory.getCompanyDao();
-	    
 		Computer computer = new Computer();
 		
 		computer.setId(dtoComputer.getId());

@@ -3,16 +3,20 @@ package com.excilys.cdb.service;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import com.excilys.cdb.persistence.CompanyDao;
-import com.excilys.cdb.persistence.DaoFactory;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+
 import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.model.Company;
+import com.excilys.cdb.persistence.CompanyDao;
 
+@Lazy
+@Service
 public class CompanyService {
 	private CompanyDao companyDao;
 	
-	public CompanyService(DaoFactory daoFactory) {
-		this.companyDao = daoFactory.getCompanyDao();
+	public CompanyService(CompanyDao cd) {
+		companyDao = cd;
 	}
 	
 	public ArrayList<Company> listService() throws DaoException {

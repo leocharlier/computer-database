@@ -6,9 +6,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
+
 import com.excilys.cdb.dto.ComputerDto;
 import com.excilys.cdb.model.Computer;
 
+@Lazy
+@Component
 public class ComputerDtoMapper {
 	public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 	
