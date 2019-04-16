@@ -22991,3 +22991,350 @@ java.net.URLClassLoader@1c20c684
 2019-04-16 11:20:43 INFO  HikariDataSource:110 - HikariPool-2 - Starting...
 2019-04-16 11:20:43 INFO  HikariDataSource:123 - HikariPool-2 - Start completed.
 2019-04-16 11:20:52 INFO  ComputerDao:77 - Computer 'Test 2' created.
+2019-04-16 11:35:54 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 11:35:55 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 907 ms
+2019-04-16 11:38:31 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 11:38:32 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 1008 ms
+2019-04-16 11:38:33 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 11:38:34 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 11:38:40 INFO  ComputerDao:115 - 0 computers found for search 'tes.
+2019-04-16 11:38:45 INFO  ComputerDao:115 - 0 computers found for search 'a.
+2019-04-16 11:38:52 INFO  ComputerDao:54 - Computer 381 found.
+2019-04-16 11:41:07 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 11:41:07 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 11:41:09 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 11:41:10 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 1011 ms
+2019-04-16 11:41:21 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 11:41:23 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 1245 ms
+2019-04-16 11:41:23 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 11:41:24 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 11:41:32 INFO  ComputerDao:115 - 1 computers found for search 'test'.
+2019-04-16 11:41:35 INFO  ComputerDao:115 - 0 computers found for search 'tes'.
+2019-04-16 11:44:28 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 11:44:28 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 11:44:29 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 11:44:31 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 1207 ms
+2019-04-16 11:44:35 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 11:44:36 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 1023 ms
+2019-04-16 11:44:36 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 11:44:37 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 11:44:40 INFO  ComputerDao:115 - 6 computers found for search 'tes'.
+2019-04-16 11:44:54 INFO  ComputerDao:54 - Computer 575 found.
+2019-04-16 11:44:54 INFO  ComputerDao:106 - Computer 575 deleted.
+2019-04-16 11:44:54 INFO  ComputerDao:54 - Computer 576 found.
+2019-04-16 11:44:54 INFO  ComputerDao:106 - Computer 576 deleted.
+2019-04-16 11:45:05 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 11:45:05 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 11:49:55 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 11:49:56 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 1327 ms
+2019-04-16 11:51:00 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 11:51:01 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 1514 ms
+2019-04-16 11:51:04 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 11:51:04 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 11:52:55 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 11:52:55 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 11:52:56 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 11:52:57 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 1257 ms
+2019-04-16 11:53:09 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 11:53:10 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 1093 ms
+2019-04-16 12:03:26 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 12:03:27 WARN  AnnotationConfigWebApplicationContext:557 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'cliUI' defined in file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/ui/CliUI.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'companyDao' defined in file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/persistence/CompanyDao.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'springConfiguration': Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.excilys.cdb.config.SpringConfiguration$$EnhancerBySpringCGLIB$$ebd0c8f5]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problem: 
+	WebMvcConfigurer cannot be resolved to a type
+
+2019-04-16 12:03:27 ERROR ContextLoader:312 - Context initialization failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'cliUI' defined in file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/ui/CliUI.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'companyDao' defined in file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/persistence/CompanyDao.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'springConfiguration': Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.excilys.cdb.config.SpringConfiguration$$EnhancerBySpringCGLIB$$ebd0c8f5]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problem: 
+	WebMvcConfigurer cannot be resolved to a type
+
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:769)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:218)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1187)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:849)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:877)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:549)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:400)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:291)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:103)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4817)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5283)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.StandardContext.reload(StandardContext.java:3864)
+	at org.apache.catalina.loader.WebappLoader.backgroundProcess(WebappLoader.java:291)
+	at org.apache.catalina.core.StandardContext.backgroundProcess(StandardContext.java:5655)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1392)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1396)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1396)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1364)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'companyDao' defined in file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/persistence/CompanyDao.class]: Unsatisfied dependency expressed through constructor parameter 1; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'springConfiguration': Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.excilys.cdb.config.SpringConfiguration$$EnhancerBySpringCGLIB$$ebd0c8f5]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problem: 
+	WebMvcConfigurer cannot be resolved to a type
+
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:769)
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:218)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1341)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1187)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:277)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1247)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1167)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:857)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:760)
+	... 26 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'springConfiguration': Instantiation of bean failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.excilys.cdb.config.SpringConfiguration$$EnhancerBySpringCGLIB$$ebd0c8f5]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problem: 
+	WebMvcConfigurer cannot be resolved to a type
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1303)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1197)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:392)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1321)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1160)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:515)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:277)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1247)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1167)
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:857)
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:760)
+	... 40 more
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.excilys.cdb.config.SpringConfiguration$$EnhancerBySpringCGLIB$$ebd0c8f5]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problem: 
+	WebMvcConfigurer cannot be resolved to a type
+
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:184)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:87)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1295)
+	... 61 more
+Caused by: java.lang.Error: Unresolved compilation problem: 
+	WebMvcConfigurer cannot be resolved to a type
+
+	at com.excilys.cdb.config.SpringConfiguration.<init>(SpringConfiguration.java:24)
+	at com.excilys.cdb.config.SpringConfiguration$$EnhancerBySpringCGLIB$$ebd0c8f5.<init>(<generated>)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:172)
+	... 63 more
+2019-04-16 12:28:47 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 12:28:48 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 890 ms
+2019-04-16 14:12:56 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 14:12:56 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 294 ms
+2019-04-16 14:55:38 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 14:55:38 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 10 ms
+2019-04-16 14:58:21 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 14:58:21 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 1 ms
+2019-04-16 14:58:21 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 14:58:21 INFO  DispatcherServlet:546 - Completed initialization in 279 ms
+2019-04-16 14:58:22 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 14:58:23 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 14:58:23 WARN  PageNotFound:1248 - No mapping for GET /computer-data-base/500
+2019-04-16 15:01:38 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 15:01:38 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 15:01:40 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:01:40 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:01:40 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:01:40 INFO  DispatcherServlet:546 - Completed initialization in 236 ms
+2019-04-16 15:02:31 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:02:31 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:02:31 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:02:31 INFO  DispatcherServlet:546 - Completed initialization in 272 ms
+2019-04-16 15:02:32 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 15:02:32 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 15:02:33 WARN  PageNotFound:1248 - No mapping for GET /computer-data-base/500
+2019-04-16 15:03:20 WARN  PageNotFound:1248 - No mapping for GET /computer-data-base/500
+2019-04-16 15:03:23 WARN  PageNotFound:1248 - No mapping for GET /computer-data-base/dashb
+2019-04-16 15:03:23 WARN  PageNotFound:1248 - No mapping for GET /computer-data-base/404
+2019-04-16 15:05:26 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 15:05:26 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 15:05:29 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:05:29 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:05:29 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:05:29 INFO  DispatcherServlet:546 - Completed initialization in 418 ms
+2019-04-16 15:05:34 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:05:34 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:05:34 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:05:35 INFO  DispatcherServlet:546 - Completed initialization in 263 ms
+2019-04-16 15:05:36 WARN  PageNotFound:1248 - No mapping for GET /computer-data-base/500
+2019-04-16 15:06:18 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:06:18 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 1 ms
+2019-04-16 15:06:18 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:06:18 INFO  DispatcherServlet:546 - Completed initialization in 268 ms
+2019-04-16 15:06:39 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:06:39 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:06:39 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:06:39 INFO  DispatcherServlet:546 - Completed initialization in 12 ms
+2019-04-16 15:06:56 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:06:56 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:06:56 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:06:56 INFO  DispatcherServlet:546 - Completed initialization in 17 ms
+2019-04-16 15:06:57 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 15:06:57 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 15:13:05 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 15:13:05 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 15:15:37 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:15:37 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:15:37 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:15:37 INFO  DispatcherServlet:546 - Completed initialization in 10 ms
+2019-04-16 15:15:38 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 15:15:39 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 15:15:49 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 15:15:49 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 15:15:54 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:15:54 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:15:54 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:15:54 INFO  DispatcherServlet:546 - Completed initialization in 12 ms
+2019-04-16 15:15:55 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 15:15:56 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 15:17:09 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 15:17:09 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 15:28:48 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:28:48 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:28:48 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:28:48 INFO  DispatcherServlet:546 - Completed initialization in 9 ms
+2019-04-16 15:28:49 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 15:28:49 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 15:28:52 WARN  PageNotFound:1248 - No mapping for GET /computer-data-base/azedfa
+2019-04-16 15:29:18 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 15:29:18 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 15:29:23 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:29:23 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:29:23 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:29:23 INFO  DispatcherServlet:546 - Completed initialization in 18 ms
+2019-04-16 15:29:24 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 15:29:25 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 15:29:28 WARN  PageNotFound:1248 - No mapping for GET /computer-data-base/qsdfqsd
+2019-04-16 15:29:53 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 15:29:53 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 15:29:58 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:29:58 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:29:58 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:29:58 INFO  DispatcherServlet:546 - Completed initialization in 13 ms
+2019-04-16 15:29:59 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 15:29:59 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 15:30:02 WARN  PageNotFound:1248 - No mapping for GET /computer-data-base/qsdfqsdf
+2019-04-16 15:30:24 INFO  ComputerDao:115 - 3 computers found for search 'test'.
+2019-04-16 15:31:19 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 15:31:19 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 15:39:25 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:39:25 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:39:25 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:39:25 INFO  DispatcherServlet:546 - Completed initialization in 10 ms
+2019-04-16 15:39:26 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 15:39:26 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 15:39:31 WARN  PageNotFound:1248 - No mapping for GET /computer-data-base/addComputer
+2019-04-16 15:39:45 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 15:39:46 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 15:39:49 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:39:49 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:39:49 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:39:49 INFO  DispatcherServlet:546 - Completed initialization in 11 ms
+2019-04-16 15:40:00 WARN  AnnotationConfigWebApplicationContext:557 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to read candidate component class: file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/service/CompanyService.class]; nested exception is java.nio.channels.ClosedByInterruptException
+2019-04-16 15:40:05 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:40:05 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:40:05 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:40:05 INFO  DispatcherServlet:546 - Completed initialization in 10 ms
+2019-04-16 15:40:06 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 15:40:07 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 15:41:07 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 15:41:07 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 15:41:10 WARN  AnnotationConfigWebApplicationContext:557 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/web/servlet/config/annotation/DelegatingWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'computerController' method 
+public java.lang.String com.excilys.cdb.controller.ComputerController.getEditComputer(java.util.Map<java.lang.String, java.lang.String>,org.springframework.ui.Model)
+to {GET /addComputer}: There is already 'computerController' bean method
+public java.lang.String com.excilys.cdb.controller.ComputerController.postAddComputer(java.util.Map<java.lang.String, java.lang.String>,org.springframework.ui.Model) mapped.
+2019-04-16 15:46:36 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:46:36 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:46:36 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:46:36 INFO  DispatcherServlet:546 - Completed initialization in 10 ms
+2019-04-16 15:46:37 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 15:46:37 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 15:46:49 INFO  ComputerDao:77 - Computer 'Test 1' created.
+2019-04-16 15:46:59 INFO  ComputerDao:115 - 5 computers found for search 'tes'.
+2019-04-16 15:47:08 INFO  ComputerDao:54 - Computer 577 found.
+2019-04-16 15:47:08 INFO  ComputerDao:106 - Computer 577 deleted.
+2019-04-16 15:47:12 INFO  ComputerDao:115 - 3 computers found for search 'test'.
+2019-04-16 15:49:11 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 15:49:11 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 15:49:13 WARN  AnnotationConfigWebApplicationContext:557 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'computerController' defined in file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/controller/ComputerController.class]: Unexpected exception during bean creation; nested exception is java.lang.IllegalStateException: Method [getEditComputer] was discovered in the .class file but cannot be resolved in the class object
+2019-04-16 15:54:19 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:54:19 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:54:19 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:54:19 INFO  DispatcherServlet:546 - Completed initialization in 13 ms
+2019-04-16 15:54:20 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 15:54:20 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 15:54:27 INFO  ComputerDao:54 - Computer 46 found.
+2019-04-16 15:54:32 INFO  ComputerDao:54 - Computer 152 found.
+2019-04-16 15:54:35 INFO  ComputerDao:54 - Computer 57 found.
+2019-04-16 15:55:31 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 15:55:31 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 15:55:34 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:55:34 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:55:34 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:55:34 INFO  DispatcherServlet:546 - Completed initialization in 9 ms
+2019-04-16 15:56:28 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:56:28 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:56:28 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:56:28 INFO  DispatcherServlet:546 - Completed initialization in 10 ms
+2019-04-16 15:59:46 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 15:59:46 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 15:59:46 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 15:59:46 INFO  DispatcherServlet:546 - Completed initialization in 11 ms
+2019-04-16 15:59:47 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 15:59:47 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 15:59:56 INFO  ComputerDao:77 - Computer 'Test 1' created.
+2019-04-16 16:00:02 INFO  ComputerDao:115 - 5 computers found for search 'tes'.
+2019-04-16 16:00:04 INFO  ComputerDao:54 - Computer 578 found.
+2019-04-16 16:00:10 INFO  ComputerDao:96 - Computer 578 updated.
+2019-04-16 16:00:10 INFO  ComputerDao:54 - Computer 578 found.
+2019-04-16 16:00:16 INFO  ComputerDao:115 - 5 computers found for search 'tes'.
+2019-04-16 16:01:18 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 16:01:18 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 16:01:27 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 16:01:27 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 16:01:27 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 16:01:27 INFO  DispatcherServlet:546 - Completed initialization in 23 ms
+2019-04-16 16:01:28 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 16:01:28 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 16:03:30 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 16:03:30 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 16:09:49 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 16:09:49 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 16:09:49 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 16:09:49 INFO  DispatcherServlet:546 - Completed initialization in 12 ms
+2019-04-16 16:09:50 INFO  HikariDataSource:110 - HikariPool-1 - Starting...
+2019-04-16 16:09:50 INFO  HikariDataSource:123 - HikariPool-1 - Start completed.
+2019-04-16 16:09:53 WARN  PageNotFound:1248 - No mapping for GET /computer-data-base/qsdfqsdf
+2019-04-16 16:15:18 INFO  HikariDataSource:350 - HikariPool-1 - Shutdown initiated...
+2019-04-16 16:15:18 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 16:15:20 WARN  AnnotationConfigWebApplicationContext:557 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to read candidate component class: file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/service/CompanyService.class]; nested exception is java.nio.channels.ClosedByInterruptException
+2019-04-16 16:15:24 WARN  AnnotationConfigWebApplicationContext:557 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'computerController' defined in file [/home/excilys/eclipse/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/computer-data-base/WEB-INF/classes/com/excilys/cdb/controller/ComputerController.class]: Bean instantiation via constructor failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.excilys.cdb.controller.ComputerController]: Constructor threw exception; nested exception is java.lang.Error: Unresolved compilation problem: 
+	Syntax error, insert "}" to complete MemberValue
+
+2019-04-16 16:15:39 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 16:15:39 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 16:15:39 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 16:15:39 INFO  DispatcherServlet:546 - Completed initialization in 23 ms
+2019-04-16 16:15:40 WARN  DefaultHandlerExceptionResolver:197 - Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported]
+2019-04-16 16:16:44 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 16:16:44 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 0 ms
+2019-04-16 16:16:44 INFO  DispatcherServlet:524 - Initializing Servlet 'app'
+2019-04-16 16:16:44 INFO  DispatcherServlet:546 - Completed initialization in 11 ms
