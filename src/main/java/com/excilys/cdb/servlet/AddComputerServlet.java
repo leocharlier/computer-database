@@ -54,8 +54,6 @@ public class AddComputerServlet extends HttpServlet {
 
 		ComputerDto dtoComputer = new ComputerDto(computerName, introduced, discontinued, companyName);
 		Computer computer = dtoComputerMapper.map(dtoComputer);
-		System.out.println(computer.getIntroduced());
-		System.out.println(introduced);
 
 		try {
 			this.computerService.createService(computer);
