@@ -40,9 +40,9 @@ public class SpringConfiguration {
 	}
 	
 	@Bean
-	  public JdbcTemplate jdbcTemplate() {
-	    JdbcTemplate jdbc = new JdbcTemplate();
-	    jdbc.setDataSource(dataSource());
-	    return jdbc;
+    public JdbcTemplate jdbcTemplate() {
+		JdbcTemplate jdbc = new JdbcTemplate();
+		jdbc.setDataSource(dataSource());
+		return jdbc;
 	}
 }

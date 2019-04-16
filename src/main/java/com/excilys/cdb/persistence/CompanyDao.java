@@ -34,8 +34,11 @@ public class CompanyDao {
   private static final String SQL_DELETE_COMPUTER = "DELETE FROM computer WHERE company_id = ?";
   
   public ArrayList<Company> list() {
-    ArrayList<Company> companies = (ArrayList<Company>) jdbcTemplate.query(SQL_SELECT_ALL, companyMapper);
-    return companies;
+	try {
+		return (ArrayList<Company>) jdbcTemplate.query(SQL_SELECT_ALL, companyMapper);
+	} catch(DataAccessException e) {
+		throw new DaoException("Failed to list the companies.", e.getCause());
+	}
   }
 
   public Optional<Company> findById(int pid) {
@@ -44,6 +47,8 @@ public class CompanyDao {
 		company = jdbcTemplate.queryForObject(SQL_SELECT_BY_ID, new Object[]{pid}, companyMapper);
 	} catch(EmptyResultDataAccessException e){
 		company = null;
+	} catch(DataAccessException e) {
+		throw new DaoException("Failed to find the company " + pid + ".", e.getCause());
 	}
     
     return Optional.ofNullable(company);
@@ -53,8 +58,10 @@ public class CompanyDao {
     Company company;
 	try {
 		company = jdbcTemplate.queryForObject(SQL_SELECT_BY_NAME, new Object[]{pname}, companyMapper);
-	} catch(EmptyResultDataAccessException e){
+	} catch(EmptyResultDataAccessException e) {
 		company = null;
+	} catch(DataAccessException e) {
+		throw new DaoException("Failed to find the company '" + pname + "'.", e.getCause());
 	}
     
     return Optional.ofNullable(company);
@@ -67,12 +74,13 @@ public class CompanyDao {
 	  LOGGER.info(computersDeleted + " computers deleted.");
 	  int companyDeleted = jdbcTemplate.update(SQL_DELETE, company.getId());
 	  if(companyDeleted < 1) {
+		  LOGGER.error("Failed to delete the company " + company.getId() + ".");
 		  throw new DaoException("Failed to delete the company " + company.getId() + ". Cause : None line affected in database.");
 	  }
 	  LOGGER.info("Company " + company.getId() + " deleted.");
 	} catch(DataAccessException e) {
 		LOGGER.error("Failed to delete the company " + company.getId() + ".");
-		throw new DaoException("Failed to delete the company " + company.getId() + ". Cause : " + e.getMessage());
+		throw new DaoException("Failed to delete the company " + company.getId() + ".", e.getCause());
 	}
   }
 }
