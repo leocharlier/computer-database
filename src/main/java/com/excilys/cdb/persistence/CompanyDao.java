@@ -1,19 +1,15 @@
 package com.excilys.cdb.persistence;
 
-import static com.excilys.cdb.persistence.DaoUtility.preparedStatementInitialization;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import javax.sql.DataSource;
-
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.mapper.CompanyDaoMapper;
@@ -23,11 +19,11 @@ import com.excilys.cdb.model.Company;
 @Repository
 public class CompanyDao {
   static final Logger LOGGER = Logger.getLogger(CompanyDao.class);
-  private DataSource dataSource;
   private CompanyDaoMapper companyMapper;
+  private JdbcTemplate jdbcTemplate;
   
-  public CompanyDao(DataSource ds, CompanyDaoMapper cm) {
-	  dataSource = ds;
+  public CompanyDao(CompanyDaoMapper cm, JdbcTemplate jdbcT) {
+	  jdbcTemplate = jdbcT;
 	  companyMapper = cm;
   }
   
@@ -37,109 +33,54 @@ public class CompanyDao {
   private static final String SQL_DELETE          = "DELETE FROM company WHERE id = ?";
   private static final String SQL_DELETE_COMPUTER = "DELETE FROM computer WHERE company_id = ?";
   
-  public ArrayList<Company> list() throws DaoException {
-    ArrayList<Company> companies = new ArrayList<Company>();
-    ResultSet resultSet = null;
+  public ArrayList<Company> list() {
+	try {
+		return (ArrayList<Company>) jdbcTemplate.query(SQL_SELECT_ALL, companyMapper);
+	} catch(DataAccessException e) {
+		throw new DaoException("Failed to list the companies.", e.getCause());
+	}
+  }
+
+  public Optional<Company> findById(int pid) {
+	Company company;
+	try {
+		company = jdbcTemplate.queryForObject(SQL_SELECT_BY_ID, new Object[]{pid}, companyMapper);
+	} catch(EmptyResultDataAccessException e){
+		company = null;
+	} catch(DataAccessException e) {
+		throw new DaoException("Failed to find the company " + pid + ".", e.getCause());
+	}
     
-    try (
-        Connection connection = dataSource.getConnection();
-        PreparedStatement preparedStatement = 
-            preparedStatementInitialization(connection, SQL_SELECT_ALL, false)
-        ) {
-      connection.setAutoCommit(false);
-      resultSet = preparedStatement.executeQuery();
-
-      while (resultSet.next()) {
-        companies.add(this.companyMapper.map(resultSet));
-      }
-      
-      connection.commit();
-    } catch (SQLException e) {
-      throw new DaoException(e);
-    }
-
-    if (companies.isEmpty()) {
-      LOGGER.warn("Companies list is empty.");
-    } else {
-      LOGGER.info("Companies list created (size : " + companies.size() + ").");
-    }
-
-    return companies;
-  }
-
-  public Optional<Company> findById(int pid) throws DaoException {
-    ResultSet resultSet;
-    Company company = null;
-
-    try (
-        Connection connection = dataSource.getConnection();
-        PreparedStatement preparedStatement =
-            preparedStatementInitialization(connection, SQL_SELECT_BY_ID, false, pid)
-    ) {
-      connection.setAutoCommit(false);
-      resultSet = preparedStatement.executeQuery();
-
-      if (resultSet.next()) {
-        company = this.companyMapper.map(resultSet);
-      }
-      
-      connection.commit();
-    } catch (SQLException e) {
-      throw new DaoException(e);
-    }
-
     return Optional.ofNullable(company);
   }
   
-  public Optional<Company> findByName(String pname) throws DaoException {
-    ResultSet resultSet;
-    Company company = null;
-
-    try (
-        Connection connection = dataSource.getConnection();
-        PreparedStatement preparedStatement =
-            preparedStatementInitialization(connection, SQL_SELECT_BY_NAME, false, pname)
-    ) {
-      connection.setAutoCommit(false);
-      resultSet = preparedStatement.executeQuery();
-
-      if (resultSet.next()) {
-        company = this.companyMapper.map(resultSet);
-      }
-      
-      connection.commit();
-    } catch (SQLException e) {
-      throw new DaoException(e);
-    }
-
+  public Optional<Company> findByName(String pname) {
+    Company company;
+	try {
+		company = jdbcTemplate.queryForObject(SQL_SELECT_BY_NAME, new Object[]{pname}, companyMapper);
+	} catch(EmptyResultDataAccessException e) {
+		company = null;
+	} catch(DataAccessException e) {
+		throw new DaoException("Failed to find the company '" + pname + "'.", e.getCause());
+	}
+    
     return Optional.ofNullable(company);
   }
   
+  @Transactional(rollbackFor=DaoException.class)
   public void delete(Company company) throws DaoException {
-	    try (
-	         Connection connection = dataSource.getConnection();
-	         PreparedStatement preparedStatement = preparedStatementInitialization(connection, SQL_DELETE, false, company.getId());
-	    	 PreparedStatement preparedStatementComputer = preparedStatementInitialization(connection, SQL_DELETE_COMPUTER, false, company.getId());
-	    ) {
-	      connection.setAutoCommit(false);
-    	  int statut = preparedStatementComputer.executeUpdate();
-	      if (statut == 0) {
-	        throw new DaoException("Failed to delete the computer(s) related to the company in database, no line deleted in the computer table.");
-	      } else {
-	    	  LOGGER.info(statut + " computers deleted.");
-	      }
-	      
-	      statut = preparedStatement.executeUpdate();
-	      if (statut == 0) {
-	        throw new DaoException("Failed to delete the company in database, no line deleted in the company table.");
-	      }
-	      
-	      connection.commit();
-	    } catch (SQLException e) {
-	      throw new DaoException("SQL error during company or computers deletion.", e);
-	    }
-
-	    LOGGER.info("Company " + company.getId() + " deleted.");
+	try {
+	  int computersDeleted = jdbcTemplate.update(SQL_DELETE_COMPUTER, company.getId());
+	  LOGGER.info(computersDeleted + " computers deleted.");
+	  int companyDeleted = jdbcTemplate.update(SQL_DELETE, company.getId());
+	  if(companyDeleted < 1) {
+		  LOGGER.error("Failed to delete the company " + company.getId() + ".");
+		  throw new DaoException("Failed to delete the company " + company.getId() + ". Cause : None line affected in database.");
 	  }
-
+	  LOGGER.info("Company " + company.getId() + " deleted.");
+	} catch(DataAccessException e) {
+		LOGGER.error("Failed to delete the company " + company.getId() + ".");
+		throw new DaoException("Failed to delete the company " + company.getId() + ".", e.getCause());
+	}
+  }
 }

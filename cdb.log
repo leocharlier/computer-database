@@ -22986,3 +22986,8 @@ java.net.URLClassLoader@1c20c684
 2019-04-12 10:49:40 DEBUG PoolBase:129 - HikariPool-1 - Closing connection com.mysql.cj.jdbc.ConnectionImpl@6484f652: (connection evicted)
 2019-04-12 10:49:40 DEBUG HikariPool:411 - HikariPool-1 - After shutdown stats (total=0, active=0, idle=0, waiting=0)
 2019-04-12 10:49:40 INFO  HikariDataSource:352 - HikariPool-1 - Shutdown completed.
+2019-04-16 11:20:38 INFO  ContextLoader:270 - Root WebApplicationContext: initialization started
+2019-04-16 11:20:39 INFO  ContextLoader:306 - Root WebApplicationContext initialized in 1135 ms
+2019-04-16 11:20:43 INFO  HikariDataSource:110 - HikariPool-2 - Starting...
+2019-04-16 11:20:43 INFO  HikariDataSource:123 - HikariPool-2 - Start completed.
+2019-04-16 11:20:52 INFO  ComputerDao:77 - Computer 'Test 2' created.

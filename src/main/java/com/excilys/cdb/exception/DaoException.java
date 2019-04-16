@@ -7,17 +7,17 @@ public class DaoException extends RuntimeException {
    
   public DaoException(String message) {
     super(message);
-    LOGGER.warn(message);
+    LOGGER.error(message);
   }
 
   public DaoException(String message, Throwable cause) {
     super(message, cause);
-    LOGGER.warn(cause.toString() + " : " + message);
+    LOGGER.error(cause.toString() + " : " + message);
   }
 
   public DaoException(Throwable cause) {
     super(cause);
-    LOGGER.warn(cause.toString());
+    LOGGER.error(cause.toString());
   }
     
 }

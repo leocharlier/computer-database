@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @Lazy
 @Configuration
@@ -28,13 +29,20 @@ public class SpringConfiguration {
 	@Value("${password}")
 	String password;
 	
-	@Bean
-	public DataSource getDataSource() {
+	@Bean(destroyMethod="close")
+	public DataSource dataSource() {
 		return DataSourceBuilder.create()
 								.username(username)
 								.password(password)
 								.url(jdbcUrl)
 								.driverClassName(driverClassName)
 								.build();
+	}
+	
+	@Bean
+    public JdbcTemplate jdbcTemplate() {
+		JdbcTemplate jdbc = new JdbcTemplate();
+		jdbc.setDataSource(dataSource());
+		return jdbc;
 	}
 }
