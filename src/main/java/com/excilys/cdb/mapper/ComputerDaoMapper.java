@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.context.annotation.Lazy;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.excilys.cdb.model.Computer;
@@ -11,7 +12,7 @@ import com.excilys.cdb.persistence.CompanyDao;
 
 @Lazy
 @Component
-public class ComputerDaoMapper {
+public class ComputerDaoMapper implements RowMapper<Computer>  {
   private CompanyDao companyDao;
   
   public ComputerDaoMapper(CompanyDao cd) {
@@ -30,4 +31,17 @@ public class ComputerDaoMapper {
     return computer;
   }
 
+  @Override
+  public Computer mapRow(ResultSet rs, int rowNum) throws SQLException {
+	  Computer computer = new Computer();
+
+	  computer.setId(rs.getInt("id"));
+	  computer.setName(rs.getString("name"));
+	  computer.setIntroduced(rs.getTimestamp("introduced"));
+	  computer.setDiscontinued(rs.getTimestamp("discontinued"));
+	  computer.setCompany(companyDao.findById(rs.getInt("company_id")).orElse(null));
+	    
+	  return computer;
+  }
+  
 }

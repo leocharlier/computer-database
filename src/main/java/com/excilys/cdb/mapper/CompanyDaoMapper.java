@@ -4,19 +4,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.context.annotation.Lazy;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import com.excilys.cdb.model.Company;
 
 @Lazy
 @Component
-public class CompanyDaoMapper {
+public class CompanyDaoMapper implements RowMapper<Company> {
 
-  public Company map(ResultSet resultSet) throws SQLException {
-    Company company = new Company();
-    company.setId(resultSet.getInt("id"));
-    company.setName(resultSet.getString("name"));
-    return company;
+  @Override
+  public Company mapRow(ResultSet rs, int rowNum) throws SQLException {
+	  Company company = new Company();
+	  company.setId(rs.getInt("id"));
+	  company.setName(rs.getString("name"));
+	  return company;
   }
 
 }

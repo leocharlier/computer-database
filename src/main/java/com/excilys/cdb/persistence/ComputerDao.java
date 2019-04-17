@@ -1,24 +1,16 @@
 package com.excilys.cdb.persistence;
 
-import static com.excilys.cdb.persistence.DaoUtility.preparedStatementInitialization;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import javax.sql.DataSource;
-
 import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.excilys.cdb.exception.ComputerNullNameException;
 import com.excilys.cdb.exception.DaoException;
-import com.excilys.cdb.exception.DiscontinuedBeforeIntroducedException;
-import com.excilys.cdb.exception.DiscontinuedButNoIntroducedException;
 import com.excilys.cdb.mapper.ComputerDaoMapper;
 import com.excilys.cdb.model.Computer;
 
@@ -26,11 +18,11 @@ import com.excilys.cdb.model.Computer;
 @Repository
 public class ComputerDao {
   static final Logger LOGGER = Logger.getLogger(ComputerDao.class);
-  private DataSource dataSource;
   private ComputerDaoMapper computerMapper;
+  private JdbcTemplate jdbcTemplate;
   
-  public ComputerDao(DataSource ds, ComputerDaoMapper cm) {
-	  dataSource = ds;
+  public ComputerDao(ComputerDaoMapper cm, JdbcTemplate jdbcT) {
+	  jdbcTemplate = jdbcT;
 	  computerMapper = cm;
   }
 
@@ -47,167 +39,84 @@ public class ComputerDao {
   private static final String SQL_SEARCH = 
 	  "SELECT cpt.id, cpt.name, cpt.introduced, cpt.discontinued, cpt.company_id FROM computer cpt LEFT OUTER JOIN company cpn ON cpt.company_id=cpn.id WHERE cpt.name LIKE ? OR cpn.name LIKE ?";
 
-  public ArrayList<Computer> list() throws DaoException {
-    ResultSet resultSet = null;
-    ArrayList<Computer> computers = new ArrayList<Computer>();
- 
-    try (
-        Connection connection = dataSource.getConnection();
-        PreparedStatement preparedStatement = preparedStatementInitialization(connection, SQL_SELECT_ALL, false)
-    ) {
-      connection.setAutoCommit(false);
-      resultSet = preparedStatement.executeQuery();
-      
-      while (resultSet.next()) {
-        computers.add(this.computerMapper.map(resultSet));
-      }
-      
-      connection.commit();
-    } catch (SQLException e) {
-      throw new DaoException(e);
-    }
-
-    if (computers.isEmpty()) {
-      LOGGER.warn("Computers list is empty.");
-    } else {
-      LOGGER.info("Computers list created (size : " + computers.size() + ").");
-    }
-
-    return computers;
+  public ArrayList<Computer> list() {
+	try {
+		return (ArrayList<Computer>) jdbcTemplate.query(SQL_SELECT_ALL, computerMapper);
+	} catch(DataAccessException e) {
+		throw new DaoException("Failed to list the computers.", e.getCause());
+	}
   }
 
-  public Optional<Computer> findById(int pid) throws DaoException {
-    ResultSet resultSet = null;
-    Optional<Computer> computer = Optional.empty();
-
-    try (
-        Connection connection = dataSource.getConnection();
-        PreparedStatement preparedStatement = preparedStatementInitialization(connection, SQL_SELECT_BY_ID, false, pid)
-    ) {
-      connection.setAutoCommit(false);
-      resultSet = preparedStatement.executeQuery();
-
-      if (resultSet.next()) {
-        computer = Optional.ofNullable(this.computerMapper.map(resultSet));
-      }
-      
-      connection.commit();
-    } catch (SQLException e) {
-      throw new DaoException(e);
-    }
+  public Optional<Computer> findById(int pid) {
+    Computer computer;
+	try {
+		computer = jdbcTemplate.queryForObject(SQL_SELECT_BY_ID, new Object[]{pid}, computerMapper);
+		LOGGER.info("Computer " + computer.getId() + " found.");
+	} catch(EmptyResultDataAccessException e){
+		computer = null;
+		LOGGER.warn("The computer " + pid + " doesn't exist.");
+	} catch(DataAccessException e) {
+		throw new DaoException("Failed to find the computer " + pid + ".", e.getCause());
+	}
     
-    if(computer.isPresent()) {
-    	LOGGER.info("Computer " + pid + " found.");
-    } else {
-    	LOGGER.warn("Computer " + pid + " not found.");
-    }
+    return Optional.ofNullable(computer);
+  }
+
+  public void create(Computer computer) throws DaoException {
+	try {
+		int affectedLines = jdbcTemplate.update(SQL_INSERT,
+				computer.getName(),
+				computer.getIntroduced().orElse(null),
+				computer.getDiscontinued().orElse(null),
+				computer.getCompany().map(someCompany -> someCompany.getId()).orElse(null));
+	    
+		if(affectedLines < 1) {
+			throw new DaoException("Failed to create the computer in database, no line added in the table.");
+		}
+		
+		LOGGER.info("Computer '" + computer.getName() + "' created.");
+	} catch(DataAccessException e) {
+		throw new DaoException("Failed to create the computer '" + computer.getName() + "'.", e.getCause());
+	}
+  }
+
+  public void update(Computer computerUpdated) throws DaoException {
+	try {
+		int affectedLines = jdbcTemplate.update(SQL_UPDATE,
+	    		computerUpdated.getName(),
+	    		computerUpdated.getIntroduced().orElse(null),
+	    		computerUpdated.getDiscontinued().orElse(null),
+	    		computerUpdated.getCompany().map(someCompany -> someCompany.getId()).orElse(null),
+	    		computerUpdated.getId());
+	    
+		if(affectedLines < 1) {
+			throw new DaoException("Failed to update the computer in database, no line updated in the table.");
+		}
+		
+		LOGGER.info("Computer " + computerUpdated.getId() + " updated.");
+	} catch(DataAccessException e) {
+		throw new DaoException("Failed to update the computer " + computerUpdated.getId() + ".", e.getCause());
+	}
     
-    return computer;
-  }
-
-  public void create(Computer computer) throws DaoException, ComputerNullNameException, DiscontinuedButNoIntroducedException, DiscontinuedBeforeIntroducedException {
-    LOGGER.info("Start computer insertion...");
-    ResultSet autoGeneratedValues = null;
-
-    try (
-        Connection connection = dataSource.getConnection();
-        PreparedStatement preparedStatement = 
-              preparedStatementInitialization(connection, SQL_INSERT, true, 
-                 computer.getName(), computer.getIntroduced().orElse(null),
-                 computer.getDiscontinued().orElse(null), computer.getCompany().map(someCompany -> someCompany.getId()).orElse(null))
-    ) {
-      connection.setAutoCommit(false);
-      int statut = preparedStatement.executeUpdate();
-
-      if (statut == 0) {
-        throw new DaoException("Failed to create the computer in database, no line added in the table.");
-      }
-
-      autoGeneratedValues = preparedStatement.getGeneratedKeys();
-
-      if (autoGeneratedValues.next()) {
-        computer.setId(autoGeneratedValues.getInt(1));
-      } else {
-        throw new DaoException("Failed to create the computer in database, no auto-generated ID returned.");
-      }
-      
-      connection.commit();
-    } catch (SQLException e) {
-      throw new DaoException("SQL error during creation.", e);
-    }
-
-    LOGGER.info("Computer " + computer.getId() + " created.");
-  }
-
-  public void update(Computer computerUpdated) throws DaoException, ComputerNullNameException, DiscontinuedButNoIntroducedException, DiscontinuedBeforeIntroducedException {
-    try (
-         Connection connection = dataSource.getConnection();
-         PreparedStatement preparedStatement = 
-             preparedStatementInitialization(connection, SQL_UPDATE, false,
-             computerUpdated.getName(), computerUpdated.getIntroduced().orElse(null),
-             computerUpdated.getDiscontinued().orElse(null), computerUpdated.getCompany().map(someCompany -> someCompany.getId()).orElse(null), computerUpdated.getId())
-    ) {
-      connection.setAutoCommit(false);
-      int statut = preparedStatement.executeUpdate();
-
-      if (statut == 0) {
-        throw new DaoException("Failed to update the computer in database, no line updated in the table.");
-      }
-      
-      connection.commit();
-    } catch (SQLException e) {
-      throw new DaoException("SQL error during update.", e);
-    }
-
-    LOGGER.info("Computer " + computerUpdated.getId() + " updated.");
   }
 
   public void delete(Computer computer) throws DaoException {
-    try (
-         Connection connection = dataSource.getConnection();
-         PreparedStatement preparedStatement = preparedStatementInitialization(connection, SQL_DELETE, false, computer.getId())
-    ) {
-      connection.setAutoCommit(false);
-      int statut = preparedStatement.executeUpdate();
-      if (statut == 0) {
-        throw new DaoException("Failed to delete the computer in database, no line deleted in the table.");
-      }
-      
-      connection.commit();
-    } catch (SQLException e) {
-      throw new DaoException("SQL error during deletion.", e);
-    }
-
-    LOGGER.info("Computer " + computer.getId() + " deleted.");
+	try {
+		jdbcTemplate.update(SQL_DELETE, computer.getId());
+		LOGGER.info("Computer " + computer.getId() + " deleted.");
+	} catch(DataAccessException e) {
+		throw new DaoException("Failed to delete the computer " + computer.getId() + ".", e.getCause());
+	}
   }
   
   public ArrayList<Computer> search(String search) throws DaoException {
-    ResultSet resultSet = null;
-    ArrayList<Computer> computers = new ArrayList<Computer>();
- 
-    try (
-        Connection connection = dataSource.getConnection();
-        PreparedStatement preparedStatement = preparedStatementInitialization(connection, SQL_SEARCH, false, "%" + search + "%", "%" + search + "%")
-    ) {
-      connection.setAutoCommit(false);
-      resultSet = preparedStatement.executeQuery();
-      
-      while (resultSet.next()) {
-        computers.add(this.computerMapper.map(resultSet));
-      }
-      
-      connection.commit();
-    } catch (SQLException e) {
-      throw new DaoException(e);
-    }
-
-    if (computers.isEmpty()) {
-      LOGGER.warn("No computer found for '" + search + "' search.");
-    } else {
-      LOGGER.info(computers.size() + " computer(s) found for '" + search + "' search.");
-    }
-
-    return computers;
+	try {
+		ArrayList<Computer> computers =  (ArrayList<Computer>) jdbcTemplate.query(SQL_SEARCH, new Object[] {"%"+search+"%", "%"+search+"%"}, computerMapper);
+		LOGGER.info(computers.size() + " computers found for search '" + search + "'.");
+		return computers;
+	} catch(DataAccessException e) {
+		throw new DaoException("Failed to create computers list for search '" + search + "'.", e.getCause());
+	}
   }
 
   public Integer getCompanyId(Computer computer) {

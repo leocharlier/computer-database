@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.excilys.cdb.config.SpringConfiguration;
+import com.excilys.cdb.config.SpringJdbcConfiguration;
 import com.excilys.cdb.exception.ComputerNullNameException;
 import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.exception.DiscontinuedBeforeIntroducedException;
@@ -35,7 +35,7 @@ class ComputerServiceTest {
   
   @BeforeAll
   public static void setUp() {
-	AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+	AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringJdbcConfiguration.class);
   }
 
   @Test

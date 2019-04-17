@@ -7,11 +7,11 @@ public class DtoDateParseException extends RuntimeException {
    
   public DtoDateParseException(String message) {
     super(message);
-    LOGGER.warn(message);
+    LOGGER.error(message);
   }
 
   public DtoDateParseException(String message, Throwable cause) {
     super(message, cause);
-    LOGGER.warn(cause.toString() + " : " + message);
+    LOGGER.error(cause.toString() + " : " + message);
   }
 }

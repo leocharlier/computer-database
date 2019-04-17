@@ -9,6 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Lazy
 @Configuration
@@ -17,8 +19,10 @@ import org.springframework.context.annotation.PropertySource;
 				"com.excilys.cdb.persistence",
 				"com.excilys.cdb.mapper",
 				"com.excilys.cdb.ui",
-				"com.excilys.cdb.servicetest"})
-public class SpringConfiguration {
+				"com.excilys.cdb.controller",
+				"com.excilys.cdb.config",
+				"com.excilys.cdb.validator"})
+public class SpringJdbcConfiguration implements WebMvcConfigurer {
 	@Value("${driverClassName}")
 	String driverClassName;
 	@Value("${jdbcUrl}")
@@ -29,12 +33,19 @@ public class SpringConfiguration {
 	String password;
 	
 	@Bean
-	public DataSource getDataSource() {
+	public DataSource dataSource() {
 		return DataSourceBuilder.create()
 								.username(username)
 								.password(password)
 								.url(jdbcUrl)
 								.driverClassName(driverClassName)
 								.build();
+	}
+	
+	@Bean
+    public JdbcTemplate jdbcTemplate() {
+		JdbcTemplate jdbc = new JdbcTemplate();
+		jdbc.setDataSource(dataSource());
+		return jdbc;
 	}
 }
