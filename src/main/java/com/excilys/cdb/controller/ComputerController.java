@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -32,12 +33,6 @@ public class ComputerController {
 	private static final String NOT_FOUND_VIEW = "404";
 	
 	private static final int DEFAULT_PAGE_SIZE   = 10;
-	
-	private static final String ID_FIELD           = "id";
-	private static final String NAME_FIELD         = "computerName";
-	private static final String INTRODUCED_FIELD   = "introduced";
-	private static final String DISCONTINUED_FIELD = "discontinued";
-	private static final String COMPANY_FIELD      = "companyName";
 	
 	private ComputerService computerService;
 	private CompanyService companyService;
@@ -144,7 +139,7 @@ public class ComputerController {
 	}
 	
 	@PostMapping({"/", "/dashboard"})
-	public String postDeleteComputers(@RequestParam(required = false) Map<String, String> paths, Model model) {
+	public String postDeleteComputers(@RequestParam(required = true) Map<String, String> paths, Model model) {
 		String[] computersIdToDelete = paths.get("selection").split("\\,");
 		
 		for(String computerId : computersIdToDelete) {
@@ -154,11 +149,11 @@ public class ComputerController {
 					computerService.deleteService(computerToDelete.get());
 				} catch(DaoException e) {
 					model.addAttribute("errorMessage", "An <strong>SQL error</strong> has occured during the deletion...");
-					return get500(paths, model);
+					return get500(model);
 				}
 			} else {
 				model.addAttribute("errorMessage", "Sorry, the computer <strong>" + computerId + "</strong> doesn't exist.");
-				return get404(paths, model);
+				return get404(model);
 			}
 		}
 		
@@ -166,99 +161,86 @@ public class ComputerController {
 	}
 	
 	@GetMapping("/addComputer")
-	public String getAddComputer(@RequestParam(required = false) Map<String, String> paths, Model model) {
+	public String getAddComputer(Model model) {
 		model.addAttribute("companies", companyService.listService());
+		model.addAttribute("computerDto", new ComputerDto());
 		return ADD_COMPUTER;
 	}
 	
+	@ModelAttribute
+	public ComputerDto initComputerDto() {
+		return new ComputerDto();
+	}
+	
 	@PostMapping("/addComputer")
-	public String postAddComputer(@RequestParam(required = false) Map<String, String> paths, Model model) {
-		String computerName = paths.get(NAME_FIELD);
-		String introduced = paths.get(INTRODUCED_FIELD);
-		String discontinued = paths.get(DISCONTINUED_FIELD);
-		String companyName = paths.get(COMPANY_FIELD);
-
-		ComputerDto dtoComputer = new ComputerDto(computerName, introduced, discontinued, companyName);
+	public String postAddComputer(@ModelAttribute("computerDto")ComputerDto dtoComputer, Model model) {
 		Computer computer = dtoComputerMapper.map(dtoComputer);
 
 		try {
 			this.computerService.createService(computer);
 			model.addAttribute("resultMessage", "The computer <strong>" + computer.getName() + "</strong> has been created !");
-			return getAddComputer(paths, model);
+			return getAddComputer(model);
 		} catch (DaoException e) {
 			model.addAttribute("errorMessage", "An <strong>SQL error</strong> has occured during the creation...");
-			return get500(paths, model);
+			return get500(model);
 		} catch (ComputerNullNameException e) {
 			model.addAttribute("errorMessage", "An error has occurred <strong>due to the name</strong> of the computer...");
-			return get500(paths, model);
+			return get500(model);
 		} catch (DiscontinuedButNoIntroducedException e) {
 			model.addAttribute("errorMessage", "An error has occurred <strong>due to the discontinuation and introduction date</strong> of the computer...");
-			return get500(paths, model);
+			return get500(model);
 		} catch (DiscontinuedBeforeIntroducedException e) {
 			model.addAttribute("errorMessage", "An error has occurred <strong>due to the discontinuation date</strong> (it must be after the introduction date)...");
-			return get500(paths, model);
+			return get500(model);
 		}
 	}
 	
 	@GetMapping("/editComputer")
-	public String getEditComputer(@RequestParam(required = false) Map<String, String> paths, Model model) {
-		if (paths.containsKey("computerId")) {
-			int computerId = Integer.parseInt(paths.get("computerId"));
-			Optional<Computer> computer = computerService.findService(computerId);
-			if (computer.isPresent()) {
-				Computer computerToEdit = computer.get();
-				ComputerDto computerDto = computerDtoMapper.map(computerToEdit);
-				model.addAttribute("computer", computerDto);
-				model.addAttribute("companies", companyService.listService());
-				return EDIT_COMPUTER;
-			} else {
-				model.addAttribute("errorMessage", "Sorry, the computer <strong>" + computerId + "</strong> doesn't exist.");
-				return get404(paths, model);
-			}
+	public String getEditComputer(@RequestParam(value = "computerId", required = true) String pComputerId, Model model) {
+		int computerId = Integer.parseInt(pComputerId);
+		Optional<Computer> computer = computerService.findService(computerId);
+		if (computer.isPresent()) {
+			Computer computerToEdit = computer.get();
+			ComputerDto computerDto = computerDtoMapper.map(computerToEdit);
+			model.addAttribute("computer", computerDto);
+			model.addAttribute("companies", companyService.listService());
+			return EDIT_COMPUTER;
 		} else {
-			model.addAttribute("errorMessage", "Sorry, there is <strong>no computer ID</strong> to check.");
-			return get404(paths, model);
+			model.addAttribute("errorMessage", "Sorry, the computer <strong>" + computerId + "</strong> doesn't exist.");
+			return get404(model);
 		}
 	}
 	
 	@PostMapping("/editComputer")
-	public String postEditComputer(@RequestParam(required = false) Map<String, String> paths, Model model) {
-		String id = paths.get(ID_FIELD);
-		String computerName = paths.get(NAME_FIELD);
-		String introduced = paths.get(INTRODUCED_FIELD);
-		String discontinued = paths.get(DISCONTINUED_FIELD);
-		String companyName = paths.get(COMPANY_FIELD);
-
-		ComputerDto dtoComputer = new ComputerDto(Integer.parseInt(id), computerName, introduced, discontinued,
-				companyName);
+	public String postEditComputer(@ModelAttribute("computerDto")ComputerDto dtoComputer, Model model) {
 		Computer computer = dtoComputerMapper.map(dtoComputer);
 
 		try {
 			this.computerService.updateService(computer);
-			model.addAttribute("resultMessage", "The computer <strong>" + computerName + "</strong> has been updated !");
-			return getEditComputer(paths, model);
+			model.addAttribute("resultMessage", "The computer <strong>" + computer.getName() + "</strong> has been updated !");
+			return getEditComputer(String.valueOf(computer.getId()), model);
 		} catch (DaoException e) {
 			model.addAttribute("errorMessage", "An <strong>SQL error</strong> has occured during the update...");
-			return get500(paths, model);
+			return get500(model);
 		} catch (ComputerNullNameException e) {
 			model.addAttribute("errorMessage", "An error has occurred <strong>due to the name</strong> of the computer...");
-			return get500(paths, model);
+			return get500(model);
 		} catch (DiscontinuedButNoIntroducedException e) {
 			model.addAttribute("errorMessage", "An error has occurred <strong>due to the discontinuation and introduction date</strong> of the computer...");
-			return get500(paths, model);
+			return get500(model);
 		} catch (DiscontinuedBeforeIntroducedException e) {
 			model.addAttribute("errorMessage", "An error has occurred <strong>due to the discontinuation date</strong> (it must be after the introduction date)...");
-			return get500(paths, model);
+			return get500(model);
 		}
 	}
 	
 	@GetMapping("/404")
-	public String get404(@RequestParam(required = false) Map<String, String> paths, Model model) {
+	public String get404(Model model) {
 		return NOT_FOUND_VIEW;
 	}
 	
 	@GetMapping("/500")
-	public String get500(@RequestParam(required = false) Map<String, String> paths, Model model) {
+	public String get500(Model model) {
 		return EXCEPTION_VIEW;
 	}
 }

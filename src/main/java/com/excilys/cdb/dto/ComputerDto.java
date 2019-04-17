@@ -7,6 +7,8 @@ public class ComputerDto {
 	private String discontinued;
 	private String company;
 	
+	public ComputerDto(){}
+	
 	public ComputerDto(int id, String name, String introduced, String discontinued, String company) {
 		super();
 		this.id = id;
@@ -15,13 +17,8 @@ public class ComputerDto {
 		this.discontinued = discontinued;
 		this.company = company;
 	}
-	public ComputerDto(String name, String introduced, String discontinued, String company) {
-		super();
-		this.name = name;
-		this.introduced = introduced;
-		this.discontinued = discontinued;
-		this.company = company;
-	}
+
+
 	public int getId() {
 		return id;
 	}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -27,48 +28,48 @@
 	                    </div>
 	                    <h1>Edit Computer</h1>
 	
-	                    <form action="editComputer?computerId=${computer.id}" method="POST">
-	                        <input type="hidden" value="${computer.id}" id="id" name="id"/>
+	                    <form:form action="editComputer?computerId=${computer.id}" method="POST" modelAttribute="computerDto">
+	                        <form:input path="id" type="hidden" value="${computer.id}"/>
 	                        <fieldset>
 	                            <div class="form-group">
-	                                <label for="computerName">Computer name</label>
-	                                <input 
+	                                <form:label path="name">Computer name</form:label>
+	                                <form:input
+	                                	path="name"
 	                                	type="text" 
-	                                	class="form-control" 
-	                                	id="computerName" 
-	                                	name="computerName" 
+	                                	class="form-control"
 	                                	value="${computer.name}" 
-	                                	required pattern=".*\S+.*" 
+	                                	required="true"
+	                                	pattern=".*\S+.*" 
 	                                	oninvalid="this.setCustomValidity('The name must contain at least one non white space character.')"
 	                                	onchange="try{setCustomValidity('')}catch(e){}"
-	                                	oninput="setCustomValidity(' ')">
+	                                	oninput="setCustomValidity(' ')"/>
 	                            	<span id="emptyNameError" class="error">Computer name must be set.</span>
 	                            </div>
 	                            <div class="form-group">
-	                                <label for="introduced">Introduced date</label>
-	                                <input type="date" class="form-control" id="introduced" name="introduced" value="${computer.introduced}">
+	                                <form:label path="introduced">Introduced date</form:label>
+	                                <form:input path="introduced" type="date" class="form-control" value="${computer.introduced}"/>
 	                            </div>
 	                            <div class="form-group">
-	                                <label for="discontinued">Discontinued date</label>
-	                                <input type="date" class="form-control" id="discontinued" name="discontinued" value="${computer.discontinued}" min="${computer.introduced}">
+	                                <form:label path="discontinued">Discontinued date</form:label>
+	                                <form:input path="discontinued" type="date" class="form-control" value="${computer.discontinued}" min="${computer.introduced}"/>
 	                            </div>
 	                            <div class="form-group">
-	                                <label for="companyName">Company</label>
-	                                <select class="form-control" id="companyName" name="companyName" >
+	                                <form:label path="company">Company</form:label>
+	                                <form:select path="company" class="form-control">
 	                                	<c:if test="${empty computer.company}">
-	                                		<option selected value="">--</option>
+	                                		<form:option selected="true" value="">--</form:option>
 	                                	</c:if>
 	                                	<c:forEach items="${companies}" var="company">
 	                                		<c:choose>
 							            		<c:when test="${computer.company == company.name}">
-							                		<option selected value="${company.name}">${company.name}</option>
+							                		<form:option selected="true" value="${company.name}">${company.name}</form:option>
 							                	</c:when>
 							                	<c:otherwise>
-							                		<option value="${company.name}">${company.name}</option>
+							                		<form:option value="${company.name}">${company.name}</form:option>
 							                	</c:otherwise>
 											</c:choose>
 	                                	</c:forEach>
-	                                </select>
+	                                </form:select>
 	                            </div>            
 	                        </fieldset>
 	                        <div class="actions pull-right">
@@ -76,7 +77,7 @@
 	                            or
 	                            <a href="dashboard" class="btn btn-default">Cancel</a>
 	                        </div>
-	                    </form>
+	                    </form:form>
 	                </div>
 	            </div>
 	        </div>
