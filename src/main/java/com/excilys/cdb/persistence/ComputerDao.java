@@ -111,11 +111,11 @@ public class ComputerDao {
   
   public ArrayList<Computer> search(String search) throws DaoException {
 	try {
-		ArrayList<Computer> computers =  (ArrayList<Computer>) jdbcTemplate.query(SQL_SEARCH, new Object[] {search, search}, computerMapper);
-		LOGGER.info(computers.size() + " computers found for search '" + search + ".");
+		ArrayList<Computer> computers =  (ArrayList<Computer>) jdbcTemplate.query(SQL_SEARCH, new Object[] {"%"+search+"%", "%"+search+"%"}, computerMapper);
+		LOGGER.info(computers.size() + " computers found for search '" + search + "'.");
 		return computers;
 	} catch(DataAccessException e) {
-		throw new DaoException("Failed to create computers list for search " + search + ".", e.getCause());
+		throw new DaoException("Failed to create computers list for search '" + search + "'.", e.getCause());
 	}
   }
 

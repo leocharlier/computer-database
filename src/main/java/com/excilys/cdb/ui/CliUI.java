@@ -12,7 +12,7 @@ import java.util.Scanner;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
-import com.excilys.cdb.config.SpringConfiguration;
+import com.excilys.cdb.config.SpringJdbcConfiguration;
 import com.excilys.cdb.model.Company;
 import com.excilys.cdb.model.Computer;
 import com.excilys.cdb.model.Page;
@@ -531,7 +531,7 @@ public class CliUI {
 	}
 
 	public static void main(String[] args) throws ParseException {
-		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringConfiguration.class);
+		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringJdbcConfiguration.class);
 		CliUI cliUI = applicationContext.getBean("cliUI", CliUI.class);
 		cliUI.start();
 		applicationContext.close();

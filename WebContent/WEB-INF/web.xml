@@ -4,73 +4,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
     version="3.0">
-    
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
-
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>com.excilys.cdb.config.SpringConfiguration</param-value>
-    </context-param>
-    <context-param>
-        <param-name>contextClass</param-name>
-        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
-    </context-param>
-    
-    <servlet>
-		<servlet-name>Dashboard</servlet-name>
-		<servlet-class>com.excilys.cdb.servlet.DashboardServlet</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-	    <servlet-name>Dashboard</servlet-name>
-	    <url-pattern>/dashboard</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>AddComputer</servlet-name>
-		<servlet-class>com.excilys.cdb.servlet.AddComputerServlet</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-	    <servlet-name>AddComputer</servlet-name>
-	    <url-pattern>/addComputer</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>EditComputer</servlet-name>
-		<servlet-class>com.excilys.cdb.servlet.EditComputerServlet</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-	    <servlet-name>EditComputer</servlet-name>
-	    <url-pattern>/editComputer</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>Error404</servlet-name>
-		<servlet-class>com.excilys.cdb.servlet.Error404Servlet</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-	    <servlet-name>Error404</servlet-name>
-	    <url-pattern>/404</url-pattern>
-	</servlet-mapping>
-	
-	<servlet>
-		<servlet-name>Error500</servlet-name>
-		<servlet-class>com.excilys.cdb.servlet.Error500Servlet</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-	    <servlet-name>Error500</servlet-name>
-	    <url-pattern>/500</url-pattern>
-	</servlet-mapping>
-	
-	<welcome-file-list>
-	    <welcome-file>dashboard</welcome-file>
-	</welcome-file-list>
 	
 	<error-page>
 	    <!-- Missing resource -->
@@ -83,5 +16,11 @@
 	    <error-code>500</error-code>
 	    <location>/500</location>
 	</error-page>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.css</url-pattern>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
 
 </web-app>
