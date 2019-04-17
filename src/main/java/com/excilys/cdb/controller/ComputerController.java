@@ -7,7 +7,12 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +28,7 @@ import com.excilys.cdb.model.Computer;
 import com.excilys.cdb.model.Page;
 import com.excilys.cdb.service.CompanyService;
 import com.excilys.cdb.service.ComputerService;
+import com.excilys.cdb.validator.ComputerDtoValidator;
 
 @Controller
 public class ComputerController {
@@ -40,6 +46,8 @@ public class ComputerController {
 	private ComputerDtoMapper computerDtoMapper;
 	private DtoComputerMapper dtoComputerMapper;
 	
+	private ComputerDtoValidator computerDtoValidator;
+	
 	private Page<Computer> page;
 	private int currentPage;
 	private int currentSize;
@@ -47,11 +55,24 @@ public class ComputerController {
 	public ComputerController(ComputerService sComputer, 
 			CompanyService sCompany, 
 			ComputerDtoMapper mComputerDto,
-			DtoComputerMapper mDtoComputer) {
+			DtoComputerMapper mDtoComputer,
+			ComputerDtoValidator vComputerDto) {
 		computerService = sComputer;
 		companyService = sCompany;
 		computerDtoMapper = mComputerDto;
 		dtoComputerMapper = mDtoComputer;
+		computerDtoValidator = vComputerDto;
+	}
+	
+	@InitBinder
+	public void dataBinding(WebDataBinder binder) {
+		binder.addValidators(computerDtoValidator);
+	}
+	
+	
+	@ModelAttribute
+	public ComputerDto initComputerDto() {
+		return new ComputerDto();
 	}
 	
 	@GetMapping({"/", "/dashboard"})
@@ -167,13 +188,20 @@ public class ComputerController {
 		return ADD_COMPUTER;
 	}
 	
-	@ModelAttribute
-	public ComputerDto initComputerDto() {
-		return new ComputerDto();
-	}
-	
 	@PostMapping("/addComputer")
-	public String postAddComputer(@ModelAttribute("computerDto")ComputerDto dtoComputer, Model model) {
+	public String postAddComputer(@Validated @ModelAttribute("computerDto")ComputerDto dtoComputer, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			StringBuilder sb = new StringBuilder("Error(s) : \n");
+			for(ObjectError error : result.getAllErrors()) {
+				sb.append("<strong>");
+				sb.append(error.getDefaultMessage());
+				sb.append("</strong>");
+				sb.append("\n");
+			}
+			model.addAttribute("errorMessage", "An error has occured during the <strong>form validation</strong>... " + sb);
+			return get500(model);
+		}
+		
 		Computer computer = dtoComputerMapper.map(dtoComputer);
 
 		try {
@@ -212,7 +240,19 @@ public class ComputerController {
 	}
 	
 	@PostMapping("/editComputer")
-	public String postEditComputer(@ModelAttribute("computerDto")ComputerDto dtoComputer, Model model) {
+	public String postEditComputer(@Validated @ModelAttribute("computerDto") ComputerDto dtoComputer, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			StringBuilder sb = new StringBuilder("Error(s) : \n");
+			for(ObjectError error : result.getAllErrors()) {
+				sb.append("<strong>");
+				sb.append(error.getDefaultMessage());
+				sb.append("</strong>");
+				sb.append("\n");
+			}
+			model.addAttribute("errorMessage", "An error has occured during the <strong>form validation</strong>... " + sb);
+			return get500(model);
+		}
+		
 		Computer computer = dtoComputerMapper.map(dtoComputer);
 
 		try {
