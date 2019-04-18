@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -21,7 +22,7 @@
 		<section id="main">
 			<div class="container">	
 				<div class="alert alert-danger">
-					Error 500: An error has occurred. Too bad bitch! ${errorMessage} Please try later. <a href="dashboard">Go back to dashboard.</a>
+					<spring:message code="error500"/> ${errorMessage} <a href="dashboard"><spring:message code="backtodashboard"/>.</a>
 				</div>
 			</div>
 		</section>

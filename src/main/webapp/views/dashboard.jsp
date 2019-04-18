@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,29 +16,37 @@
 	<body>
 		<header class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
+        	<div class="pull-left">
+        		<a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
+        	</div>
+        	<ul class="nav navbar-nav navbar-right">
+		      	<li><a href="dashboard?page=${page}&size=${size}&search=${search}&sort=${sort}&lang=en"><img src="images/english_icon.png" alt="Anglais" height="30" width="30"></a></li>
+		      	<li><a href="dashboard?page=${page}&size=${size}&search=${search}&sort=${sort}&lang=fr"><img src="images/french_icon.png" alt="Français" height="30" width="30"></a></li>
+		    </ul>
         </div>
 	    </header>
 	
 	    <section id="main">
 	        <div class="container">
 	            <h1 id="homeTitle">
-	                ${nbOfComputers} Computers found
+	                ${nbOfComputers} <spring:message code="computerfound"/>
 	            </h1>
 	            <div id="actions" class="form-horizontal">
 	                <div class="pull-left">
 	                    <form id="searchForm" action="#" method="GET" class="form-inline">
-	                        <input type="search" id="searchbox" name="search" class="form-control" placeholder="Search name" />
-	                        <input type="submit" id="searchsubmit" value="Filter by name"
+	                        <input type="search" id="searchbox" name="search" class="form-control" placeholder="<spring:message code="search"/>" />
+	                        <input type="submit" id="searchsubmit" value="<spring:message code="filter"/>"
 	                        class="btn btn-primary" />
 	                        <c:if test="${not empty search}">
-		                    	<a class="btn btn-default" id="backToList" href="dashboard">All Computers</a>
+		                    	<a class="btn btn-default" id="backToList" href="dashboard"><spring:message code="allcomputers"/></a>
 		                    </c:if>
 	                    </form>
 	                </div>
 	                <div class="pull-right">
-	                    <a class="btn btn-success" id="addComputer" href="addComputer">Add Computer</a> 
-	                    <a class="btn btn-default" id="editComputer" href="#" onclick="$.fn.toggleEditMode();">Edit</a>
+	                    <a class="btn btn-success" id="addComputer" href="addComputer"><spring:message code="add"/></a>
+	                    <span id="editText" style="display:none"><spring:message code="edit"/></span>
+	                    <span id="viewText" style="display:none"><spring:message code="view"/></span>
+	                    <a class="btn btn-default" id="editComputer" href="#" onclick="$.fn.toggleEditMode();"><spring:message code="edit"/></a>
 	                </div>
 	            </div>
 	        </div>
@@ -52,10 +61,10 @@
 				        <div class="alert alert-warning" role="alert">
 				        	<c:choose>
 				        		<c:when test="${not empty search}">
-				        			No computer found for the research "<strong>${search}</strong>"... <a href="dashboard">Go back to dashboard.</a> 
+				        			<spring:message code="nosearchresult"/> "<strong>${search}</strong>"... <a href="dashboard"><spring:message code="backtodashboard"/>.</a> 
 				        		</c:when>
 				        		<c:otherwise>
-				        			No computer found in database... <a href="addComputer">Add the first one here !</a> 
+				        			<spring:message code="nocomputerindb"/>... <a href="addComputer"><spring:message code="addfirstcomputer"/> !</a> 
 				        		</c:otherwise>
 				        	</c:choose>
 				        </div>
@@ -76,19 +85,19 @@
 			                        	<c:choose>
 			                        		<c:when test="${empty sort || sort == 'nameAsc'}">
 			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=nameDesc">
-			                        				Computer name
+			                        				<spring:message code="computername"/>
 			                        				<span class="glyphicon glyphicon-sort-by-alphabet sort-icon" aria-hidden="true"></span>
 			                        			</a>
 			                        		</c:when>
 			                        		<c:when test="${sort == 'nameDesc'}">
 			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=nameAsc">
-			                        				Computer name
+			                        				<spring:message code="computername"/>
 			                        				<span class="glyphicon glyphicon-sort-by-alphabet-alt sort-icon" aria-hidden="true"></span>
 			                        			</a>
 			                        		</c:when>
 			                        		<c:otherwise>
 			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=nameAsc">
-			                        				Computer name
+			                        				<spring:message code="computername"/>
 			                        				<span class="glyphicon glyphicon-sort sort-icon" aria-hidden="true"></span>
 			                        			</a>
 			                        		</c:otherwise>
@@ -98,19 +107,19 @@
 			                        	<c:choose>
 			                        		<c:when test="${sort == 'introducedAsc'}">
 			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=introducedDesc">
-			                        				Introduced date
+			                        				<spring:message code="introduceddate"/>
 			                        				<span class="glyphicon glyphicon-sort-by-order sort-icon" aria-hidden="true"></span>
 			                        			</a>
 			                        		</c:when>
 			                        		<c:when test="${sort == 'introducedDesc'}">
 			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=introducedAsc">
-			                        				Introduced date
+			                        				<spring:message code="introduceddate"/>
 			                        				<span class="glyphicon glyphicon-sort-by-order-alt sort-icon" aria-hidden="true"></span>
 			                        			</a>
 			                        		</c:when>
 			                        		<c:otherwise>
 			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=introducedAsc">
-			                        				Introduced date
+			                        				<spring:message code="introduceddate"/>
 			                        				<span class="glyphicon glyphicon-sort sort-icon" aria-hidden="true"></span>
 			                        			</a>
 			                        		</c:otherwise>
@@ -120,19 +129,19 @@
 			                        	<c:choose>
 			                        		<c:when test="${sort == 'discontinuedAsc'}">
 			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=discontinuedDesc">
-			                        				Discontinued date
+			                        				<spring:message code="discontinueddate"/>
 			                        				<span class="glyphicon glyphicon-sort-by-order sort-icon" aria-hidden="true"></span>
 			                        			</a>
 			                        		</c:when>
 			                        		<c:when test="${sort == 'discontinuedDesc'}">
 			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=discontinuedAsc">
-			                        				Discontinued date
+			                        				<spring:message code="discontinueddate"/>
 			                        				<span class="glyphicon glyphicon-sort-by-order-alt sort-icon" aria-hidden="true"></span>
 			                        			</a>
 			                        		</c:when>
 			                        		<c:otherwise>
 			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=discontinuedAsc">
-			                        				Discontinued date
+			                        				<spring:message code="discontinueddate"/>
 			                        				<span class="glyphicon glyphicon-sort sort-icon" aria-hidden="true"></span>
 			                        			</a>
 			                        		</c:otherwise>
@@ -142,19 +151,19 @@
 			                            <c:choose>
 			                        		<c:when test="${sort == 'companyAsc'}">
 			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=companyDesc">
-			                        				Company
+			                        				<spring:message code="company"/>
 			                        				<span class="glyphicon glyphicon-sort-by-alphabet sort-icon" aria-hidden="true"></span>
 			                        			</a>
 			                        		</c:when>
 			                        		<c:when test="${sort == 'companyDesc'}">
 			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=companyAsc">
-			                        				Company
+			                        				<spring:message code="company"/>
 			                        				<span class="glyphicon glyphicon-sort-by-alphabet-alt sort-icon" aria-hidden="true"></span>
 			                        			</a>
 			                        		</c:when>
 			                        		<c:otherwise>
 			                        			<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=companyAsc">
-			                        				Company
+			                        				<spring:message code="company"/>
 			                        				<span class="glyphicon glyphicon-sort sort-icon" aria-hidden="true"></span>
 			                        			</a>
 			                        		</c:otherwise>

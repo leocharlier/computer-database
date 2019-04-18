@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,7 +16,13 @@
 	<body>
 	    <header class="navbar navbar-inverse navbar-fixed-top">
 	        <div class="container">
-	            <a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
+	            <div class="pull-left">
+        			<a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
+	        	</div>
+	        	<ul class="nav navbar-nav navbar-right">
+			      	<li><a href="addComputer?lang=en"><img src="images/english_icon.png" alt="Anglais" height="30" width="30"></a></li>
+			      	<li><a href="addComputer?lang=fr"><img src="images/french_icon.png" alt="Français" height="30" width="30"></a></li>
+			    </ul>
 	        </div>
 	    </header>
 	
@@ -23,32 +30,33 @@
 	        <div class="container">
 	            <div class="row">
 	                <div class="col-xs-8 col-xs-offset-2 box">
-	                    <h1>Add Computer</h1>
+	                    <h1><spring:message code="add"/></h1>
 	                    <form:form action="addComputer" method="POST" modelAttribute="computerDto">
 	                        <fieldset>
 	                            <div class="form-group">
-	                                <form:label path="name">Computer name</form:label>
+	                                <form:label path="name"><spring:message code="computername"/></form:label>
+	                                <spring:message code="computername" var="placeholder" />
 	                                <form:input path="name" 
 	                                			type="text" 
 	                                			class="form-control" 
-	                                			placeholder="Computer name"
+	                                			placeholder="${placeholder}"
 	                                			required="true"
 	                                			pattern=".*\S+.*" 
 	                                			oninvalid="this.setCustomValidity('The name must contain at least one non white space character.')"
 	                                			onchange="try{setCustomValidity('')}catch(e){}"
 												oninput="setCustomValidity(' ')"/>
-	                            	<span id="emptyNameError" class="error">Computer name must be set.</span>
+	                            	<span id="emptyNameError" class="error"><spring:message code="computernameerror"/>.</span>
 	                            </div>
 	                            <div class="form-group">
-	                                <form:label path="introduced">Introduced date</form:label>
-	                                <form:input path="introduced" type="date" class="form-control" placeholder="Introduced date" min="1950-01-01"/>
+	                                <form:label path="introduced"><spring:message code="introduceddate"/></form:label>
+	                                <form:input path="introduced" type="date" class="form-control" min="1950-01-01"/>
 	                            </div>
 	                            <div class="form-group">
-	                                <form:label path="discontinued">Discontinued date</form:label>
-	                                <form:input path="discontinued" type="date" class="form-control" id="discontinued" placeholder="Discontinued date" disabled="true"/>
+	                                <form:label path="discontinued"><spring:message code="discontinueddate"/></form:label>
+	                                <form:input path="discontinued" type="date" class="form-control" disabled="true"/>
 	                            </div>
 	                            <div class="form-group">
-	                                <form:label path="company">Company</form:label>
+	                                <form:label path="company"><spring:message code="company"/></form:label>
 	                                <form:select class="form-control" path="company">
 	                                	<form:option selected="true" value="" label="--"/>
 	                                	<c:forEach items="${companies}" var="company">
@@ -58,9 +66,9 @@
 	                            </div>                  
 	                        </fieldset>
 	                        <div class="actions pull-right">
-	                            <input type="submit" value="Add" class="btn btn-primary">
-	                            or
-	                            <a href="dashboard" class="btn btn-default">Cancel</a>
+	                            <input type="submit" value="<spring:message code="addbutton"/>" class="btn btn-primary">
+	                            <spring:message code="or"/>
+	                            <a href="dashboard" class="btn btn-default"><spring:message code="cancel"/></a>
 	                        </div>
 	                    </form:form>
 	                </div>
@@ -74,7 +82,7 @@
 		            <div class="row">
 		            	<div class="col-xs-8 col-xs-offset-2 box">
 					        <div class="alert alert-success" role="alert">
-					        	${resultMessage} <a href="dashboard">Go back to dashboard.</a>
+					        	${resultMessage} <a href="dashboard"><spring:message code="backtodashboard"/>.</a>
 					        </div>
 				       	</div>
 	       			</div>
