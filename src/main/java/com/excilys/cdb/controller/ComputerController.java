@@ -184,7 +184,6 @@ public class ComputerController {
 	@GetMapping("/addComputer")
 	public String getAddComputer(Model model) {
 		model.addAttribute("companies", companyService.listService());
-		model.addAttribute("computerDto", new ComputerDto());
 		return ADD_COMPUTER;
 	}
 	
