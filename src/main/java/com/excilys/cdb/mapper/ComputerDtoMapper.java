@@ -2,7 +2,6 @@ package com.excilys.cdb.mapper;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,10 +20,10 @@ public class ComputerDtoMapper {
 		return new ComputerDto(computer.getId(),
 				               computer.getName(),
 				               computer.getIntroduced()
-								.map(someDate -> DATE_FORMAT.format(new Date(someDate.getTime())))
+								.map(someDate -> DATE_FORMAT.format(someDate))
 								.orElse(""),
 							   computer.getDiscontinued()
-								.map(someDate -> DATE_FORMAT.format(new Date(someDate.getTime())))
+								.map(someDate -> DATE_FORMAT.format(someDate))
 								.orElse(""),
 							   computer.getCompany()
 								.map(someCompany -> someCompany.getName())

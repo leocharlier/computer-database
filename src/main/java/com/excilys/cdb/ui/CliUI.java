@@ -1,6 +1,5 @@
 package com.excilys.cdb.ui;
 
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -225,15 +224,15 @@ public class CliUI {
 		
 		System.out.print( "Enter the date (Format 'dd/MM/yyyy' only) of introduction (press Enter if it's unknown and 0 to exit the creation) : " );
 		input = keyboard.nextLine().trim();
-		Optional<Timestamp> introduced = Optional.empty();
+		Optional<Date> introduced = Optional.empty();
 		if( !input.equals( "0" ) && !StringUtils.isNullOrEmpty( input ) ) {
-			introduced = Optional.ofNullable(convertToTimestamp(input));
+			introduced = Optional.ofNullable(convertToDate(input));
 		} else if ( input.equals( "0" ) ) {
 			System.out.println();
 			return;
 		}
 		
-		Optional<Timestamp> discontinued = Optional.empty();
+		Optional<Date> discontinued = Optional.empty();
 		if( introduced.isPresent() ) {
 			System.out.print( "Enter the date (Format 'dd/MM/yyyy' only) of discontinuation (press Enter if it's unknown and 0 to exit the creation) : " );
 			input = keyboard.nextLine().trim();
@@ -290,9 +289,9 @@ public class CliUI {
 					System.out.print( "New introduction date (Format 'dd/MM/yyyy' or press Enter to make it null) : " );
 					input = keyboard.nextLine().trim();
 					
-					Optional<Timestamp> introduced = Optional.empty();
+					Optional<Date> introduced = Optional.empty();
 					if( !StringUtils.isNullOrEmpty( input ) ) {
-						introduced = Optional.ofNullable(convertToTimestamp( input ));
+						introduced = Optional.ofNullable(convertToDate( input ));
 					}
 					computerToUpdate.setIntroduced( introduced.orElse(null) );
 				}
@@ -311,7 +310,7 @@ public class CliUI {
 					if( !input.equals( "n" ) ) {
 						input = keyboard.nextLine().trim();
 						
-						Optional<Timestamp> discontinued = Optional.empty();
+						Optional<Date> discontinued = Optional.empty();
 						if( !StringUtils.isNullOrEmpty( input ) ) {
 							discontinued = Optional.ofNullable(checkDiscontinued( input, computerToUpdate.getIntroduced().get() ));
 						}
@@ -453,22 +452,18 @@ public class CliUI {
 		return input;
 	}
 	
-	public Timestamp convertToTimestamp(String dateInput) {
-		Timestamp sqlDate = null;
-		
+	public Date convertToDate(String dateInput) {
+		Date sqlDate = null;
 		try {
-			Date date = dateFormat.parse( dateInput );
-			long time = date.getTime();
-			sqlDate = new Timestamp(time);
-			return sqlDate;
+			return sqlDate = dateFormat.parse( dateInput );
 		} catch( ParseException e) {
 			System.out.println( "Wrong date format. The date will be null." );
 			return sqlDate;
 		}	
 	}
 	
-	public Timestamp checkDiscontinued(String input, Timestamp introduced) {
-		Timestamp discontinued = convertToTimestamp(input);
+	public Date checkDiscontinued(String input, Date introduced) {
+		Date discontinued = convertToDate(input);
 		
 		if(!discontinued.after(introduced)) {
 			System.out.println( "The date of discontinuation must be after the date of introduction. It will be null." );
@@ -490,7 +485,7 @@ public class CliUI {
 		return input;
 	}
 	
-	public void createSQLComputer(String name, Optional<Timestamp> introduced, Optional<Timestamp> discontinued, Optional<Company> company) {
+	public void createSQLComputer(String name, Optional<Date> introduced, Optional<Date> discontinued, Optional<Company> company) {
 		Computer computer = new Computer();
 		computer.setName( name );
 		computer.setIntroduced( introduced.orElse(null) );

@@ -1,13 +1,35 @@
 package com.excilys.cdb.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Optional;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="computer")
 public class Computer {
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
   private int id;
+  
+  @Column(name="name")
   private String name;
-  private Timestamp introduced;
-  private Timestamp discontinued;
+  
+  @Column(name="introduced")
+  private Date introduced;
+
+  @Column(name="discontinued")
+  private Date discontinued;
+  
+  @ManyToOne
+  @JoinColumn(name = "company_id")
   private Company company;
 
   public Computer() {}
@@ -16,12 +38,12 @@ public class Computer {
     this.name = pname;
   }
 
-  public Computer(String pname, Timestamp pdiscontinued) {
+  public Computer(String pname, Date pdiscontinued) {
     this.name = pname;
     this.discontinued = pdiscontinued;
   }
 
-  public Computer(String pname, Timestamp pintroduced, Timestamp pdiscontinued) {
+  public Computer(String pname, Date pintroduced, Date pdiscontinued) {
     this.name = pname;
     this.introduced = pintroduced;
     this.discontinued = pdiscontinued;
@@ -43,19 +65,19 @@ public class Computer {
     this.name = name;
   }
 
-  public Optional<Timestamp> getIntroduced() {
+  public Optional<Date> getIntroduced() {
     return Optional.ofNullable(introduced);
   }
 
-  public void setIntroduced(Timestamp introduced) {
+  public void setIntroduced(Date introduced) {
     this.introduced = introduced;
   }
 
-  public Optional<Timestamp> getDiscontinued() {
+  public Optional<Date> getDiscontinued() {
     return Optional.ofNullable(discontinued);
   }
 
-  public void setDiscontinued(Timestamp discontinued) {
+  public void setDiscontinued(Date discontinued) {
     this.discontinued = discontinued;
   }
 

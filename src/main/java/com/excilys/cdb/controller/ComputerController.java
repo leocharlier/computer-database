@@ -206,6 +206,7 @@ public class ComputerController {
 		try {
 			this.computerService.createService(computer);
 			model.addAttribute("resultMessage", "The computer <strong>" + computer.getName() + "</strong> has been created !");
+			model.addAttribute("computerDto", new ComputerDto());
 			return getAddComputer(model);
 		} catch (DaoException e) {
 			model.addAttribute("errorMessage", "An <strong>SQL error</strong> has occured during the creation...");

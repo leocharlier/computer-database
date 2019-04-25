@@ -24,8 +24,8 @@ public class ComputerDaoMapper implements RowMapper<Computer>  {
 
     computer.setId(resultSet.getInt("id"));
     computer.setName(resultSet.getString("name"));
-    computer.setIntroduced(resultSet.getTimestamp("introduced"));
-    computer.setDiscontinued(resultSet.getTimestamp("discontinued"));
+    //computer.setIntroduced(resultSet.getTimestamp("introduced"));
+    //computer.setDiscontinued(resultSet.getTimestamp("discontinued"));
     computer.setCompany(companyDao.findById(resultSet.getInt("company_id")).orElse(null));
     
     return computer;
@@ -37,8 +37,8 @@ public class ComputerDaoMapper implements RowMapper<Computer>  {
 
 	  computer.setId(rs.getInt("id"));
 	  computer.setName(rs.getString("name"));
-	  computer.setIntroduced(rs.getTimestamp("introduced"));
-	  computer.setDiscontinued(rs.getTimestamp("discontinued"));
+	  //computer.setIntroduced(rs.getTimestamp("introduced"));
+	  //computer.setDiscontinued(rs.getTimestamp("discontinued"));
 	  computer.setCompany(companyDao.findById(rs.getInt("company_id")).orElse(null));
 	    
 	  return computer;

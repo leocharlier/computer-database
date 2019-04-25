@@ -24,20 +24,21 @@ public class ComputerDtoValidator implements Validator {
 		
 		ComputerDto computerDto = (ComputerDto) target;
 		Pattern dateFormat = Pattern.compile("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))");
-		Matcher matcherIntroduced = dateFormat.matcher(computerDto.getIntroduced());
-		Matcher matcherDiscontinued = dateFormat.matcher(computerDto.getDiscontinued());
 		
+		Matcher matcherIntroduced = dateFormat.matcher(computerDto.getIntroduced());
 		if(!"".equals(computerDto.getIntroduced()) && !matcherIntroduced.matches()) {
 			errors.rejectValue("introduced", "introduced.wrongDateFormat", "Wrong date format for introduction date.");
 		}
-		
-		if(!"".equals(computerDto.getDiscontinued())) {
-			if(!matcherDiscontinued.matches()) {
-				errors.rejectValue("discontinued", "discontinued.wrongDateFormat", "Wrong date format for discontinuation date.");
-			} else if("".equals(computerDto.getIntroduced())){
-				errors.rejectValue("discontinued", "discontinuedButNoIntroduced", "Discontinuation date cannot be set if introduction date is null.");
+	
+		if(computerDto.getDiscontinued() != null) {
+			Matcher matcherDiscontinued = dateFormat.matcher(computerDto.getDiscontinued());	
+			if(!"".equals(computerDto.getDiscontinued())) {
+				if(!matcherDiscontinued.matches()) {
+					errors.rejectValue("discontinued", "discontinued.wrongDateFormat", "Wrong date format for discontinuation date.");
+				} else if("".equals(computerDto.getIntroduced())){
+					errors.rejectValue("discontinued", "discontinuedButNoIntroduced", "Discontinuation date cannot be set if introduction date is null.");
+				}
 			}
 		}
 	}
-
 }

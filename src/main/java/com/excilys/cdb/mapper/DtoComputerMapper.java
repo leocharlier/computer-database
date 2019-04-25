@@ -1,6 +1,5 @@
 package com.excilys.cdb.mapper;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -33,9 +32,7 @@ public class DtoComputerMapper {
 		} else {
 			String dateString = dtoComputer.getIntroduced();
 			try {
-				Date date = ComputerDtoMapper.DATE_FORMAT.parse(dateString);
-				long time = date.getTime();
-				Timestamp introduced = new Timestamp(time);
+				Date introduced = ComputerDtoMapper.DATE_FORMAT.parse(dateString);
 				computer.setIntroduced(introduced);
 			} catch(ParseException e) {
 				throw new DtoDateParseException("Introduced date parsing error.");
@@ -46,9 +43,7 @@ public class DtoComputerMapper {
 			} else {
 				dateString = dtoComputer.getDiscontinued();
 				try {
-					Date date = ComputerDtoMapper.DATE_FORMAT.parse(dateString);
-					long time = date.getTime();
-					Timestamp discontinued = new Timestamp(time);
+					Date discontinued = ComputerDtoMapper.DATE_FORMAT.parse(dateString);
 					computer.setDiscontinued(discontinued);
 				} catch(ParseException e) {
 					throw new DtoDateParseException("Discontinued date parsing error.");
