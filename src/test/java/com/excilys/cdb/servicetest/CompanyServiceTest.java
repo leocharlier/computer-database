@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.excilys.cdb.config.SpringJdbcConfiguration;
+import com.excilys.cdb.config.HibernateConfiguration;
 import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.model.Company;
 import com.excilys.cdb.service.CompanyService;
@@ -26,7 +26,7 @@ class CompanyServiceTest {
   
   @BeforeAll
   public static void setUp() {
-	AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SpringJdbcConfiguration.class);
+	AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(HibernateConfiguration.class);
 //    CliUI cliUI = applicationContext.getBean("cliUI", CliUI.class);
 //    daoFactory = DaoFactory.getInstance();
 //    companyService = new CompanyService(daoFactory);
