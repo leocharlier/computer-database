@@ -15,7 +15,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.excilys.cdb.model.Company;
 import com.excilys.cdb.model.Computer;
@@ -30,7 +29,7 @@ import com.excilys.cdb.model.Computer;
 				"com.excilys.cdb.controller",
 				"com.excilys.cdb.config",
 				"com.excilys.cdb.validator"})
-public class HibernateConfiguration implements WebMvcConfigurer {
+public class HibernateConfiguration {
 	@Value("${driverClassName}")
 	String driverClassName;
 	@Value("${jdbcUrl}")
