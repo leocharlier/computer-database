@@ -37,3 +37,7 @@ input[type='checkbox'] {
 .sort-icon {
 	float: right;
 }
+
+.welcome-message {
+	text-align: center;
+}

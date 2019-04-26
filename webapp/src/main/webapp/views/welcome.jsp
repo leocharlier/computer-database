@@ -25,42 +25,87 @@
 			    </ul>
 	        </div>
 	    </header>
-	
+		
 	    <section id="main">
 	        <div class="container">
+	        	<h1 class="welcome-message">Welcome on Computer Database !</h1>
 	            <div class="row">
-	                <div class="col-xs-8 col-xs-offset-2 box">
-	                    <h1>Welcome !</h1>
-                            <div class="form-group">
-			                    <form:form action="userRegistration" method="POST" modelAttribute="user">
-			                    	<fieldset>
-				                    	<form:label path="username">Username</form:label>
-		                                <form:input path="username" 
-		                                			type="text" 
-		                                			class="form-control" 
-		                                			placeholder="Username"
-		                                			required="true"
-		                                			pattern=".*\S+.*" 
-		                                			oninvalid="this.setCustomValidity('The id must contain at least one non white space character.')"
-		                                			onchange="try{setCustomValidity('')}catch(e){}"
-													oninput="setCustomValidity(' ')"/>
-										<form:label path="password">Password</form:label>
-										<form:input path="password" 
-		                                			type="text" 
-		                                			class="form-control" 
-		                                			placeholder="Password"
-		                                			required="true"
-		                                			pattern=".*\S+.*" 
-		                                			oninvalid="this.setCustomValidity('The password must contain at least one non white space character.')"
-		                                			onchange="try{setCustomValidity('')}catch(e){}"
-													oninput="setCustomValidity(' ')"/>
-			                   		</fieldset>
-				                    <div class="actions pull-right">
-			                            <input type="submit" value="Register" class="btn btn-primary">
-			                         </div>
-			                    </form:form>
-		                    </div>
+	                
+	                <div class="col-sm-6"> 
+	                	<h3>Sign in</h3>
+	                    <form:form action="userRegistration" method="POST" modelAttribute="user">
+	                    	<fieldset>
+	                    		<div class="form-group">
+			                    	<form:label path="username">Username</form:label>
+	                                <form:input path="username" 
+	                                			type="text" 
+	                                			class="form-control" 
+	                                			placeholder="Username"
+	                                			required="true"
+	                                			pattern=".*\S+.*" 
+	                                			oninvalid="this.setCustomValidity('The username must contain at least one non white space character.')"
+	                                			onchange="try{setCustomValidity('')}catch(e){}"
+												oninput="setCustomValidity(' ')"/>
+								</div>
+								<div class="form-group">
+									<form:label path="password">Password</form:label>
+									<form:input path="password" 
+	                                			type="password" 
+	                                			class="form-control" 
+	                                			placeholder="Password"
+	                                			required="true"
+	                                			pattern=".*\S+.*" 
+	                                			oninvalid="this.setCustomValidity('The password must contain at least one non white space character.')"
+	                                			onchange="try{setCustomValidity('')}catch(e){}"
+												oninput="setCustomValidity(' ')"/>
+								</div>
+	                   		</fieldset>
+		                    <div class="actions pull-right">
+	                            <input type="submit" value="Sign in" class="btn btn-primary">
+	                         </div>
+	                    </form:form>
 	                </div>
+	                
+	                <div class="col-sm-6"> 
+	                	<h3>... or create your account</h3>
+	                    <form:form action="userRegistration" method="POST" modelAttribute="user">
+	                    	<fieldset>
+	                    		<div class="form-group">
+			                    	<form:label path="username">Username</form:label>
+	                                <form:input path="username" 
+	                                			type="text" 
+	                                			class="form-control" 
+	                                			placeholder="Username"
+	                                			required="true"
+	                                			pattern=".*\S+.*" 
+	                                			oninvalid="this.setCustomValidity('The username must contain at least one non white space character.')"
+	                                			onchange="try{setCustomValidity('')}catch(e){}"
+												oninput="setCustomValidity(' ')"/>
+								</div>
+								<div class="form-group">
+									<form:label path="password">Password</form:label>
+									<form:input path="password" 
+	                                			type="password" 
+	                                			class="form-control" 
+	                                			placeholder="Password"
+	                                			required="true"
+	                                			pattern=".*\S+.*" 
+	                                			oninvalid="this.setCustomValidity('The password must contain at least one non white space character.')"
+	                                			onchange="try{setCustomValidity('')}catch(e){}"
+												oninput="setCustomValidity(' ')"/>
+								</div>
+	                   		</fieldset>
+	                   		<c:if test="${not empty errorRegistration}">
+						        <div class="alert alert-danger" role="alert">
+						        	<strong>${errorRegistration}</strong>
+						        </div>
+						    </c:if>
+		                    <div class="actions pull-right">
+	                            <input type="submit" value="Sign up" class="btn btn-primary">
+	                         </div>
+	                    </form:form>
+	                </div>
+	                
 	            </div>
 	        </div>
 	    </section>

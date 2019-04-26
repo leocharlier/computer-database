@@ -1,20 +1,21 @@
 package com.excilys.cdb.controller;
 
-import java.util.Map;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.model.User;
 import com.excilys.cdb.service.UserService;
+import com.excilys.cdb.validator.UserValidator;
 
 @Controller
 public class UserController {
@@ -22,8 +23,16 @@ public class UserController {
 	
 	private UserService userService;
 	
-	public UserController(UserService us) {
+	private UserValidator userValidator;
+	
+	public UserController(UserService us, UserValidator uv) {
 		userService = us;
+		userValidator = uv;
+	}
+	
+	@InitBinder
+	public void dataBinding(WebDataBinder binder) {
+		binder.addValidators(userValidator);
 	}
 	
 	@ModelAttribute
@@ -32,26 +41,22 @@ public class UserController {
 	}
 	
 	@GetMapping("/")
-	public String getDashBoard(@RequestParam(required = false) Map<String, String> paths, Model model) {
+	public String getWelcomePage(Model model) {
 		return WELCOME;
 	}
 	
 	@PostMapping("/userRegistration")
-	public ModelAndView postuserRegistration(@ModelAttribute("user")User user, BindingResult result, Model model) {
+	public ModelAndView postUserRegistration(@Validated @ModelAttribute("user")User user, BindingResult result, Model model) {
 		if(result.hasErrors()) {
-			StringBuilder sb = new StringBuilder("Error(s) : \n");
+			ModelAndView errorView = new ModelAndView(WELCOME);
 			for(ObjectError error : result.getAllErrors()) {
-				sb.append("<strong>");
-				sb.append(error.getDefaultMessage());
-				sb.append("</strong>");
-				sb.append("\n");
+				errorView.addObject("errorRegistration", error.getDefaultMessage());
 			}
-			model.addAttribute("errorMessage", "An error has occured during the <strong>form validation</strong>... " + sb);
-			return new ModelAndView("redirect:/500");
+			return errorView;
 		}
 
 		try {
-			this.userService.createService(user);
+			this.userService.registerService(user);
 			return new ModelAndView("redirect:/dashboard");
 		} catch (DaoException e) {
 			model.addAttribute("errorMessage", "An <strong>SQL error</strong> has occured during the creation...");
