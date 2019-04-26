@@ -31,7 +31,7 @@
 	            <div class="row">
 	                <div class="col-xs-8 col-xs-offset-2 box">
 	                    <h1><spring:message code="add"/></h1>
-	                    <form:form action="addComputer" method="POST" modelAttribute="computerDto">
+	                    <form:form action="dashboard" method="POST" modelAttribute="computerDto">
 	                        <fieldset>
 	                            <div class="form-group">
 	                                <form:label path="name"><spring:message code="computername"/></form:label>

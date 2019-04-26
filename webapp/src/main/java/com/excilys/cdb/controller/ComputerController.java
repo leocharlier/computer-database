@@ -75,7 +75,7 @@ public class ComputerController {
 		return new ComputerDto();
 	}
 	
-	@GetMapping({"/", "/dashboard"})
+	@GetMapping({"/dashboard"})
 	public String getDashBoard(@RequestParam(required = false) Map<String, String> paths, Model model) {
 		ArrayList<Computer> computers;
 		if(paths.containsKey("search") && !paths.get("search").equals("")) {
@@ -159,7 +159,7 @@ public class ComputerController {
 		return DASHBOARD;
 	}
 	
-	@PostMapping({"/", "/dashboard"})
+	@PostMapping({"/dashboard"})
 	public String postDeleteComputers(@RequestParam(required = true) Map<String, String> paths, Model model) {
 		String[] computersIdToDelete = paths.get("selection").split("\\,");
 		

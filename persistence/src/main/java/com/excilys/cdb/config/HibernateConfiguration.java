@@ -18,6 +18,7 @@ import org.springframework.context.annotation.PropertySource;
 
 import com.excilys.cdb.model.Company;
 import com.excilys.cdb.model.Computer;
+import com.excilys.cdb.model.User;
 
 @Lazy
 @Configuration
@@ -55,7 +56,8 @@ public class HibernateConfiguration {
 	    StandardServiceRegistry registry = registryBuilder.build();
 	    MetadataSources sources = new MetadataSources(registry)
 	          .addAnnotatedClass(Computer.class)
-	          .addAnnotatedClass(Company.class);
+	          .addAnnotatedClass(Company.class)
+	          .addAnnotatedClass(User.class);
 	    Metadata metadata = sources.getMetadataBuilder().build();
 	    SessionFactory sessionFactory = metadata.getSessionFactoryBuilder().build();
 	    return sessionFactory;
