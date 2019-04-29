@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
 import com.excilys.cdb.exception.DaoException;
+import com.excilys.cdb.model.Authority;
 import com.excilys.cdb.model.User;
 
 @Lazy
@@ -22,7 +23,7 @@ public class UserDao {
 	private SessionFactory sessionFactory;
 	
 	private static final String SQL_SELECT_BY_NAME  = "FROM User WHERE username = :username";
-	  
+	
 	public UserDao(SessionFactory sf) {
 		sessionFactory = sf;
 	}
@@ -31,6 +32,10 @@ public class UserDao {
 		try(Session session = sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
 			session.save(user);
+			Authority authority = new Authority();
+			authority.setUser(user);
+			authority.setAuthority("ROLE_USER");
+			session.save(authority);
 			tx.commit();
 		} catch(HibernateException e) {
 			throw new DaoException("Failed to create the user '" + user.getUsername() + "'.", e.getCause());

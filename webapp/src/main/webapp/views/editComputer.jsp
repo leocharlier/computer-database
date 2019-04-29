@@ -22,6 +22,7 @@
 	        	<ul class="nav navbar-nav navbar-right">
 			      	<li><a href="addComputer?lang=en"><img src="images/english_icon.png" alt="Anglais" height="30" width="30"></a></li>
 			      	<li><a href="addComputer?lang=fr"><img src="images/french_icon.png" alt="Français" height="30" width="30"></a></li>
+			    	<li><a href="logout" class="btn btn-danger logout-button">Logout</a></li>
 			    </ul>
 	        </div>
 	    </header>

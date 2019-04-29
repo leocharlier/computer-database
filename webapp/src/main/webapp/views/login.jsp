@@ -33,7 +33,7 @@
 	                
 	                <div class="col-sm-6"> 
 	                	<h3>Sign in</h3>
-	                    <form:form action="userRegistration" method="POST" modelAttribute="user">
+	                    <form:form action="loginAction" method="POST" modelAttribute="user">
 	                    	<fieldset>
 	                    		<div class="form-group">
 			                    	<form:label path="username">Username</form:label>
@@ -68,7 +68,7 @@
 	                
 	                <div class="col-sm-6"> 
 	                	<h3>... or create your account</h3>
-	                    <form:form action="userRegistration" method="POST" modelAttribute="user">
+	                    <form:form action="login" method="POST" modelAttribute="user">
 	                    	<fieldset>
 	                    		<div class="form-group">
 			                    	<form:label path="username">Username</form:label>

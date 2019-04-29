@@ -6,6 +6,12 @@
     version="3.0">
 	
 	<error-page>
+	    <!-- Uncaught exception -->
+	    <error-code>403</error-code>
+	    <location>/403</location>
+	</error-page>
+	
+	<error-page>
 	    <!-- Missing resource -->
 	    <error-code>404</error-code>
 	    <location>/404</location>

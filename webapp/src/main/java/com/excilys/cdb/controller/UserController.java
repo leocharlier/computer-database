@@ -19,7 +19,7 @@ import com.excilys.cdb.validator.UserValidator;
 
 @Controller
 public class UserController {
-	private static final String WELCOME = "welcome";
+	private static final String LOGIN = "login";
 	
 	private UserService userService;
 	
@@ -40,20 +40,33 @@ public class UserController {
 		return new User();
 	}
 	
-	@GetMapping("/")
-	public String getWelcomePage(Model model) {
-		return WELCOME;
+	@GetMapping({"/", "/login"})
+	public String getLoginPage(Model model) {
+		return LOGIN;
 	}
 	
-	@PostMapping("/userRegistration")
+	@PostMapping("/login")
 	public ModelAndView postUserRegistration(@Validated @ModelAttribute("user")User user, BindingResult result, Model model) {
 		if(result.hasErrors()) {
-			ModelAndView errorView = new ModelAndView(WELCOME);
+			ModelAndView errorView = new ModelAndView(LOGIN);
 			for(ObjectError error : result.getAllErrors()) {
 				errorView.addObject("errorRegistration", error.getDefaultMessage());
 			}
+			errorView.addObject("user", new User());
 			return errorView;
 		}
+
+		try {
+			this.userService.registerService(user);
+			return new ModelAndView("redirect:/dashboard");
+		} catch (DaoException e) {
+			model.addAttribute("errorMessage", "An <strong>SQL error</strong> has occured during the creation...");
+			return new ModelAndView("redirect:/500");
+		}
+	}
+	
+	@PostMapping("/userConnection")
+	public ModelAndView postUserConnection(@ModelAttribute("user")User user, Model model) {
 
 		try {
 			this.userService.registerService(user);

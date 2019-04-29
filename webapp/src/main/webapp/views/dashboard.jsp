@@ -18,10 +18,12 @@
         <div class="container">
         	<div class="pull-left">
         		<a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
+        		<p class="user-label">User : ${user}</p>
         	</div>
         	<ul class="nav navbar-nav navbar-right">
 		      	<li><a href="dashboard?page=${page}&size=${size}&search=${search}&sort=${sort}&lang=en"><img src="images/english_icon.png" alt="Anglais" height="30" width="30"></a></li>
 		      	<li><a href="dashboard?page=${page}&size=${size}&search=${search}&sort=${sort}&lang=fr"><img src="images/french_icon.png" alt="Français" height="30" width="30"></a></li>
+		    	<li><a href="logout" class="btn btn-danger logout-button">Logout</a></li>
 		    </ul>
         </div>
 	    </header>
@@ -51,7 +53,7 @@
 	            </div>
 	        </div>
 	
-	        <form id="deleteForm" action="dashboard?page=${page}&size=${size}" method="POST">
+	        <form id="deleteForm" action="deleteComputers" method="POST">
 	            <input type="hidden" name="selection" value="">
 	        </form>
 	

@@ -22,6 +22,7 @@
 	        	<ul class="nav navbar-nav navbar-right">
 			      	<li><a href="addComputer?lang=en"><img src="images/english_icon.png" alt="Anglais" height="30" width="30"></a></li>
 			      	<li><a href="addComputer?lang=fr"><img src="images/french_icon.png" alt="Français" height="30" width="30"></a></li>
+			    	<li><a href="logout" class="btn btn-danger logout-button">Logout</a></li>
 			    </ul>
 	        </div>
 	    </header>
@@ -31,7 +32,7 @@
 	            <div class="row">
 	                <div class="col-xs-8 col-xs-offset-2 box">
 	                    <h1><spring:message code="add"/></h1>
-	                    <form:form action="dashboard" method="POST" modelAttribute="computerDto">
+	                    <form:form action="addComputer" method="POST" modelAttribute="computerDto">
 	                        <fieldset>
 	                            <div class="form-group">
 	                                <form:label path="name"><spring:message code="computername"/></form:label>

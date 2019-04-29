@@ -1,5 +1,6 @@
 package com.excilys.cdb.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,7 @@ public class ComputerController {
 	private static final String ADD_COMPUTER = "addComputer";
 	private static final String EXCEPTION_VIEW = "500";
 	private static final String NOT_FOUND_VIEW = "404";
+	private static final String PERMISSION_DENIED_VIEW = "403";
 	
 	private static final int DEFAULT_PAGE_SIZE   = 10;
 	
@@ -75,8 +77,9 @@ public class ComputerController {
 		return new ComputerDto();
 	}
 	
-	@GetMapping({"/dashboard"})
-	public String getDashBoard(@RequestParam(required = false) Map<String, String> paths, Model model) {
+	@GetMapping("/dashboard")
+	public String getDashBoard(@RequestParam(required = false) Map<String, String> paths, Model model, Principal principal) {
+		model.addAttribute("user", principal.getName());
 		ArrayList<Computer> computers;
 		if(paths.containsKey("search") && !paths.get("search").equals("")) {
 			computers = this.computerService.searchService(paths.get("search").trim());
@@ -159,8 +162,8 @@ public class ComputerController {
 		return DASHBOARD;
 	}
 	
-	@PostMapping({"/dashboard"})
-	public String postDeleteComputers(@RequestParam(required = true) Map<String, String> paths, Model model) {
+	@PostMapping({"/deleteComputers"})
+	public String postDeleteComputers(@RequestParam(required = true) Map<String, String> paths, Model model, Principal principal) {
 		String[] computersIdToDelete = paths.get("selection").split("\\,");
 		
 		for(String computerId : computersIdToDelete) {
@@ -178,7 +181,7 @@ public class ComputerController {
 			}
 		}
 		
-		return getDashBoard(paths, model);
+		return getDashBoard(paths, model, principal);
 	}
 	
 	@GetMapping("/addComputer")
@@ -282,5 +285,10 @@ public class ComputerController {
 	@GetMapping("/500")
 	public String get500(Model model) {
 		return EXCEPTION_VIEW;
+	}
+	
+	@GetMapping("/403")
+	public String get403(Model model) {
+		return PERMISSION_DENIED_VIEW;
 	}
 }

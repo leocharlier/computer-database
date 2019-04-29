@@ -2,38 +2,37 @@ package com.excilys.cdb.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
 @Configuration
-public class SpringMvcConfiguration implements WebMvcConfigurer {
+@ComponentScan({"com.excilys.cdb.service",
+	"com.excilys.cdb.persistence",
+	"com.excilys.cdb.mapper",
+	"com.excilys.cdb.ui",
+	"com.excilys.cdb.controller",
+	"com.excilys.cdb.config",
+	"com.excilys.cdb.validator"})
+public class WebConfig implements WebMvcConfigurer {
 	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-	    return new BCryptPasswordEncoder();
+	@Override
+	public void configureViewResolvers(ViewResolverRegistry registry) {
+		registry.jsp().prefix("/views/").suffix(".jsp");
 	}
 	
-	@Bean
-	public ViewResolver viewResolver() {
-		InternalResourceViewResolver bean = new InternalResourceViewResolver();
-		
-		bean.setViewClass(JstlView.class);
-		bean.setPrefix("/views/");
-		bean.setSuffix(".jsp");
-		 
-		return bean;
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/login").setViewName("login");
 	}
 	
 	@Bean("messageSource")

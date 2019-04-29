@@ -20,9 +20,11 @@
 		</header>
 	
 		<section id="main">
-			<div class="container">	
+			<div class="container">
 				<div class="alert alert-danger">
-					<spring:message code="error500"/> ${errorMessage} <a href="dashboard"><spring:message code="backtodashboard"/>.</a>
+					<spring:message code="error403"/> ${errorMessage} <a href="dashboard"><spring:message code="backtodashboard"/>.</a>
+					<br/>
+					<!-- stacktrace -->
 				</div>
 			</div>
 		</section>
