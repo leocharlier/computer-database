@@ -192,14 +192,15 @@ public class ComputerController {
 	
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/addComputer")
-	public ModelAndView getAddComputer(Model model) {
+	public ModelAndView getAddComputer(Model model, Principal principal) {
+		model.addAttribute("user", principal.getName());
 		model.addAttribute("companies", companyService.listService());
 		return new ModelAndView(ADD_COMPUTER);
 	}
 	
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/addComputer")
-	public ModelAndView postAddComputer(@Validated @ModelAttribute("computerDto")ComputerDto dtoComputer, BindingResult result, Model model) {
+	public ModelAndView postAddComputer(@Validated @ModelAttribute("computerDto")ComputerDto dtoComputer, BindingResult result, Model model, Principal principal) {
 		if(result.hasErrors()) {
 			StringBuilder sb = new StringBuilder("Error(s) : \n");
 			for(ObjectError error : result.getAllErrors()) {
@@ -219,7 +220,7 @@ public class ComputerController {
 			this.computerService.createService(computer);
 			model.addAttribute("resultMessage", "The computer <strong>" + computer.getName() + "</strong> has been created !");
 			model.addAttribute("computerDto", new ComputerDto());
-			return getAddComputer(model);
+			return getAddComputer(model, principal);
 		} catch (DaoException e) {
 			ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
 			errorView.addObject("errorMessage", "An <strong>SQL error</strong> has occured during the creation...");
@@ -241,7 +242,8 @@ public class ComputerController {
 	
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/editComputer")
-	public ModelAndView getEditComputer(@RequestParam(value = "computerId", required = true) String pComputerId, Model model) {
+	public ModelAndView getEditComputer(@RequestParam(value = "computerId", required = true) String pComputerId, Model model, Principal principal) {
+		model.addAttribute("user", principal.getName());
 		int computerId = Integer.parseInt(pComputerId);
 		Optional<Computer> computer = computerService.findService(computerId);
 		if (computer.isPresent()) {
@@ -259,7 +261,7 @@ public class ComputerController {
 	
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/editComputer")
-	public ModelAndView postEditComputer(@Validated @ModelAttribute("computerDto") ComputerDto dtoComputer, BindingResult result, Model model) {
+	public ModelAndView postEditComputer(@Validated @ModelAttribute("computerDto") ComputerDto dtoComputer, BindingResult result, Model model, Principal principal) {
 		if(result.hasErrors()) {
 			StringBuilder sb = new StringBuilder("Error(s) : \n");
 			for(ObjectError error : result.getAllErrors()) {
@@ -278,7 +280,7 @@ public class ComputerController {
 		try {
 			this.computerService.updateService(computer);
 			model.addAttribute("resultMessage", "The computer <strong>" + computer.getName() + "</strong> has been updated !");
-			return getEditComputer(String.valueOf(computer.getId()), model);
+			return getEditComputer(String.valueOf(computer.getId()), model, principal);
 		} catch (DaoException e) {
 			ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
 			errorView.addObject("errorMessage", "An <strong>SQL error</strong> has occured during the update...");

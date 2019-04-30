@@ -16,17 +16,36 @@
 	</head>
 	<body>
 		<header class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-        	<div class="pull-left">
-        		<a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
-        		<p class="user-label">User : ${user}</p>
-        	</div>
-        	<ul class="nav navbar-nav navbar-right">
-		      	<li><a href="dashboard?page=${page}&size=${size}&search=${search}&sort=${sort}&lang=en"><img src="images/english_icon.png" alt="Anglais" height="30" width="30"></a></li>
-		      	<li><a href="dashboard?page=${page}&size=${size}&search=${search}&sort=${sort}&lang=fr"><img src="images/french_icon.png" alt="Français" height="30" width="30"></a></li>
-		    	<li><a href="logout" class="btn btn-danger logout-button">Logout</a></li>
-		    </ul>
-        </div>
+	        <div class="container">
+	        	<a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
+	        	<ul class="nav navbar-nav navbar-right">
+			      	<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
+	       					<span class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></span><spring:message code="hi"/>, ${user} !
+	     				</a>
+					    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					    	<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=${sort}&lang=en">
+					    		<div class="dropdown-menu-item">
+							    	<span class="menu-icon"><img src="images/english_icon.png" height="17" width="17"></span>
+							    	<spring:message code="english"/>
+							    </div>
+					    	</a>
+					    	<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=${sort}&lang=fr">
+					    		<div class="dropdown-menu-item">
+							    	<span class="menu-icon"><img src="images/french_icon.png" height="17" width="17"></span>
+							    	<spring:message code="french"/>
+							    </div>
+					    	</a>
+					    	<a href="logout">
+					    		<div class="dropdown-menu-item">
+							    	<span class="glyphicon glyphicon-log-out menu-icon" aria-hidden="true"></span>
+							    	<spring:message code="logout"/>
+							    </div>
+					    	</a>
+					    </div>
+				   	 </li>
+				</ul>
+	        </div>
 	    </header>
 	
 	    <section id="main">

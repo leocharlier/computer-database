@@ -46,7 +46,7 @@ public class UserController {
 	@GetMapping({"/","/login"})
 	public String getLoginPage(@RequestParam(required = false) Map<String, String> paths, Model model) {
 		if(paths.containsKey("error")) {
-			model.addAttribute("errorLogin", "Login failed, please check your username/password.");
+			model.addAttribute("errorLogin", true);
 		}
 		return LOGIN;
 	}
@@ -56,7 +56,7 @@ public class UserController {
 		if(result.hasErrors()) {
 			ModelAndView errorView = new ModelAndView(LOGIN);
 			for(ObjectError error : result.getAllErrors()) {
-				errorView.addObject("errorRegistration", error.getDefaultMessage());
+				errorView.addObject("errorUsername", error.getDefaultMessage());
 			}
 			errorView.addObject("user", new User());
 			return errorView;

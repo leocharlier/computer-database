@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.excilys.cdb.exception.DaoException;
+import com.excilys.cdb.model.Authority;
 import com.excilys.cdb.model.User;
 import com.excilys.cdb.persistence.UserDao;
 
@@ -23,7 +24,10 @@ public class UserService implements UserDetailsService {
 	
 	public void registerService(User user) throws DaoException {
 		user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-		this.userDao.create(user);
+		Authority authority = new Authority();
+		authority.setUser(user);
+		authority.setAuthority("ROLE_USER");
+		this.userDao.create(user, authority);
 	}
 	
 	@Override

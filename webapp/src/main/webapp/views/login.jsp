@@ -17,30 +17,31 @@
 	    <header class="navbar navbar-inverse navbar-fixed-top">
 	        <div class="container">
 	            <div class="pull-left">
-        			<a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
+        			<a class="navbar-brand" href="login"> Application - Computer Database </a>
 	        	</div>
 	        	<ul class="nav navbar-nav navbar-right">
-			      	<li><a href="addComputer?lang=en"><img src="images/english_icon.png" alt="Anglais" height="30" width="30"></a></li>
-			      	<li><a href="addComputer?lang=fr"><img src="images/french_icon.png" alt="Français" height="30" width="30"></a></li>
+			      	<li><a href="login?lang=en"><img src="images/english_icon.png" alt="<spring:message code="english"/>" height="30" width="30"></a></li>
+			      	<li><a href="login?lang=fr"><img src="images/french_icon.png" alt="<spring:message code="french"/>" height="30" width="30"></a></li>
 			    </ul>
 	        </div>
 	    </header>
 		
 	    <section id="main">
 	        <div class="container">
-	        	<h1 class="welcome-message">Welcome on Computer Database !</h1>
+	        	<h1 class="welcome-message"><spring:message code="welcomemessage"/> Computer Database !</h1>
 	            <div class="row">
 	                
 	                <div class="col-sm-6"> 
-	                	<h3>Sign in</h3>
+	                	<h3><spring:message code="signin"/></h3>
 	                    <form:form action="loginAction" method="POST" modelAttribute="user">
 	                    	<fieldset>
 	                    		<div class="form-group">
-			                    	<form:label path="username">Username</form:label>
+			                    	<form:label path="username"><spring:message code="username"/></form:label>
+	                                <spring:message code="username" var="placeholder" />
 	                                <form:input path="username" 
 	                                			type="text" 
 	                                			class="form-control" 
-	                                			placeholder="Username"
+	                                			placeholder="${placeholder}"
 	                                			required="true"
 	                                			pattern=".*\S+.*" 
 	                                			oninvalid="this.setCustomValidity('The username must contain at least one non white space character.')"
@@ -48,11 +49,12 @@
 												oninput="setCustomValidity(' ')"/>
 								</div>
 								<div class="form-group">
-									<form:label path="password">Password</form:label>
+									<form:label path="password"><spring:message code="password"/></form:label>
+									<spring:message code="password" var="placeholder" />
 									<form:input path="password" 
 	                                			type="password" 
 	                                			class="form-control" 
-	                                			placeholder="Password"
+	                                			placeholder="${placeholder}"
 	                                			required="true"
 	                                			pattern=".*\S+.*" 
 	                                			oninvalid="this.setCustomValidity('The password must contain at least one non white space character.')"
@@ -60,27 +62,28 @@
 												oninput="setCustomValidity(' ')"/>
 								</div>
 	                   		</fieldset>
-	                   		<c:if test="${not empty errorLogin}">
+	                   		<c:if test="${errorLogin}">
 						        <div class="alert alert-danger" role="alert">
-						        	<strong>${errorLogin}</strong>
+						        	<strong><spring:message code="errorLogin"/>.</strong>
 						        </div>
 						    </c:if>
 		                    <div class="actions pull-right">
-	                            <input type="submit" value="Sign in" class="btn btn-primary">
+	                            <input type="submit" value="<spring:message code="signin"/>" class="btn btn-primary">
 	                         </div>
 	                    </form:form>
 	                </div>
 	                
 	                <div class="col-sm-6"> 
-	                	<h3>... or create your account</h3>
+	                	<h3>... <spring:message code="createyouraccount"/></h3>
 	                    <form:form action="registration" method="POST" modelAttribute="user">
 	                    	<fieldset>
 	                    		<div class="form-group">
-			                    	<form:label path="username">Username</form:label>
+			                    	<form:label path="username"><spring:message code="username"/></form:label>
+			                    	<spring:message code="username" var="placeholder" />
 	                                <form:input path="username" 
 	                                			type="text" 
 	                                			class="form-control" 
-	                                			placeholder="Username"
+	                                			placeholder="${placeholder}"
 	                                			required="true"
 	                                			pattern=".*\S+.*" 
 	                                			oninvalid="this.setCustomValidity('The username must contain at least one non white space character.')"
@@ -88,11 +91,12 @@
 												oninput="setCustomValidity(' ')"/>
 								</div>
 								<div class="form-group">
-									<form:label path="password">Password</form:label>
+									<form:label path="password"><spring:message code="password"/></form:label>
+									<spring:message code="password" var="placeholder" />
 									<form:input path="password" 
 	                                			type="password" 
 	                                			class="form-control" 
-	                                			placeholder="Password"
+	                                			placeholder="${placeholder}"
 	                                			required="true"
 	                                			pattern=".*\S+.*" 
 	                                			oninvalid="this.setCustomValidity('The password must contain at least one non white space character.')"
@@ -100,13 +104,13 @@
 												oninput="setCustomValidity(' ')"/>
 								</div>
 	                   		</fieldset>
-	                   		<c:if test="${not empty errorRegistration}">
+	                   		<c:if test="${not empty errorUsername}">
 						        <div class="alert alert-danger" role="alert">
-						        	<strong>${errorRegistration}</strong>
+						        	<spring:message code="errorRegistration1"/><strong>${errorUsername}</strong><spring:message code="errorRegistration2"/>.
 						        </div>
 						    </c:if>
 		                    <div class="actions pull-right">
-	                            <input type="submit" value="Sign up" class="btn btn-primary">
+	                            <input type="submit" value="<spring:message code="signup"/>" class="btn btn-primary">
 	                         </div>
 	                    </form:form>
 	                </div>

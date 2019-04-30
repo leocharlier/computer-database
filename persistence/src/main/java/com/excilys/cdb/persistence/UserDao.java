@@ -28,13 +28,10 @@ public class UserDao {
 		sessionFactory = sf;
 	}
 	
-	public void create(User user) throws DaoException {
+	public void create(User user, Authority authority) throws DaoException {
 		try(Session session = sessionFactory.openSession()) {
 			Transaction tx = session.beginTransaction();
 			session.save(user);
-			Authority authority = new Authority();
-			authority.setUser(user);
-			authority.setAuthority("ROLE_USER");
 			session.save(authority);
 			tx.commit();
 		} catch(HibernateException e) {

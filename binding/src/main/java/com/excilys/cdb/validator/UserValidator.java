@@ -28,7 +28,7 @@ public class UserValidator implements Validator {
 		
 		User user = (User) target;
 		if(this.userDao.findByUsername(user.getUsername()).isPresent()) {
-			errors.rejectValue("username", "usernameexists", "The username '" + user.getUsername() + "' is already used.");
+			errors.rejectValue("username", "usernameexists", user.getUsername());
 		}
 	}
 }

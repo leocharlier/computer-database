@@ -16,14 +16,34 @@
 	<body>
 	    <header class="navbar navbar-inverse navbar-fixed-top">
 	        <div class="container">
-	            <div class="pull-left">
-        			<a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
-	        	</div>
+	        	<a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
 	        	<ul class="nav navbar-nav navbar-right">
-			      	<li><a href="addComputer?lang=en"><img src="images/english_icon.png" alt="Anglais" height="30" width="30"></a></li>
-			      	<li><a href="addComputer?lang=fr"><img src="images/french_icon.png" alt="Français" height="30" width="30"></a></li>
-			    	<li><a href="logout" class="btn btn-danger logout-button">Logout</a></li>
-			    </ul>
+			      	<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown">
+	       					<span class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></span><spring:message code="hi"/>, ${user} !
+	     				</a>
+					    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					    	<a href="editComputer?computerId=${computer.id}&lang=en">
+					    		<div class="dropdown-menu-item">
+							    	<span class="menu-icon"><img src="images/english_icon.png" height="17" width="17"></span>
+							    	<spring:message code="english"/>
+							    </div>
+					    	</a>
+					    	<a href="editComputer?computerId=${computer.id}&lang=fr">
+					    		<div class="dropdown-menu-item">
+							    	<span class="menu-icon"><img src="images/french_icon.png" height="17" width="17"></span>
+							    	<spring:message code="french"/>
+							    </div>
+					    	</a>
+					    	<a href="logout">
+					    		<div class="dropdown-menu-item">
+							    	<span class="glyphicon glyphicon-log-out menu-icon" aria-hidden="true"></span>
+							    	<spring:message code="logout"/>
+							    </div>
+					    	</a>
+					    </div>
+				   	 </li>
+				</ul>
 	        </div>
 	    </header>
 	    
@@ -106,6 +126,7 @@
 	    </c:if>
 	    
 	    <script src="js/jquery.min.js"></script>
+	    <script src="js/bootstrap.min.js"></script>
 	    <script src="js/validator.js"></script>
 	</body>
 </html>
