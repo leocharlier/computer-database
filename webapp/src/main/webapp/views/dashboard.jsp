@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -44,12 +45,15 @@
 		                    </c:if>
 	                    </form>
 	                </div>
-	                <div class="pull-right">
-	                    <a class="btn btn-success" id="addComputer" href="addComputer"><spring:message code="add"/></a>
-	                    <span id="editText" style="display:none"><spring:message code="edit"/></span>
-	                    <span id="viewText" style="display:none"><spring:message code="view"/></span>
-	                    <a class="btn btn-default" id="editComputer" href="#" onclick="$.fn.toggleEditMode();"><spring:message code="edit"/></a>
-	                </div>
+	                
+	                <security:authorize access="hasRole('ROLE_ADMIN')">
+		                <div class="pull-right">
+		                    <a class="btn btn-success" id="addComputer" href="addComputer"><spring:message code="add"/></a>
+		                    <span id="editText" style="display:none"><spring:message code="edit"/></span>
+		                    <span id="viewText" style="display:none"><spring:message code="view"/></span>
+		                    <a class="btn btn-default" id="editComputer" href="#" onclick="$.fn.toggleEditMode();"><spring:message code="edit"/></a>
+		                </div>
+		            </security:authorize>
 	            </div>
 	        </div>
 	
@@ -180,7 +184,12 @@
 				                            <input type="checkbox" name="cb" class="cb" value="${computer.id}">
 				                        </td>
 				                        <td>
-				                            <a href="editComputer?computerId=${computer.id}">${computer.name}</a>
+				                        	<security:authorize access="hasRole('ROLE_ADMIN')">
+				                            	<a href="editComputer?computerId=${computer.id}">${computer.name}</a>
+				                        	</security:authorize>
+				                        	<security:authorize access="hasRole('ROLE_USER')">
+				                            	${computer.name}
+				                        	</security:authorize>
 				                        </td>
 				                        <td>${computer.introduced}</td>
 				                        <td>${computer.discontinued}</td>

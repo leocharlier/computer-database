@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.excilys.cdb.dto.ComputerDto;
 import com.excilys.cdb.exception.ComputerNullNameException;
@@ -38,7 +41,6 @@ public class ComputerController {
 	private static final String ADD_COMPUTER = "addComputer";
 	private static final String EXCEPTION_VIEW = "500";
 	private static final String NOT_FOUND_VIEW = "404";
-	private static final String PERMISSION_DENIED_VIEW = "403";
 	
 	private static final int DEFAULT_PAGE_SIZE   = 10;
 	
@@ -77,8 +79,9 @@ public class ComputerController {
 		return new ComputerDto();
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/dashboard")
-	public String getDashBoard(@RequestParam(required = false) Map<String, String> paths, Model model, Principal principal) {
+	public ModelAndView getDashBoard(@RequestParam(required = false) Map<String, String> paths, Model model, Principal principal) {
 		model.addAttribute("user", principal.getName());
 		ArrayList<Computer> computers;
 		if(paths.containsKey("search") && !paths.get("search").equals("")) {
@@ -159,11 +162,12 @@ public class ComputerController {
 			model.addAttribute("nbMaxPages", this.page.getMaxPages());
 		}
 		
-		return DASHBOARD;
+		return new ModelAndView(DASHBOARD);
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@PostMapping({"/deleteComputers"})
-	public String postDeleteComputers(@RequestParam(required = true) Map<String, String> paths, Model model, Principal principal) {
+	public ModelAndView postDeleteComputers(@RequestParam(required = true) Map<String, String> paths, Model model, Principal principal) {
 		String[] computersIdToDelete = paths.get("selection").split("\\,");
 		
 		for(String computerId : computersIdToDelete) {
@@ -172,26 +176,30 @@ public class ComputerController {
 				try {
 					computerService.deleteService(computerToDelete.get());
 				} catch(DaoException e) {
-					model.addAttribute("errorMessage", "An <strong>SQL error</strong> has occured during the deletion...");
-					return get500(model);
+					ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
+					errorView.addObject("errorMessage", "An <strong>SQL error</strong> has occured during the deletion...");
+					return errorView;
 				}
 			} else {
-				model.addAttribute("errorMessage", "Sorry, the computer <strong>" + computerId + "</strong> doesn't exist.");
-				return get404(model);
+				ModelAndView errorView = new ModelAndView(NOT_FOUND_VIEW);
+				errorView.addObject("errorMessage", "Sorry, the computer <strong>" + computerId + "</strong> doesn't exist.");
+				return errorView;
 			}
 		}
 		
-		return getDashBoard(paths, model, principal);
+		return new ModelAndView("redirect:/dashboard");
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/addComputer")
-	public String getAddComputer(Model model) {
+	public ModelAndView getAddComputer(Model model) {
 		model.addAttribute("companies", companyService.listService());
-		return ADD_COMPUTER;
+		return new ModelAndView(ADD_COMPUTER);
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/addComputer")
-	public String postAddComputer(@Validated @ModelAttribute("computerDto")ComputerDto dtoComputer, BindingResult result, Model model) {
+	public ModelAndView postAddComputer(@Validated @ModelAttribute("computerDto")ComputerDto dtoComputer, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			StringBuilder sb = new StringBuilder("Error(s) : \n");
 			for(ObjectError error : result.getAllErrors()) {
@@ -200,8 +208,9 @@ public class ComputerController {
 				sb.append("</strong>");
 				sb.append("\n");
 			}
-			model.addAttribute("errorMessage", "An error has occured during the <strong>form validation</strong>... " + sb);
-			return get500(model);
+			ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
+			errorView.addObject("errorMessage", "An error has occured during the <strong>form validation</strong>... " + sb);
+			return errorView;
 		}
 		
 		Computer computer = dtoComputerMapper.map(dtoComputer);
@@ -212,22 +221,27 @@ public class ComputerController {
 			model.addAttribute("computerDto", new ComputerDto());
 			return getAddComputer(model);
 		} catch (DaoException e) {
-			model.addAttribute("errorMessage", "An <strong>SQL error</strong> has occured during the creation...");
-			return get500(model);
+			ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
+			errorView.addObject("errorMessage", "An <strong>SQL error</strong> has occured during the creation...");
+			return errorView;
 		} catch (ComputerNullNameException e) {
-			model.addAttribute("errorMessage", "An error has occurred <strong>due to the name</strong> of the computer...");
-			return get500(model);
+			ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
+			errorView.addObject("errorMessage", "An error has occurred <strong>due to the name</strong> of the computer...");
+			return errorView;
 		} catch (DiscontinuedButNoIntroducedException e) {
-			model.addAttribute("errorMessage", "An error has occurred <strong>due to the discontinuation and introduction date</strong> of the computer...");
-			return get500(model);
+			ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
+			errorView.addObject("errorMessage", "An error has occurred <strong>due to the discontinuation and introduction date</strong> of the computer...");
+			return errorView;
 		} catch (DiscontinuedBeforeIntroducedException e) {
-			model.addAttribute("errorMessage", "An error has occurred <strong>due to the discontinuation date</strong> (it must be after the introduction date)...");
-			return get500(model);
+			ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
+			errorView.addObject("errorMessage", "An error has occurred <strong>due to the discontinuation date</strong> (it must be after the introduction date)...");
+			return errorView;
 		}
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/editComputer")
-	public String getEditComputer(@RequestParam(value = "computerId", required = true) String pComputerId, Model model) {
+	public ModelAndView getEditComputer(@RequestParam(value = "computerId", required = true) String pComputerId, Model model) {
 		int computerId = Integer.parseInt(pComputerId);
 		Optional<Computer> computer = computerService.findService(computerId);
 		if (computer.isPresent()) {
@@ -235,15 +249,17 @@ public class ComputerController {
 			ComputerDto computerDto = computerDtoMapper.map(computerToEdit);
 			model.addAttribute("computer", computerDto);
 			model.addAttribute("companies", companyService.listService());
-			return EDIT_COMPUTER;
+			return new ModelAndView(EDIT_COMPUTER);
 		} else {
-			model.addAttribute("errorMessage", "Sorry, the computer <strong>" + computerId + "</strong> doesn't exist.");
-			return get404(model);
+			ModelAndView errorView = new ModelAndView(NOT_FOUND_VIEW);
+			errorView.addObject("errorMessage", "Sorry, the computer <strong>" + computerId + "</strong> doesn't exist.");
+			return errorView;
 		}
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/editComputer")
-	public String postEditComputer(@Validated @ModelAttribute("computerDto") ComputerDto dtoComputer, BindingResult result, Model model) {
+	public ModelAndView postEditComputer(@Validated @ModelAttribute("computerDto") ComputerDto dtoComputer, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			StringBuilder sb = new StringBuilder("Error(s) : \n");
 			for(ObjectError error : result.getAllErrors()) {
@@ -252,8 +268,9 @@ public class ComputerController {
 				sb.append("</strong>");
 				sb.append("\n");
 			}
-			model.addAttribute("errorMessage", "An error has occured during the <strong>form validation</strong>... " + sb);
-			return get500(model);
+			ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
+			errorView.addObject("errorMessage", "An error has occured during the <strong>form validation</strong>... " + sb);
+			return errorView;
 		}
 		
 		Computer computer = dtoComputerMapper.map(dtoComputer);
@@ -263,32 +280,21 @@ public class ComputerController {
 			model.addAttribute("resultMessage", "The computer <strong>" + computer.getName() + "</strong> has been updated !");
 			return getEditComputer(String.valueOf(computer.getId()), model);
 		} catch (DaoException e) {
-			model.addAttribute("errorMessage", "An <strong>SQL error</strong> has occured during the update...");
-			return get500(model);
+			ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
+			errorView.addObject("errorMessage", "An <strong>SQL error</strong> has occured during the update...");
+			return errorView;
 		} catch (ComputerNullNameException e) {
-			model.addAttribute("errorMessage", "An error has occurred <strong>due to the name</strong> of the computer...");
-			return get500(model);
+			ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
+			errorView.addObject("errorMessage", "An error has occurred <strong>due to the name</strong> of the computer...");
+			return errorView;
 		} catch (DiscontinuedButNoIntroducedException e) {
-			model.addAttribute("errorMessage", "An error has occurred <strong>due to the discontinuation and introduction date</strong> of the computer...");
-			return get500(model);
+			ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
+			errorView.addObject("errorMessage", "An error has occurred <strong>due to the discontinuation and introduction date</strong> of the computer...");
+			return errorView;
 		} catch (DiscontinuedBeforeIntroducedException e) {
-			model.addAttribute("errorMessage", "An error has occurred <strong>due to the discontinuation date</strong> (it must be after the introduction date)...");
-			return get500(model);
+			ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
+			errorView.addObject("errorMessage", "An error has occurred <strong>due to the discontinuation date</strong> (it must be after the introduction date)...");
+			return errorView;
 		}
-	}
-	
-	@GetMapping("/404")
-	public String get404(Model model) {
-		return NOT_FOUND_VIEW;
-	}
-	
-	@GetMapping("/500")
-	public String get500(Model model) {
-		return EXCEPTION_VIEW;
-	}
-	
-	@GetMapping("/403")
-	public String get403(Model model) {
-		return PERMISSION_DENIED_VIEW;
 	}
 }

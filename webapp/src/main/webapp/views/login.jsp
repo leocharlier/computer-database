@@ -60,6 +60,11 @@
 												oninput="setCustomValidity(' ')"/>
 								</div>
 	                   		</fieldset>
+	                   		<c:if test="${not empty errorLogin}">
+						        <div class="alert alert-danger" role="alert">
+						        	<strong>${errorLogin}</strong>
+						        </div>
+						    </c:if>
 		                    <div class="actions pull-right">
 	                            <input type="submit" value="Sign in" class="btn btn-primary">
 	                         </div>
@@ -68,7 +73,7 @@
 	                
 	                <div class="col-sm-6"> 
 	                	<h3>... or create your account</h3>
-	                    <form:form action="login" method="POST" modelAttribute="user">
+	                    <form:form action="registration" method="POST" modelAttribute="user">
 	                    	<fieldset>
 	                    		<div class="form-group">
 			                    	<form:label path="username">Username</form:label>
