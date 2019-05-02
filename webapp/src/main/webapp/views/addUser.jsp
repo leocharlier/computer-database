@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -23,13 +23,19 @@
 	       					<span class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></span><spring:message code="hi"/>, ${user} !
 	     				</a>
 					    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					    	<a href="addComputer?lang=en">
+					    	<a href="newUser">
+					    		<div class="dropdown-menu-item">
+							    	<span class="glyphicon glyphicon-plus menu-icon"></span>
+							    	<spring:message code="newuser"/>
+							    </div>
+					    	</a>
+					    	<a href="newUser?lang=en">
 					    		<div class="dropdown-menu-item">
 							    	<span class="menu-icon"><img src="images/english_icon.png" height="17" width="17"></span>
 							    	<spring:message code="english"/>
 							    </div>
 					    	</a>
-					    	<a href="addComputer?lang=fr">
+					    	<a href="newUser?lang=fr">
 					    		<div class="dropdown-menu-item">
 							    	<span class="menu-icon"><img src="images/french_icon.png" height="17" width="17"></span>
 							    	<spring:message code="french"/>
@@ -51,59 +57,81 @@
 	        <div class="container">
 	            <div class="row">
 	                <div class="col-xs-8 col-xs-offset-2 box">
-	                    <h1><spring:message code="add"/></h1>
-	                    <form:form action="addComputer" method="POST" modelAttribute="computerDto">
+	                    <h1><spring:message code="addnewuser"/></h1>
+	                    <form action="addUser" method="POST">
 	                        <fieldset>
 	                            <div class="form-group">
-	                                <form:label path="name"><spring:message code="computername"/></form:label>
-	                                <spring:message code="computername" var="placeholder" />
-	                                <form:input path="name" 
-	                                			type="text" 
-	                                			class="form-control" 
-	                                			placeholder="${placeholder}"
-	                                			required="true"
-	                                			pattern=".*\S+.*" 
-	                                			oninvalid="this.setCustomValidity('The name must contain at least one non white space character.')"
-	                                			onchange="try{setCustomValidity('')}catch(e){}"
-												oninput="setCustomValidity(' ')"/>
-	                            	<span id="emptyNameError" class="error"><spring:message code="computernameerror"/>.</span>
+	                                <label for="username"><spring:message code="username"/></label>
+	                                <input type="text" 
+	                                	class="form-control" 
+	                                	id="username" 
+	                                	name="username" 
+	                                	placeholder="<spring:message code="username"/>" 
+	                                	/>
 	                            </div>
 	                            <div class="form-group">
-	                                <form:label path="introduced"><spring:message code="introduceddate"/></form:label>
-	                                <form:input path="introduced" type="date" class="form-control" min="1950-01-01"/>
+	                                <label for="username"><spring:message code="password"/></label>
+	                                <input type="text" 
+	                                	class="form-control" 
+	                                	id="password" 
+	                                	name="password" 
+	                                	placeholder="<spring:message code="password"/>" 
+	                                	/>
 	                            </div>
 	                            <div class="form-group">
-	                                <form:label path="discontinued"><spring:message code="discontinueddate"/></form:label>
-	                                <form:input path="discontinued" type="date" class="form-control" disabled="true"/>
-	                            </div>
-	                            <div class="form-group">
-	                                <form:label path="company"><spring:message code="company"/></form:label>
-	                                <form:select class="form-control" path="company">
-	                                	<form:option selected="true" value="" label="--"/>
-	                                	<c:forEach items="${companies}" var="company">
-							                <form:option value="${company.name}" label="${company.name}"/>
-										</c:forEach>
-	                                </form:select>
+	                                <label for="authority"><spring:message code="authority"/></label>
+	                                <select class="form-control" id="authority" name="authority">
+	                                    <option value="ROLE_USER"><spring:message code="user"/></option>
+	                                    <option value="ROLE_ADMIN"><spring:message code="admin"/></option>
+	                                </select>
 	                            </div>                  
 	                        </fieldset>
 	                        <div class="actions pull-right">
-	                            <input type="submit" value="<spring:message code="addbutton"/>" class="btn btn-primary">
+	                            <input type="submit" value="<spring:message code="addnewuser"/>" class="btn btn-primary">
 	                            <spring:message code="or"/>
 	                            <a href="dashboard" class="btn btn-default"><spring:message code="cancel"/></a>
 	                        </div>
-	                    </form:form>
+	                    </form>
 	                </div>
 	            </div>
 	        </div>
 	    </section>
 	    
-	    <c:if test="${not empty resultMessage}">
+	    <c:if test="${not empty successUsername}">
 	    	<section id="result">
 		        <div class="container" style="margin-top: 15px;">
 		            <div class="row">
 		            	<div class="col-xs-8 col-xs-offset-2 box">
 					        <div class="alert alert-success" role="alert">
-					        	${resultMessage} <a href="dashboard"><spring:message code="backtodashboard"/>.</a>
+					        	<spring:message code="successadduser1"/><strong>${successUsername}</strong><spring:message code="successadduser1"/>. <a href="dashboard"><spring:message code="backtodashboard"/></a>
+					        </div>
+				       	</div>
+	       			</div>
+	       		</div>
+		    </section>
+	    </c:if>
+	    
+	    <c:if test="${not empty errorUsername}">
+	    	<section id="result">
+		        <div class="container" style="margin-top: 15px;">
+		            <div class="row">
+		            	<div class="col-xs-8 col-xs-offset-2 box">
+					        <div class="alert alert-danger" role="alert">
+					        	<spring:message code="errorRegistration1"/><strong>${errorUsername}</strong><spring:message code="errorRegistration2"/>. <a href="dashboard"><spring:message code="backtodashboard"/></a>
+					        </div>
+				       	</div>
+	       			</div>
+	       		</div>
+		    </section>
+	    </c:if>
+	    
+	    <c:if test="${not empty incorrectField}">
+	    	<section id="result">
+		        <div class="container" style="margin-top: 15px;">
+		            <div class="row">
+		            	<div class="col-xs-8 col-xs-offset-2 box">
+					        <div class="alert alert-danger" role="alert">
+					        	<spring:message code="errorAddUser1"/><strong><spring:message code="${incorrectField}"/></strong><spring:message code="errorAddUser2"/>.
 					        </div>
 				       	</div>
 	       			</div>

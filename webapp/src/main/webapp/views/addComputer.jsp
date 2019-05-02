@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -23,6 +23,12 @@
 	       					<span class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></span><spring:message code="hi"/>, ${user} !
 	     				</a>
 					    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					    	<a href="newUser">
+					    		<div class="dropdown-menu-item">
+							    	<span class="glyphicon glyphicon-plus menu-icon"></span>
+							    	<spring:message code="newuser"/>
+							    </div>
+					    	</a>
 					    	<a href="addComputer?lang=en">
 					    		<div class="dropdown-menu-item">
 							    	<span class="menu-icon"><img src="images/english_icon.png" height="17" width="17"></span>
@@ -60,12 +66,7 @@
 	                                <form:input path="name" 
 	                                			type="text" 
 	                                			class="form-control" 
-	                                			placeholder="${placeholder}"
-	                                			required="true"
-	                                			pattern=".*\S+.*" 
-	                                			oninvalid="this.setCustomValidity('The name must contain at least one non white space character.')"
-	                                			onchange="try{setCustomValidity('')}catch(e){}"
-												oninput="setCustomValidity(' ')"/>
+	                                			placeholder="${placeholder}"/>
 	                            	<span id="emptyNameError" class="error"><spring:message code="computernameerror"/>.</span>
 	                            </div>
 	                            <div class="form-group">
@@ -97,13 +98,27 @@
 	        </div>
 	    </section>
 	    
-	    <c:if test="${not empty resultMessage}">
+	    <c:if test="${not empty computerAdded}">
 	    	<section id="result">
 		        <div class="container" style="margin-top: 15px;">
 		            <div class="row">
 		            	<div class="col-xs-8 col-xs-offset-2 box">
 					        <div class="alert alert-success" role="alert">
-					        	${resultMessage} <a href="dashboard"><spring:message code="backtodashboard"/>.</a>
+					        	<spring:message code="successaddcomputer1"/><strong>${computerAdded}</strong><spring:message code="successaddcomputer2"/> <a href="dashboard"><spring:message code="backtodashboard"/>.</a>
+					        </div>
+				       	</div>
+	       			</div>
+	       		</div>
+		    </section>
+	    </c:if>
+	    
+	    <c:if test="${errorName}">
+	    	<section id="result">
+		        <div class="container" style="margin-top: 15px;">
+		            <div class="row">
+		            	<div class="col-xs-8 col-xs-offset-2 box">
+					        <div class="alert alert-danger" role="alert">
+					        	<strong><spring:message code="computernameerror"/>.</strong>
 					        </div>
 				       	</div>
 	       			</div>

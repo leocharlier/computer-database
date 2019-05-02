@@ -218,7 +218,7 @@ public class ComputerController {
 
 		try {
 			this.computerService.createService(computer);
-			model.addAttribute("resultMessage", "The computer <strong>" + computer.getName() + "</strong> has been created !");
+			model.addAttribute("computerAdded", computer.getName());
 			model.addAttribute("computerDto", new ComputerDto());
 			return getAddComputer(model, principal);
 		} catch (DaoException e) {
@@ -226,9 +226,9 @@ public class ComputerController {
 			errorView.addObject("errorMessage", "An <strong>SQL error</strong> has occured during the creation...");
 			return errorView;
 		} catch (ComputerNullNameException e) {
-			ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
-			errorView.addObject("errorMessage", "An error has occurred <strong>due to the name</strong> of the computer...");
-			return errorView;
+			model.addAttribute("errorName", true);
+			model.addAttribute("computerDto", new ComputerDto());
+			return getAddComputer(model, principal);
 		} catch (DiscontinuedButNoIntroducedException e) {
 			ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
 			errorView.addObject("errorMessage", "An error has occurred <strong>due to the discontinuation and introduction date</strong> of the computer...");
@@ -286,9 +286,9 @@ public class ComputerController {
 			errorView.addObject("errorMessage", "An <strong>SQL error</strong> has occured during the update...");
 			return errorView;
 		} catch (ComputerNullNameException e) {
-			ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
-			errorView.addObject("errorMessage", "An error has occurred <strong>due to the name</strong> of the computer...");
-			return errorView;
+			model.addAttribute("errorName", true);
+			model.addAttribute("computerDto", new ComputerDto());
+			return getEditComputer(String.valueOf(computer.getId()), model, principal);
 		} catch (DiscontinuedButNoIntroducedException e) {
 			ModelAndView errorView = new ModelAndView(EXCEPTION_VIEW);
 			errorView.addObject("errorMessage", "An error has occurred <strong>due to the discontinuation and introduction date</strong> of the computer...");

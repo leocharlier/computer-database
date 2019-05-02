@@ -24,7 +24,7 @@ public class UserValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "username.empty", "Username field must be set.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "password.empty", "Password field must be set.");
+		ValidationUtils.rejectIfEmpty(errors, "password", "password.empty", "Password field must be set.");
 		
 		User user = (User) target;
 		if(this.userDao.findByUsername(user.getUsername()).isPresent()) {

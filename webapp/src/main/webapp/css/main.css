@@ -57,6 +57,7 @@ input[type='checkbox'] {
 
 .dropdown-menu {
 	background-color: #333;
+	width: -moz-available;
 }
 
 .dropdown-menu-item {

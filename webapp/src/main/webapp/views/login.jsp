@@ -44,9 +44,9 @@
 	                                			placeholder="${placeholder}"
 	                                			required="true"
 	                                			pattern=".*\S+.*" 
-	                                			oninvalid="this.setCustomValidity('The username must contain at least one non white space character.')"
+	                                			oninvalid="this.setCustomValidity('Please give your username.')"
 	                                			onchange="try{setCustomValidity('')}catch(e){}"
-												oninput="setCustomValidity(' ')"/>
+												oninput="setCustomValidity('')"/>
 								</div>
 								<div class="form-group">
 									<form:label path="password"><spring:message code="password"/></form:label>
@@ -56,10 +56,9 @@
 	                                			class="form-control" 
 	                                			placeholder="${placeholder}"
 	                                			required="true"
-	                                			pattern=".*\S+.*" 
-	                                			oninvalid="this.setCustomValidity('The password must contain at least one non white space character.')"
+	                                			oninvalid="this.setCustomValidity('Please give your password.')"
 	                                			onchange="try{setCustomValidity('')}catch(e){}"
-												oninput="setCustomValidity(' ')"/>
+												oninput="setCustomValidity('')"/>
 								</div>
 	                   		</fieldset>
 	                   		<c:if test="${errorLogin}">
@@ -111,7 +110,7 @@
 						    </c:if>
 		                    <div class="actions pull-right">
 	                            <input type="submit" value="<spring:message code="signup"/>" class="btn btn-primary">
-	                         </div>
+	                        </div>
 	                    </form:form>
 	                </div>
 	                

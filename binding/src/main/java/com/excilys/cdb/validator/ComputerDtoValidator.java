@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.excilys.cdb.dto.ComputerDto;
@@ -20,8 +19,6 @@ public class ComputerDtoValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "name.empty", "Name field must be set.");
-		
 		ComputerDto computerDto = (ComputerDto) target;
 		Pattern dateFormat = Pattern.compile("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))");
 		

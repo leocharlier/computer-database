@@ -24,6 +24,14 @@
 	       					<span class="glyphicon glyphicon-user menu-icon" aria-hidden="true"></span><spring:message code="hi"/>, ${user} !
 	     				</a>
 					    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					    	<security:authorize access="hasRole('ROLE_ADMIN')">
+						    	<a href="newUser">
+						    		<div class="dropdown-menu-item">
+								    	<span class="glyphicon glyphicon-plus menu-icon"></span>
+								    	<spring:message code="newuser"/>
+								    </div>
+						    	</a>
+					    	</security:authorize>
 					    	<a href="dashboard?page=${page}&size=${size}&search=${search}&sort=${sort}&lang=en">
 					    		<div class="dropdown-menu-item">
 							    	<span class="menu-icon"><img src="images/english_icon.png" height="17" width="17"></span>
