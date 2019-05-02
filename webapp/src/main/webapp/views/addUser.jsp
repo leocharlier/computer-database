@@ -103,7 +103,7 @@
 		            <div class="row">
 		            	<div class="col-xs-8 col-xs-offset-2 box">
 					        <div class="alert alert-success" role="alert">
-					        	<spring:message code="successadduser1"/><strong>${successUsername}</strong><spring:message code="successadduser1"/>. <a href="dashboard"><spring:message code="backtodashboard"/></a>
+					        	<spring:message code="successadduser1"/><strong>${successUsername}</strong><spring:message code="successadduser2"/>. <a href="dashboard"><spring:message code="backtodashboard"/></a>
 					        </div>
 				       	</div>
 	       			</div>

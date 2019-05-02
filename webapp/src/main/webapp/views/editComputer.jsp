@@ -29,13 +29,13 @@
 							    	<spring:message code="newuser"/>
 							    </div>
 					    	</a>
-					    	<a href="editComputer?computerId=${computer.id}&lang=en">
+					    	<a href="viewComputer?computerId=${computer.id}&lang=en">
 					    		<div class="dropdown-menu-item">
 							    	<span class="menu-icon"><img src="images/english_icon.png" height="17" width="17"></span>
 							    	<spring:message code="english"/>
 							    </div>
 					    	</a>
-					    	<a href="editComputer?computerId=${computer.id}&lang=fr">
+					    	<a href="viewComputer?computerId=${computer.id}&lang=fr">
 					    		<div class="dropdown-menu-item">
 							    	<span class="menu-icon"><img src="images/french_icon.png" height="17" width="17"></span>
 							    	<spring:message code="french"/>

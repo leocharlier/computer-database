@@ -75,7 +75,7 @@
 	                
 	                <security:authorize access="hasRole('ROLE_ADMIN')">
 		                <div class="pull-right">
-		                    <a class="btn btn-success" id="addComputer" href="addComputer"><spring:message code="add"/></a>
+		                    <a class="btn btn-success" id="addComputer" href="newComputer"><spring:message code="add"/></a>
 		                    <span id="editText" style="display:none"><spring:message code="edit"/></span>
 		                    <span id="viewText" style="display:none"><spring:message code="view"/></span>
 		                    <a class="btn btn-default" id="editComputer" href="#" onclick="$.fn.toggleEditMode();"><spring:message code="edit"/></a>
@@ -97,7 +97,7 @@
 				        			<spring:message code="nosearchresult"/> "<strong>${search}</strong>"... <a href="dashboard"><spring:message code="backtodashboard"/>.</a> 
 				        		</c:when>
 				        		<c:otherwise>
-				        			<spring:message code="nocomputerindb"/>... <a href="addComputer"><spring:message code="addfirstcomputer"/> !</a> 
+				        			<spring:message code="nocomputerindb"/>... <a href="newComputer"><spring:message code="addfirstcomputer"/> !</a> 
 				        		</c:otherwise>
 				        	</c:choose>
 				        </div>
@@ -212,7 +212,7 @@
 				                        </td>
 				                        <td>
 				                        	<security:authorize access="hasRole('ROLE_ADMIN')">
-				                            	<a href="editComputer?computerId=${computer.id}">${computer.name}</a>
+				                            	<a href="viewComputer?computerId=${computer.id}">${computer.name}</a>
 				                        	</security:authorize>
 				                        	<security:authorize access="hasRole('ROLE_USER')">
 				                            	${computer.name}

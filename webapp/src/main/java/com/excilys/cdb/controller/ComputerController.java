@@ -191,7 +191,7 @@ public class ComputerController {
 	}
 	
 	@Secured("ROLE_ADMIN")
-	@GetMapping("/addComputer")
+	@GetMapping("/newComputer")
 	public ModelAndView getAddComputer(Model model, Principal principal) {
 		model.addAttribute("user", principal.getName());
 		model.addAttribute("companies", companyService.listService());
@@ -241,7 +241,7 @@ public class ComputerController {
 	}
 	
 	@Secured("ROLE_ADMIN")
-	@GetMapping("/editComputer")
+	@GetMapping("/viewComputer")
 	public ModelAndView getEditComputer(@RequestParam(value = "computerId", required = true) String pComputerId, Model model, Principal principal) {
 		model.addAttribute("user", principal.getName());
 		int computerId = Integer.parseInt(pComputerId);
