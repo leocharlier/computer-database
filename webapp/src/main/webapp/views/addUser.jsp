@@ -70,14 +70,24 @@
 	                                	/>
 	                            </div>
 	                            <div class="form-group">
-	                                <label for="username"><spring:message code="password"/></label>
-	                                <input type="text" 
+	                                <label for="password"><spring:message code="password"/></label>
+	                                <input type="password" 
 	                                	class="form-control" 
 	                                	id="password" 
 	                                	name="password" 
 	                                	placeholder="<spring:message code="password"/>" 
 	                                	/>
 	                            </div>
+	                            <div class="form-group">
+									<label for="confirm_password"><spring:message code="confirmpassword"/></label>
+									<spring:message code="confirmpassword" var="placeholder" />
+									<input name="confirm_password" 
+	                                			type="password" 
+	                                			class="form-control" 
+	                                			id="confirm_password"
+	                                			placeholder="${placeholder}"
+	                                			required/>
+								</div>
 	                            <div class="form-group">
 	                                <label for="authority"><spring:message code="authority"/></label>
 	                                <select class="form-control" id="authority" name="authority">

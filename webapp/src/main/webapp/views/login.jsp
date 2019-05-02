@@ -102,6 +102,16 @@
 	                                			onchange="try{setCustomValidity('')}catch(e){}"
 												oninput="setCustomValidity(' ')"/>
 								</div>
+								<div class="form-group">
+									<label for="confirm_password"><spring:message code="confirmpassword"/></label>
+									<spring:message code="confirmpassword" var="placeholder" />
+									<input name="confirm_password" 
+	                                			type="password" 
+	                                			class="form-control" 
+	                                			id="confirm_password"
+	                                			placeholder="${placeholder}"
+	                                			required/>
+								</div>
 	                   		</fieldset>
 	                   		<c:if test="${not empty errorUsername}">
 						        <div class="alert alert-danger" role="alert">
@@ -119,5 +129,6 @@
 	    </section>
 	    
 	    <script src="js/jquery.min.js"></script>
+	    <script src="js/validator.js"></script>
 	</body>
 </html>
