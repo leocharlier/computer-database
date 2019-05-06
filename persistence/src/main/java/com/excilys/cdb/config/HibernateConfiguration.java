@@ -28,8 +28,6 @@ import com.excilys.cdb.model.User;
 				"com.excilys.cdb.persistence",
 				"com.excilys.cdb.mapper",
 				"com.excilys.cdb.ui",
-				"com.excilys.cdb.controller",
-				"com.excilys.cdb.config",
 				"com.excilys.cdb.validator"})
 public class HibernateConfiguration {
 	@Value("${driverClassName}")

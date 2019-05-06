@@ -15,13 +15,8 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan({"com.excilys.cdb.service",
-	"com.excilys.cdb.persistence",
-	"com.excilys.cdb.mapper",
-	"com.excilys.cdb.ui",
-	"com.excilys.cdb.controller",
-	"com.excilys.cdb.config",
-	"com.excilys.cdb.validator"})
+@ComponentScan({
+	"com.excilys.cdb.controller"})
 public class WebConfig implements WebMvcConfigurer {
 	
 	@Override

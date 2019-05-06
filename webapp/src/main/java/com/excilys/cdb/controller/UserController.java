@@ -79,17 +79,6 @@ public class UserController {
 		}
 	}
 	
-	@PostMapping("/userConnection")
-	public ModelAndView postUserConnection(@ModelAttribute("user")User user, Model model) {
-		try {
-			this.userService.registerService(user);
-			return new ModelAndView("redirect:/dashboard");
-		} catch (DaoException e) {
-			model.addAttribute("errorMessage", "An <strong>SQL error</strong> has occured during the creation...");
-			return new ModelAndView("redirect:/500");
-		}
-	}
-	
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/newUser")
 	public ModelAndView getNewUserPage(Model model, Principal principal) {
