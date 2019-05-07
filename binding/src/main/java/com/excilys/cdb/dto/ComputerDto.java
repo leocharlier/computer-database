@@ -49,4 +49,32 @@ public class ComputerDto {
 	public void setCompany(String company) {
 		this.company = company;
 	}
+	
+	public String toString() {
+	    return String.format("Computer %s : %s", this.getId(), this.getName());
+	}
+	
+	public String toDetailedString() {
+	    StringBuilder sb = new StringBuilder(this.toString());
+	    
+	    if(!this.getIntroduced().equals("")) {
+	    	sb.append("\n\t| Introduced the " + this.getIntroduced() + "\n");
+	    } else {
+	    	sb.append("\n\t| Introduction date unknown \n");
+	    }
+	    
+	    if(!this.getDiscontinued().equals("")) {
+	    	sb.append("\t| Discontinued the " + this.getDiscontinued() + "\n");
+	    } else {
+	    	sb.append("\t| Discontinuation date unknown \n");
+	    }
+	    
+	    if(!this.getCompany().equals("")) {
+	    	sb.append("\t| Manufactured by " + this.getCompany() + "\n");
+	    } else {
+	    	sb.append("\t| Manufacturer unknown \n");
+	    }
+
+	    return sb.toString();
+	  }
 }

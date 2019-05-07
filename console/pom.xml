@@ -20,6 +20,11 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <springframework.version>5.1.6.RELEASE</springframework.version>
     <mysql-connector-java.version>8.0.15</mysql-connector-java.version>
+    <jersey-client.version>2.28</jersey-client.version>
+    <javax.ws.rs-api.version>2.0</javax.ws.rs-api.version>
+    <jersey-media-json-jackson.version>2.25.1</jersey-media-json-jackson.version>
+  	<jersey-hk2.version>2.26-b07</jersey-hk2.version>
+  	<springframework.version>5.1.6.RELEASE</springframework.version>
   </properties>
 
   <dependencies>
@@ -43,10 +48,46 @@
     </dependency>
     
     <dependency>
+        <groupId>com.excilys</groupId>
+        <artifactId>binding</artifactId>
+        <version>${computer-database.version}</version>
+    </dependency>
+    
+    <dependency>
       <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
         <version>${mysql-connector-java.version}</version>
     </dependency>
+    
+    <dependency>
+	    <groupId>org.glassfish.jersey.core</groupId>
+	    <artifactId>jersey-client</artifactId>
+	    <version>${jersey-client.version}</version>
+	</dependency>
+
+    <dependency>
+	    <groupId>javax.ws.rs</groupId>
+	    <artifactId>javax.ws.rs-api</artifactId>
+	    <version>${javax.ws.rs-api.version}</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.glassfish.jersey.media</groupId>
+	    <artifactId>jersey-media-json-jackson</artifactId>
+	    <version>${jersey-media-json-jackson.version}</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.glassfish.jersey.inject</groupId>
+	    <artifactId>jersey-hk2</artifactId>
+	    <version>${jersey-hk2.version}</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-webmvc</artifactId>
+	    <version>${springframework.version}</version>
+	</dependency>
     
   </dependencies>
 

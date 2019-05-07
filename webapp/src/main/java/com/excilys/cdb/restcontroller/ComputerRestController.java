@@ -23,6 +23,7 @@ import com.excilys.cdb.exception.DaoException;
 import com.excilys.cdb.exception.DiscontinuedBeforeIntroducedException;
 import com.excilys.cdb.exception.DiscontinuedButNoIntroducedException;
 import com.excilys.cdb.mapper.ComputerDtoMapper;
+import com.excilys.cdb.mapper.DtoComputerMapper;
 import com.excilys.cdb.model.Computer;
 import com.excilys.cdb.model.Page;
 import com.excilys.cdb.service.ComputerService;
@@ -32,17 +33,22 @@ import com.excilys.cdb.service.ComputerService;
 public class ComputerRestController {
 	private ComputerService computerService;
 	private ComputerDtoMapper computerDtoMapper;
+	private DtoComputerMapper dtoComputerMapper;
 	
-	public ComputerRestController(ComputerService sComputer, ComputerDtoMapper mComputerDto) {
+	public ComputerRestController(ComputerService sComputer, 
+			ComputerDtoMapper mComputerDto,
+			DtoComputerMapper mDtoComputer) {
 		computerService = sComputer;
 		computerDtoMapper = mComputerDto;
+		dtoComputerMapper = mDtoComputer;
 	}
 	
 	@GetMapping
 	public List<ComputerDto> getPageableComputers(@RequestParam(name = "search", required = false) String search,
 			@RequestParam(name = "sort", defaultValue = "nameAsc") String sort,
 			@RequestParam(name = "size", defaultValue = "10") String size,
-			@RequestParam(name = "page", defaultValue = "1") String page) {
+			@RequestParam(name = "page", defaultValue = "1") String page)
+					throws ResponseStatusException {
 		ArrayList<Computer> computers;
 		if(search != null && !search.isEmpty()) {
 			computers = computerService.searchService(search);
@@ -88,25 +94,26 @@ public class ComputerRestController {
 				
 			return computerDtoMapper.map(currentPage.getPageData(numPage - 1));
 		} else {
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Computer's list is empty.");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND , "Computer's list is empty.");
 		}
 	}
 	
 	@GetMapping(path = "/{id}")
-	public ComputerDto getUniqueComputer(@PathVariable("id") int id) {
+	public ComputerDto getUniqueComputer(@PathVariable("id") int id) throws ResponseStatusException {
 		Optional<Computer> computerToFind = computerService.findService(id);
 		if(computerToFind.isPresent()) {
 			return computerDtoMapper.map(computerToFind.get());
 		} else {
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Computer " + id + " doesn't exist.");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND , "Computer " + id + " doesn't exist.");
 		}
 	}
 	
 	@PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addComputer(@RequestBody Computer computerToAdd) {
+    public void addComputer(@RequestBody ComputerDto computerToAdd) {
         try {
-        	computerService.createService(computerToAdd);
+        	Computer computer = dtoComputerMapper.map(computerToAdd);
+        	computerService.createService(computer);
         } catch(DaoException e) {
         	throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR , "Creation : An error has occured during the creation...", e);
         } catch(ComputerNullNameException e) {
@@ -135,7 +142,7 @@ public class ComputerRestController {
 	        	throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR , "Update : The discontinuation date must be same or after the introduction date.", e);
 	        }
 		} else {
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Computer " + id + " doesn't exist.");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND , "Computer " + id + " doesn't exist.");
 		}
     }
 	
@@ -150,7 +157,7 @@ public class ComputerRestController {
 	        	throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR , "Deletion : An error has occured during the deletion...", e);
 	        }
 		} else {
-			throw new ResponseStatusException(HttpStatus.NO_CONTENT , "Computer " + id + " doesn't exist.");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND , "Computer " + id + " doesn't exist.");
 		}
     }
 }
