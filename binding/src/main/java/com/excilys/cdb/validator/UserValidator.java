@@ -1,5 +1,6 @@
 package com.excilys.cdb.validator;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -10,6 +11,7 @@ import com.excilys.cdb.persistence.UserDao;
 
 @Component
 public class UserValidator implements Validator {
+	static final Logger LOGGER = Logger.getLogger(UserValidator.class);
 	private UserDao userDao;
 	
 	public UserValidator(UserDao ud) {
@@ -28,6 +30,7 @@ public class UserValidator implements Validator {
 		
 		User user = (User) target;
 		if(this.userDao.findByUsername(user.getUsername()).isPresent()) {
+			LOGGER.warn("Cannot create the account because " + user.getUsername() + " is already used.");
 			errors.rejectValue("username", "usernameexists", user.getUsername());
 		}
 	}

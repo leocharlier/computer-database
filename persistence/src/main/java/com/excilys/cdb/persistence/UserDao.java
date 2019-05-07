@@ -34,6 +34,7 @@ public class UserDao {
 			session.save(user);
 			session.save(authority);
 			tx.commit();
+			LOGGER.info("User " + user.getUsername() + " created.");
 		} catch(HibernateException e) {
 			throw new DaoException("Failed to create the user '" + user.getUsername() + "'.", e.getCause());
 		}
@@ -43,7 +44,8 @@ public class UserDao {
 	    Optional<User> user;
 	    try(Session session = sessionFactory.openSession()) {
 	    	user = Optional.of(session.createQuery(SQL_SELECT_BY_NAME, User.class).setParameter("username", pusername).getSingleResult());
-		} catch(NoResultException e) {
+	    	LOGGER.info("User " + pusername + " found.");
+	    } catch(NoResultException e) {
 			user = Optional.empty();
 		} catch(HibernateException e) {
 			throw new DaoException("Failed to find the user '" + pusername + "'.", e.getCause());

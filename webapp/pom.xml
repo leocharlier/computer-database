@@ -26,6 +26,7 @@
     <jstl.version>1.2</jstl.version>
     <taglibs.version>1.1.2</taglibs.version>
     <hibernate-core.version>5.4.2.Final</hibernate-core.version>
+    <jackson-databind.version>2.9.8</jackson-databind.version>
   </properties>
 
   <dependencies>
@@ -98,6 +99,12 @@
       <version>${taglibs.version}</version>
       <scope>compile</scope>
     </dependency>
+    
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson-databind.version}</version>
+   </dependency>
 	
   </dependencies>
   
