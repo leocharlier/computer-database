@@ -37,17 +37,17 @@ public class DtoComputerMapper {
 			} catch(ParseException e) {
 				throw new DtoDateParseException("Introduced date parsing error.");
 			}
-			
-			if(dtoComputer.getDiscontinued().isEmpty()) {
-				computer.setDiscontinued(null);
-			} else {
-				dateString = dtoComputer.getDiscontinued();
-				try {
-					Date discontinued = ComputerDtoMapper.DATE_FORMAT.parse(dateString);
-					computer.setDiscontinued(discontinued);
-				} catch(ParseException e) {
-					throw new DtoDateParseException("Discontinued date parsing error.");
-				}
+		}
+		
+		if(dtoComputer.getDiscontinued().isEmpty()) {
+			computer.setDiscontinued(null);
+		} else {
+			String dateString = dtoComputer.getDiscontinued();
+			try {
+				Date discontinued = ComputerDtoMapper.DATE_FORMAT.parse(dateString);
+				computer.setDiscontinued(discontinued);
+			} catch(ParseException e) {
+				throw new DtoDateParseException("Discontinued date parsing error.");
 			}
 		}
 		

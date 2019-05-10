@@ -30,4 +30,8 @@ public class CompanyService {
 	public Optional<Company> findByName(String name) throws DaoException {
 		return companyDao.findByName(name);
 	}
+	
+	public void deleteService(Company company) throws DaoException {
+		companyDao.delete(company);
+	}
 } 
